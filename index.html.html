@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biuro Rachunkowe & Narzędzia Danych | Nowoczesna Księgowość Online</title>
+    <!-- Tailwind CSS (CDN) do szybkiego i nowoczesnego stylowania -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Font "Inter" (nowoczesny i czytelny) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+    <!-- NAV: Nawigacja strony -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Nazwa firmy -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-xl font-bold text-blue-600 flex items-center gap-2">
+                        <span class="w-3 h-3 bg-blue-600 rounded-full"></span>
+                        <span>Biuro<span class="text-slate-900">Dane</span></span>
+                    </a>
+                </div>
+                <!-- Menu na komputery -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#uslugi" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Usługi</a>
+                    <a href="#o-nas" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">O nas</a>
+                    <a href="#wspolpraca" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Współpraca</a>
+                    <a href="#kontakt" class="text-slate-600 hover:text-blue-600 font-medium transition-colors">Kontakt</a>
+                </nav>
+                <!-- Przycisk CTA w menu -->
+                <div class="hidden md:block">
+                    <a href="#kontakt" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all text-sm">
+                        Bezpłatna wycena
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO: Sekcja główna (powitalna) -->
+    <section class="relative py-20 md:py-32 overflow-hidden bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-blue-50 text-blue-600 text-xs font-semibold rounded-full mb-4">
+                        Księgowość & Narzędzia 100% Online
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight leading-tight mb-6">
+                        Tradycyjna księgowość. <br>
+                        <span class="text-blue-600">Nowoczesne analizy.</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        Prowadzimy Twoje finanse i rozliczenia ZUS/PIT, a dodatkowo tworzymy dedykowane narzędzia budżetowe oraz automatyzujemy Arkusze Google i Excela. Wszystko w jednym miejscu, w pełni online.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#kontakt" class="bg-blue-600 hover:bg-blue-700 text-white text-center px-6 py-3 rounded-xl font-medium shadow-lg shadow-blue-600/10 transition-all">
+                            Skontaktuj się z nami
+                        </a>
+                        <a href="#uslugi" class="border border-slate-200 hover:bg-slate-50 text-slate-700 text-center px-6 py-3 rounded-xl font-medium transition-all">
+                            Zobacz ofertę
+                        </a>
+                    </div>
+                </div>
+                <div class="relative hidden md:block">
+                    <!-- Estetyczny element graficzny imitujący interfejs narzędzi budżetowych -->
+                    <div class="bg-slate-100 rounded-3xl p-8 shadow-xl border border-slate-200/60 relative">
+                        <div class="flex gap-2 mb-6">
+                            <span class="w-3 h-3 bg-red-400 rounded-full"></span>
+                            <span class="w-3 h-3 bg-yellow-400 rounded-full"></span>
+                            <span class="w-3 h-3 bg-green-400 rounded-full"></span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="h-8 bg-white rounded-lg w-3/4 animate-pulse"></div>
+                            <div class="h-32 bg-blue-50 rounded-lg border border-blue-100 flex items-center justify-center">
+                                <span class="text-blue-600 font-semibold text-sm">Automatyczny budżet firmowy.xlsx</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="h-10 bg-white rounded-lg"></div>
+                                <div class="h-10 bg-white rounded-lg"></div>
+                                <div class="h-10 bg-white rounded-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Usługi -->
+    <section id="uslugi" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Nasze Usługi</h2>
+                <p class="text-slate-600">Łączymy precyzję klasycznej księgowości z mocą nowoczesnej analizy danych i automatyzacji.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Usługa 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        📊
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Prowadzenie KPIR</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Kompleksowe prowadzenie Książki Przychodów i Rozchodów. Dbamy o to, by Twoje podatki były rozliczane terminowo, bezpiecznie i zgodnie z prawem.
+                    </p>
+                </div>
+
+                <!-- Usługa 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        🛡️
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Rozliczanie z ZUS</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Przygotowanie i wysyłka deklaracji rozliczeniowych, kalkulacja składek zdrowotnych i społecznych przedsiębiorcy bez stresu i kolejek.
+                    </p>
+                </div>
+
+                <!-- Usługa 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        ✍️
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Rozliczanie PIT</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Szybkie i bezbłędne roczne zeznania podatkowe dla przedsiębiorców i osób prywatnych. Pomagamy dobrać najkorzystniejsze ulgi podatkowe.
+                    </p>
+                </div>
+
+                <!-- Usługa 4 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        📈
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Narzędzia budżetowe</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Projektujemy dedykowane narzędzia do kontroli kosztów i planowania przepływów pieniężnych (Cash Flow), dostosowane do specyfiki Twojego biznesu.
+                    </p>
+                </div>
+
+                <!-- Usługa 5 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow lg:col-span-2">
+                    <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-6">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Arkusze Google & Excel</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Budujemy zaawansowane szablony, automatyzujemy nudne procesy za pomocą skryptów i formuł. Przekształcamy chaos w tabelach w czytelne wykresy i automatyczne raporty, oszczędzając Twój czas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: O nas -->
+    <section id="o-nas" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-blue-600 font-semibold text-sm">O nas</span>
+                    <h2 class="text-3xl font-bold text-slate-900">Kim jesteśmy i jak pracujemy?</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Jesteśmy nowoczesnym zespołem ekspertów finansowych i analityków danych. Wierzymy, że tradycyjne biura rachunkowe często nie nadążają za erą cyfrową. Dlatego połączyliśmy <strong>wiedzę podatkową</strong> z pasją do <strong>nowoczesnych technologii i automatyzacji</strong>.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Działamy w 100% online – nie musisz marnować czasu na dojazdy czy stanie w korkach, aby dowieźć dokumenty. Pracujemy na bezpiecznych dyskach w chmurze, a kontakt z nami jest szybki, prosty i bezpośredni.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm">
+                            <div class="text-3xl font-bold text-blue-600 mb-1">100%</div>
+                            <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Online & Bez papieru</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm">
+                            <div class="text-3xl font-bold text-blue-600 mb-1">0 h</div>
+                            <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Dojazdów do biura</div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm col-span-2">
+                            <div class="text-3xl font-bold text-blue-600 mb-1">Excel & Google Sheets</div>
+                            <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Opanowane do perfekcji</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Jak wygląda współpraca -->
+    <section id="wspolpraca" class="py-20 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Jak wygląda współpraca?</h2>
+                <p class="text-slate-600">Prosty proces w 4 krokach – bez zbędnych formalności i straty czasu.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <!-- Krok 1 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative">
+                    <span class="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">1</span>
+                    <h4 class="text-lg font-bold text-slate-900 mt-2 mb-2">Kontakt</h4>
+                    <p class="text-slate-500 text-sm">Wypełniasz formularz na dole strony, określając swoje potrzeby.</p>
+                </div>
+                <!-- Krok 2 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative">
+                    <span class="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">2</span>
+                    <h4 class="text-lg font-bold text-slate-900 mt-2 mb-2">Wycena i plan</h4>
+                    <p class="text-slate-500 text-sm">Rozmawiamy o detalach i przygotowujemy jasną ofertę cenową.</p>
+                </div>
+                <!-- Krok 3 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative">
+                    <span class="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">3</span>
+                    <h4 class="text-lg font-bold text-slate-900 mt-2 mb-2">Dostęp online</h4>
+                    <p class="text-slate-500 text-sm">Udostępniamy Ci dedykowany, bezpieczny folder na dokumenty w chmurze.</p>
+                </div>
+                <!-- Krok 4 -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 relative">
+                    <span class="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">4</span>
+                    <h4 class="text-lg font-bold text-slate-900 mt-2 mb-2">Spokój i rozwój</h4>
+                    <p class="text-slate-500 text-sm">My pilnujemy podatków i optymalizacji, Ty skupiasz się na biznesie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Kontakt & Formularz -->
+    <section id="kontakt" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <span class="text-blue-600 font-semibold text-sm">Kontakt</span>
+                    <h2 class="text-3xl font-bold text-slate-900 mt-2 mb-6">Napisz do nas</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        Chcesz powierzyć nam swoją księgowość? A może potrzebujesz zautomatyzowanego arkusza do kontroli finansów firmy? Napisz – odpowiadamy zazwyczaj w ciągu kilku godzin.
+                    </p>
+                    
+                    <!-- Informacje kontaktowe -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-blue-600">✉️</span>
+                            <span class="text-slate-700">kontakt@twojedomena.pl</span> <!-- TUTAJ: Wpisz swój e-mail -->
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-blue-600">📞</span>
+                            <span class="text-slate-700">+48 123 456 789</span> <!-- TUTAJ: Wpisz swój telefon -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formularz kontaktowy -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                    <form action="#" method="POST" class="space-y-6" id="contactForm">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Twoje imię / Firma</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Adres e-mail</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700 mb-1">W czym możemy pomóc?</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-white" placeholder="Opisz krótko swoje potrzeby..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all">
+                            Wyślij wiadomość
+                        </button>
+                    </form>
+                    <div id="formSuccess" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-100 text-emerald-800 rounded-lg text-sm text-center">
+                        Dziękujemy! Twoja wiadomość została wysłana. Skontaktujemy się z Tobą niebawem.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER: Stopka -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-sm">
+                &copy; 2026 BiuroDane. Wszelkie prawa zastrzeżone.
+            </div>
+            <div class="flex gap-6 text-sm">
+                <a href="#uslugi" class="hover:text-white transition-colors">Usługi</a>
+                <a href="#o-nas" class="hover:text-white transition-colors">O nas</a>
+                <a href="#kontakt" class="hover:text-white transition-colors">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROSTY JAVASCRIPT: Obsługa wysyłki formularza (demo) -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Powstrzymuje przeładowanie strony
+            
+            // Tutaj w przyszłości możesz podpiąć rzeczywisty system wysyłki (np. Formspree)
+            
+            document.getElementById('contactForm').classList.add('hidden');
+            document.getElementById('formSuccess').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
