@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataly - Księgowość & Automatyzacja Online</title>
+    
+    <!-- Nowoczesny Font z Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Ikonki (dla sekcji usług) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* 1. Definicje Kolorów z Palety "Modern Fintech & Data" (System 60-30-10) */
+        :root {
+            --bg-main: #F8FAFC;       /* 60% Tło główne (Light Slate) */
+            --bg-card: #FFFFFF;       /* Tło kart/sekcji (Pure White) */
+            --text-main: #0F172A;     /* 30% Tekst i Struktura (Deep Slate) */
+            --text-muted: #64748B;   /* Słabszy tekst */
+            --color-brand: #2563EB;   /* Kolor Marki (Electric Blue) */
+            --color-accent: #10B981;  /* 10% Akcent CTA (Emerald Green) */
+            --color-accent-hover: #059669; /* Ciemniejszy zielony na hover */
+            
+            --font-family: 'Inter', sans-serif;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        /* 2. Style Globalne - Reset i Typografia */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Płynne przewijanie do sekcji */
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* 3. Komponenty Reużywalne */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        /* Główny przycisk akcentowy (Emerald Green) */
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Przycisk wtórny (Outline Blue) */
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--color-brand);
+            color: var(--color-brand);
+        }
+
+        .btn-secondary:hover {
+            background-color: #eff6ff; /* Bardzo jasny niebieski tło */
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+        }
+
+        /* 4. Header & Nawigacja */
+        header {
+            background-color: var(--bg-card);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 50px; /* Dopasuj wysokość logo */
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-brand);
+        }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            border-radius: 3px;
+        }
+
+        /* 5. Hero Section */
+        .hero {
+            padding: 160px 0 100px 0; /* Więcej paddingu góra dla fixed header */
+            background-color: var(--bg-card);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--color-brand);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* 6. Usługi */
+        .services {
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid #e2e8f0;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-brand);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--color-brand);
+            background-color: #eff6ff;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            flex-grow: 1; /* Pcha przycisk na dół, jeśli teksty są różnej długości */
+            margin-bottom: 0;
+        }
+
+        /* 7. O nas */
+        .about {
+            padding: 100px 0;
+            background-color: var(--bg-card);
+        }
+
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text ul {
+            margin-top: 1.5rem;
+        }
+
+        .about-text ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .about-text ul li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .about-image {
+            background-color: #eff6ff;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .about-image h3 {
+            color: var(--color-brand);
+            font-size: 2rem;
+        }
+
+        /* 8. Jak współpracujemy */
+        .process {
+            padding: 100px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            position: relative;
+        }
+
+        /* Linia łącząca kroki (tylko desktop) */
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background-color: #e2e8f0;
+            z-index: 1;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--color-brand);
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 25px auto;
+            border: 8px solid var(--bg-main); /* Tworzy efekt przerwy w linii */
+        }
+
+        /* 9. Kontakt */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--bg-card);
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .info-item i {
+            color: var(--color-brand);
+            font-size: 1.2rem;
+        }
+
+        /* Style Formularza */
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: span 2;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        input, textarea, select {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #ffffff;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--color-brand);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-form .btn {
+            grid-column: span 2;
+            justify-self: start;
+            padding: 12px 30px;
+        }
+
+        /* 10. Footer */
+        footer {
+            background-color: var(--bg-main);
+            padding: 30px 0;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        /* ==============================
+           11. Media Queries (Responsywność)
+           ============================== */
+        
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3rem; }
+            .about-wrapper, .contact-wrapper { gap: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            /* Typografia mobile */
+            html { font-size: 15px; }
+            .section-title { font-size: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+
+            /* Nawigacja mobile */
+            .menu-toggle { display: flex; z-index: 1100; }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Schowane */
+                width: 80%;
+                height: 100vh;
+                background-color: var(--bg-card);
+                flex-direction: column;
+                justify-content: center;
+                gap: 20px;
+                padding: 50px;
+                transition: 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                z-index: 1050;
+            }
+
+            .nav-menu.active {
+                right: 0; /* Pokazane */
+            }
+
+            /* Sekcje mobile */
+            .hero, .services, .about, .process, .contact { padding: 60px 0; }
+            .hero { padding-top: 120px; }
+
+            /* Grid -> Flex Column */
+            .about-wrapper, .contact-wrapper, .process-steps {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .process-steps::before { display: none; } /* Chowa linię łączącą */
+
+            .hero-btns { flex-direction: column; gap: 10px; }
+            
+            .contact-form { grid-template-columns: 1fr; }
+            .form-group-full { grid-column: span 1; }
+            .contact-form .btn { grid-column: span 1; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HEADER & NAWIGACJA -->
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <!-- Logo: odniesienie do Twojego pliku -->
+                <a href="#" class="logo">
+                    <img src="Gemini_Generated_Image_pypsmbpypsmbpyps (1).png" alt="Dataly Logo" class="logo-img">
+                </a>
+                
+                <!-- Menu -->
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#uslugi" class="nav-link">Usługi</a></li>
+                    <li><a href="#onas" class="nav-link">O nas</a></li>
+                    <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
+                    <li><a href="#kontakt" class="btn btn-primary">Darmowa Konsultacja</a></li>
+                </ul>
+
+                <!-- Przycisk menu mobilnego -->
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION (Sekcja powitalna) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Twoje dane pod kontrolą. Twoja <span>księgowość</span> online.</h1>
+                <p>Łączymy precyzję nowoczesnej biura rachunkowego z siłą analizy danych i automatyzacji. Zarządzamy budżetem, optymalizujemy procesy, rozliczamy Twoją firmę.</p>
+                <div class="hero-btns">
+                    <a href="#kontakt" class="btn btn-primary">Sprawdź ofertę</a>
+                    <a href="#uslugi" class="btn btn-secondary">Zobacz usługi data</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. USŁUGI -->
+    <section id="uslugi" class="services">
+        <div class="container">
+            <h2 class="section-title">Nasz zakres działań</h2>
+            <p class="section-subtitle">Wspieramy nowoczesnych przedsiębiorców kompleksową obsługą rachunkową oraz zaawansowanymi narzędziami analitycznymi.</p>
+            
+            <div class="services-grid">
+                <!-- Usługa 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-book"></i></div>
+                    <h3>Prowadzenie KPiR</h3>
+                    <p>Pełna obsługa Księgi Przychodów i Rozchodów. Terminowo, rzetelnie i w 100% online.</p>
+                </div>
+                
+                <!-- Usługa 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Rozliczenia ZUS</h3>
+                    <p>Kompleksowa obsługa deklaracji i rozliczeń z Zakładem Ubezpieczeń Społecznych.</p>
+                </div>
+
+                <!-- Usługa 3 -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Rozliczanie PIT</h3>
+                    <p>Przygotowanie rocznych zeznań podatkowych dla Ciebie i Twojej firmy.</p>
+                </div>
+
+                <!-- Usługa 4 (Analityczna) -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Narzędzia Budżetowe</h3>
+                    <p>Opracowanie dedykowanych narzędzi do planowania i kontroli budżetu domowego lub firmowego.</p>
+                </div>
+
+                <!-- Usługa 5 (Arkusz Google) -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fab fa-google-drive"></i></div>
+                    <h3>Arkusz Google & Excel</h3>
+                    <p>Tworzenie i optymalizacja zaawansowanych arkuszy. Automatyzacja raportów i analiz danych.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. O NAS -->
+    <section id="onas" class="about">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <h2 class="section-title" style="text-align: left; margin-left: 0;">Kim jesteśmy?</h2>
+                    <p>Jesteśmy biurem rachunkowo-analitycznym nowej generacji. Wierzymy, że nowoczesna księgowość to coś więcej niż tylko liczby – to fundament do podejmowania mądrych decyzji biznesowych.</p>
+                    <p>Naszą misją jest odciążenie Cię od biurokracji i dostarczenie narzędzi, które pozwolą Ci efektywnie zarządzać Twoimi danymi i finansami. Działamy w pełni online, oszczędzając Twój czas.</p>
+                    
+                    <ul>
+                        <li>Doświadczeni Księgowi</li>
+                        <li>Specjaliści od Analizy Danych</li>
+                        <li>Eksperci Google Sheets/Excel</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <!-- Miejsce na grafikę lub statystykę -->
+                    <i class="fas fa-database" style="font-size: 5rem; color: var(--color-brand); margin-bottom: 20px;">
+                    </i>
+                    <h3>100% Online</h3>
+                    <p style="margin-bottom: 0;">Dostęp do Twoich danych 24/7 z dowolnego miejsca.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. JAK WYGLĄDA WSPÓŁPRACA -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Jak wygląda współpraca?</h2>
+            <p class="section-subtitle">Cenimy Twój czas i prostotę. Nasz proces jest jasny i transparentny.</p>
+            
+            <div class="process-steps">
+                <!-- Krok 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Kontakt i Wywiad</h3>
+                    <p>Wypełniasz formularz. Rozmawiamy o Twoich potrzebach księgowych i analitycznych.</p>
+                </div>
+                
+                <!-- Krok 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Dedykowane Rozwiązanie</h3>
+                    <p>Przygotowujemy plan obsługi KPiR i projektujemy narzędzia do danych (Excel/Google).</p>
+                </div>
+
+                <!-- Krok 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Stałe Wsparcie</h3>
+                    <p>Wdrażamy narzędzia, prowadzimy księgowość. Ty skupiasz się na rozwoju biznesu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. KONTAKT -->
+    <section id="kontakt" class="contact">
+        <div class="container">
+            <h2 class="section-title">Zacznijmy współpracę</h2>
+            <p class="section-subtitle">Wypełnij formularz poniżej. Odezwiemy się w ciągu 24 godzin, aby porozmawiać o Twoich finansach.</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Biuro Online</h3>
+                    <p>Działamy na terenie całej Polski, w pełni zdalnie.</p>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>kontakt@dataly.pl</span> <!-- Tutaj zmień email -->
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+48 123 456 789</span> <!-- Tutaj zmień telefon -->
+                    </div>
+                </div>
+                
+                <!-- Formularz Kontaktowy -->
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Imię i Nazwisko / Firma</label>
+                        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adres E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="service">Interesuje mnie...</label>
+                        <select id="service" name="service">
+                            <option value="kpir">Prowadzenie KPiR + ZUS</option>
+                            <option value="pit">Rozliczenie PIT</option>
+                            <option value="data">Narzędzia Budżetowe / Excel</option>
+                            <option value="inne">Inne zapytanie</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="message">Wiadomość (opcjonalnie)</label>
+                        <textarea id="message" name="message" placeholder="Opisz krótko swoją sytuację..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Wyślij zapytanie</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Dataly. Wszelkie prawa zastrzeżone.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">Modern Solutions for Data & Finance.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: Logika Menu Mobilnego -->
+    <script>
+        const mobileMenu = document.querySelector('#mobile-menu');
+        const navMenu = document.querySelector('#nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Otwieranie/Zamykanie menu po kliknięciu w hamburger
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Zamykanie menu po kliknięciu w link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
