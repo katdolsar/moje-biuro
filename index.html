@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dataly - Księgowość & Automatyzacja Online</title>
+    <title>Dataly - księgowość & automatyzacja</title>
     
     <!-- Nowoczesny Font z Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Ikonki (dla sekcji usług) -->
+    <!-- Ikonki dla sekcji usług i strzałek -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
@@ -25,8 +25,8 @@
             --color-accent-hover: #059669; /* Ciemniejszy zielony na hover */
             
             --font-family: 'Inter', sans-serif;
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --transition: all 0.3s ease;
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* 2. Style Globalne - Reset i Typografia */
@@ -37,7 +37,7 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Płynne przewijanie do sekcji */
+            scroll-behavior: smooth;
             font-size: 16px;
         }
 
@@ -70,7 +70,7 @@
             list-style: none;
         }
 
-        /* 3. Komponenty Reużywalne */
+        /* 3. Komponenty */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -80,7 +80,7 @@
 
         .btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 8px;
             font-weight: 600;
             text-align: center;
@@ -98,9 +98,10 @@
         .btn-primary:hover {
             background-color: var(--color-accent-hover);
             transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
         }
 
-        /* Przycisk wtórny (Outline Blue) */
+        /* Przycisk wtórny dla jasnego tła */
         .btn-secondary {
             background-color: transparent;
             border: 2px solid var(--color-brand);
@@ -108,7 +109,8 @@
         }
 
         .btn-secondary:hover {
-            background-color: #eff6ff; /* Bardzo jasny niebieski tło */
+            background-color: rgba(37, 99, 235, 0.05);
+            transform: translateY(-2px);
         }
 
         .section-title {
@@ -141,8 +143,9 @@
         }
 
         .logo-img {
-            height: 50px; /* Dopasuj wysokość logo */
+            height: 46px;
             width: auto;
+            display: block;
         }
 
         .nav-menu {
@@ -156,11 +159,10 @@
             color: var(--text-main);
         }
 
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover {
             color: var(--color-brand);
         }
 
-        /* Mobile Menu Button */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -176,22 +178,46 @@
             border-radius: 3px;
         }
 
-        /* 5. Hero Section */
+        /* 5. Hero Section (Optymalizacja widoczności tła i kontrastu) */
         .hero {
-            padding: 160px 0 100px 0; /* Więcej paddingu góra dla fixed header */
-            background-color: var(--bg-card);
+            position: relative;
+            padding: 210px 0 150px 0;
+            /* ZMIENIONE ZDJĘCIE: Wyraziste, nowoczesne tło (analiza, dashboard, biuro) */
+            background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             text-align: center;
         }
 
+        /* Jasny overlay o zbalansowanym kryciu (świetny kontrast, a tło wciąż doskonale widać!) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.85) 0%, rgba(248, 250, 252, 0.75) 100%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
         .hero-content {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
+            font-size: 3.75rem;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
+            color: var(--text-main);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); /* Delikatne podbicie czytelności */
         }
 
         .hero h1 span {
@@ -199,8 +225,10 @@
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             margin-bottom: 2.5rem;
+            color: #334155; /* Nieco ciemniejszy kolor tekstu dla idealnego kontrastu */
+            font-weight: 500;
         }
 
         .hero-btns {
@@ -209,15 +237,30 @@
             justify-content: center;
         }
 
-        /* 6. Usługi */
+        /* 6. Usługi - Karuzela Nieskończona */
         .services {
             padding: 100px 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track-wrapper {
+            overflow: hidden;
+            width: 100%;
+            padding: 15px 0;
+        }
+
+        .carousel-track {
+            display: flex;
             gap: 30px;
+            /* Usunięto transition stąd, ponieważ JS steruje nią dynamicznie dla efektu płynnego "resetu" */
         }
 
         .service-card {
@@ -229,12 +272,15 @@
             transition: var(--transition);
             display: flex;
             flex-direction: column;
-            height: 100%;
+            width: calc(33.333% - 20px); 
+            min-width: 320px;
+            flex-shrink: 0; /* Zapobiega zgniataniu kart */
         }
 
         .service-card:hover {
             transform: translateY(-5px);
             border-color: var(--color-brand);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
         .service-icon {
@@ -251,16 +297,66 @@
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
         }
 
         .service-card p {
-            flex-grow: 1; /* Pcha przycisk na dół, jeśli teksty są różnej długości */
+            flex-grow: 1;
             margin-bottom: 0;
         }
 
-        /* 7. O nas */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--bg-card);
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            color: var(--text-main);
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--color-brand);
+            color: white;
+            border-color: var(--color-brand);
+        }
+
+        .carousel-btn-left { left: -25px; }
+        .carousel-btn-right { right: -25px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #cbd5e1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background-color: var(--color-brand);
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        /* 7. O nas (Zdjęcie automatyzacji/danych) */
         .about {
             padding: 100px 0;
             background-color: var(--bg-card);
@@ -268,13 +364,16 @@
 
         .about-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
             align-items: center;
         }
 
         .about-text ul {
             margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         .about-text ul li {
@@ -282,10 +381,11 @@
             padding-left: 30px;
             margin-bottom: 10px;
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         .about-text ul li::before {
-            content: "\f00c"; /* FontAwesome check icon */
+            content: "\f00c"; 
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             position: absolute;
@@ -293,17 +393,42 @@
             color: var(--color-accent);
         }
 
-        .about-image {
-            background-color: #eff6ff;
-            padding: 40px;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
+        .about-image-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
-        .about-image h3 {
-            color: var(--color-brand);
-            font-size: 2rem;
+        /* ZMIENIONE ZDJĘCIE: Nowoczesne panele analityczne, wykresy i kod (Automatyzacja procesów) */
+        .about-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .about-badge h4 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .about-badge p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #94a3b8;
         }
 
         /* 8. Jak współpracujemy */
@@ -318,15 +443,14 @@
             position: relative;
         }
 
-        /* Linia łącząca kroki (tylko desktop) */
         .process-steps::before {
             content: '';
             position: absolute;
             top: 40px;
-            left: 50px;
-            right: 50px;
+            left: 100px;
+            right: 100px;
             height: 2px;
-            background-color: #e2e8f0;
+            background-color: #cbd5e1;
             z-index: 1;
         }
 
@@ -348,7 +472,7 @@
             justify-content: center;
             border-radius: 50%;
             margin: 0 auto 25px auto;
-            border: 8px solid var(--bg-main); /* Tworzy efekt przerwy w linii */
+            border: 8px solid var(--bg-main);
         }
 
         /* 9. Kontakt */
@@ -431,7 +555,7 @@
         /* 10. Footer */
         footer {
             background-color: var(--bg-main);
-            padding: 30px 0;
+            padding: 40px 0;
             border-top: 1px solid #e2e8f0;
             text-align: center;
         }
@@ -447,14 +571,13 @@
         
         @media (max-width: 1024px) {
             .hero h1 { font-size: 3rem; }
-            .about-wrapper, .contact-wrapper { gap: 30px; }
+            .about-wrapper, .contact-wrapper { gap: 40px; }
         }
 
         @media (max-width: 768px) {
-            /* Typografia mobile */
             html { font-size: 15px; }
             .section-title { font-size: 2rem; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.3rem; }
 
             /* Nawigacja mobile */
             .menu-toggle { display: flex; z-index: 1100; }
@@ -462,7 +585,7 @@
             .nav-menu {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Schowane */
+                right: -100%;
                 width: 80%;
                 height: 100vh;
                 background-color: var(--bg-card);
@@ -470,26 +593,33 @@
                 justify-content: center;
                 gap: 20px;
                 padding: 50px;
-                transition: 0.4s ease;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
                 z-index: 1050;
             }
 
             .nav-menu.active {
-                right: 0; /* Pokazane */
+                right: 0;
             }
 
-            /* Sekcje mobile */
             .hero, .services, .about, .process, .contact { padding: 60px 0; }
-            .hero { padding-top: 120px; }
+            .hero { padding-top: 140px; }
 
-            /* Grid -> Flex Column */
+            /* Układy pionowe */
             .about-wrapper, .contact-wrapper, .process-steps {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
 
-            .process-steps::before { display: none; } /* Chowa linię łączącą */
+            .about-text ul {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                height: 300px;
+            }
+
+            .process-steps::before { display: none; }
 
             .hero-btns { flex-direction: column; gap: 10px; }
             
@@ -505,12 +635,10 @@
     <header>
         <div class="container">
             <div class="nav-wrapper">
-                <!-- Logo: odniesienie do Twojego pliku -->
                 <a href="#" class="logo">
-                    <img src="Gemini_Generated_Image_pypsmbpypsmbpyps (1).png" alt="Dataly Logo" class="logo-img">
+                    <img src="Logo firmy Dataly.svg" alt="Dataly Logo" class="logo-img">
                 </a>
                 
-                <!-- Menu -->
                 <ul class="nav-menu" id="nav-menu">
                     <li><a href="#uslugi" class="nav-link">Usługi</a></li>
                     <li><a href="#onas" class="nav-link">O nas</a></li>
@@ -518,7 +646,6 @@
                     <li><a href="#kontakt" class="btn btn-primary">Darmowa Konsultacja</a></li>
                 </ul>
 
-                <!-- Przycisk menu mobilnego -->
                 <div class="menu-toggle" id="mobile-menu">
                     <span></span>
                     <span></span>
@@ -528,86 +655,105 @@
         </div>
     </header>
 
-    <!-- 2. HERO SECTION (Sekcja powitalna) -->
+    <!-- 2. HERO SECTION (Rozjaśniona, nowe tło) -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Twoje dane pod kontrolą. Twoja <span>księgowość</span> online.</h1>
-                <p>Łączymy precyzję nowoczesnej biura rachunkowego z siłą analizy danych i automatyzacji. Zarządzamy budżetem, optymalizujemy procesy, rozliczamy Twoją firmę.</p>
+                <h1>Twoje dane pod kontrolą.<br>Twoja <span>księgowość</span> online.</h1>
+                <p>Połączenie nowoczesnej księgowości z automatyzacją arkuszy i analizą danych finansowych. Planujemy, optymalizujemy i wdrażamy narzędzia idealnie skrojone pod Twój budżet.</p>
                 <div class="hero-btns">
-                    <a href="#kontakt" class="btn btn-primary">Sprawdź ofertę</a>
-                    <a href="#uslugi" class="btn btn-secondary">Zobacz usługi data</a>
+                    <a href="#kontakt" class="btn btn-primary">Darmowa wycena</a>
+                    <a href="#uslugi" class="btn btn-secondary">Zobacz zakres usług</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. USŁUGI -->
+    <!-- 3. USŁUGI (Nieskończona Karuzela) -->
     <section id="uslugi" class="services">
         <div class="container">
-            <h2 class="section-title">Nasz zakres działań</h2>
-            <p class="section-subtitle">Wspieramy nowoczesnych przedsiębiorców kompleksową obsługą rachunkową oraz zaawansowanymi narzędziami analitycznymi.</p>
+            <h2 class="section-title">Usługi</h2>
+            <p class="section-subtitle">Wspieramy dynamiczne firmy i przedsiębiorców. Wybierz usługę lub połącz księgowość z inteligentną analizą danych.</p>
             
-            <div class="services-grid">
-                <!-- Usługa 1 -->
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-book"></i></div>
-                    <h3>Prowadzenie KPiR</h3>
-                    <p>Pełna obsługa Księgi Przychodów i Rozchodów. Terminowo, rzetelnie i w 100% online.</p>
-                </div>
+            <div class="carousel-container">
+                <button class="carousel-btn carousel-btn-left" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
                 
-                <!-- Usługa 2 -->
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                    <h3>Rozliczenia ZUS</h3>
-                    <p>Kompleksowa obsługa deklaracji i rozliczeń z Zakładem Ubezpieczeń Społecznych.</p>
+                <div class="carousel-track-wrapper" id="carouselWrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        
+                        <!-- Usługa 1 -->
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fas fa-book"></i></div>
+                            <h3>Prowadzenie KPiR</h3>
+                            <p>Pełna i bezbłędna obsługa Księgi Przychodów i Rozchodów. Przesyłaj dokumenty online, bez wychodzenia z domu.</p>
+                        </div>
+                        
+                        <!-- Usługa 2 -->
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <h3>Rozliczenia ZUS</h3>
+                            <p>Kompleksowe generowanie i wysyłanie deklaracji rozliczeniowych. Dbamy o Twoje składki i terminowość zgłoszeń.</p>
+                        </div>
+
+                        <!-- Usługa 3 -->
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fas fa-calculator"></i></div>
+                            <h3>Rozliczanie PIT</h3>
+                            <p>Sprawne przygotowanie rocznych zeznań podatkowych (PIT-36, PIT-36L, PIT-37, PIT-28). Maksymalizujemy przysługujące ulgi.</p>
+                        </div>
+
+                        <!-- Usługa 4 -->
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Narzędzia Budżetowe</h3>
+                            <p>Projektujemy spersonalizowane kalkulatory i plany budżetowe, które pomagają w pełni kontrolować koszty firmy.</p>
+                        </div>
+
+                        <!-- Usługa 5 -->
+                        <div class="service-card">
+                            <div class="service-icon"><i class="fab fa-google-drive"></i></div>
+                            <h3>Arkusz Google & Excel</h3>
+                            <p>Budujemy od zera i optymalizujemy rozbudowane arkusze analityczne. Automatyzacja raportów bez drogiego oprogramowania.</p>
+                        </div>
+
+                    </div>
                 </div>
 
-                <!-- Usługa 3 -->
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-calculator"></i></div>
-                    <h3>Rozliczanie PIT</h3>
-                    <p>Przygotowanie rocznych zeznań podatkowych dla Ciebie i Twojej firmy.</p>
-                </div>
-
-                <!-- Usługa 4 (Analityczna) -->
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Narzędzia Budżetowe</h3>
-                    <p>Opracowanie dedykowanych narzędzi do planowania i kontroli budżetu domowego lub firmowego.</p>
-                </div>
-
-                <!-- Usługa 5 (Arkusz Google) -->
-                <div class="service-card">
-                    <div class="service-icon"><i class="fab fa-google-drive"></i></div>
-                    <h3>Arkusz Google & Excel</h3>
-                    <p>Tworzenie i optymalizacja zaawansowanych arkuszy. Automatyzacja raportów i analiz danych.</p>
-                </div>
+                <button class="carousel-btn carousel-btn-right" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
+
+            <div class="carousel-dots" id="carouselDots"></div>
         </div>
     </section>
 
-    <!-- 4. O NAS -->
+    <!-- 4. O NAS (Zdjęcie automatyzacji i danych) -->
     <section id="onas" class="about">
         <div class="container">
             <div class="about-wrapper">
                 <div class="about-text">
                     <h2 class="section-title" style="text-align: left; margin-left: 0;">Kim jesteśmy?</h2>
-                    <p>Jesteśmy biurem rachunkowo-analitycznym nowej generacji. Wierzymy, że nowoczesna księgowość to coś więcej niż tylko liczby – to fundament do podejmowania mądrych decyzji biznesowych.</p>
-                    <p>Naszą misją jest odciążenie Cię od biurokracji i dostarczenie narzędzi, które pozwolą Ci efektywnie zarządzać Twoimi danymi i finansami. Działamy w pełni online, oszczędzając Twój czas.</p>
+                    <p>Dataly to połączenie tradycyjnego, skrupulatnego biura rachunkowego z technologicznym podejściem do analizy danych.</p>
+                    <p>Zamiast jedynie wpisywać dane, przekształcamy je w czytelne wykresy i automatyczne narzędzia. Pomagamy Ci zoptymalizować podatki oraz codzienne procesy w firmie.</p>
                     
                     <ul>
-                        <li>Doświadczeni Księgowi</li>
-                        <li>Specjaliści od Analizy Danych</li>
-                        <li>Eksperci Google Sheets/Excel</li>
+                        <li>Rachunkowość 100% Online</li>
+                        <li>Automatyzacja procesów</li>
+                        <li>Analizy i budżety</li>
+                        <li>Pełne bezpieczeństwo</li>
                     </ul>
                 </div>
-                <div class="about-image">
-                    <!-- Miejsce na grafikę lub statystykę -->
-                    <i class="fas fa-database" style="font-size: 5rem; color: var(--color-brand); margin-bottom: 20px;">
-                    </i>
-                    <h3>100% Online</h3>
-                    <p style="margin-bottom: 0;">Dostęp do Twoich danych 24/7 z dowolnego miejsca.</p>
+                
+                <!-- Zaktualizowane zdjęcie: Tematyka Automatyzacji i Analizy Danych -->
+                <div class="about-image-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Panele analityczne i automatyzacja danych" class="about-img">
+                    <div class="about-badge">
+                        <h4>Automatyzacja</h4>
+                        <p>Przyszłość finansów w Twoich rękach.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -617,28 +763,25 @@
     <section class="process">
         <div class="container">
             <h2 class="section-title">Jak wygląda współpraca?</h2>
-            <p class="section-subtitle">Cenimy Twój czas i prostotę. Nasz proces jest jasny i transparentny.</p>
+            <p class="section-subtitle">Cenimy Twój czas i prostotę. Nasz proces jest jasny i przejrzysty na każdym kroku.</p>
             
             <div class="process-steps">
-                <!-- Krok 1 -->
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <h3>Kontakt i Wywiad</h3>
-                    <p>Wypełniasz formularz. Rozmawiamy o Twoich potrzebach księgowych i analitycznych.</p>
+                    <p>Wypełniasz krótki formularz. Rozmawiamy o potrzebach Twojej działalności.</p>
                 </div>
                 
-                <!-- Krok 2 -->
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <h3>Dedykowane Rozwiązanie</h3>
-                    <p>Przygotowujemy plan obsługi KPiR i projektujemy narzędzia do danych (Excel/Google).</p>
+                    <p>Ustalamy zakres opieki KPiR i planujemy automatyzacje narzędzi budżetowych.</p>
                 </div>
 
-                <!-- Krok 3 -->
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <h3>Stałe Wsparcie</h3>
-                    <p>Wdrażamy narzędzia, prowadzimy księgowość. Ty skupiasz się na rozwoju biznesu.</p>
+                    <p>Wdrażamy system, przejmujemy dokumentację, a Ty zyskujesz spokój i pełny wgląd w dane.</p>
                 </div>
             </div>
         </div>
@@ -648,24 +791,23 @@
     <section id="kontakt" class="contact">
         <div class="container">
             <h2 class="section-title">Zacznijmy współpracę</h2>
-            <p class="section-subtitle">Wypełnij formularz poniżej. Odezwiemy się w ciągu 24 godzin, aby porozmawiać o Twoich finansach.</p>
+            <p class="section-subtitle">Napisz do nas. Pomożemy Ci uporządkować podatki i zautomatyzować Twoje codzienne arkusze.</p>
             
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <h3>Biuro Online</h3>
-                    <p>Działamy na terenie całej Polski, w pełni zdalnie.</p>
+                    <p>Pracujemy całkowicie w chmurze, obsługując partnerów z całej Polski.</p>
                     
                     <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <span>kontakt@dataly.pl</span> <!-- Tutaj zmień email -->
+                        <span>kontakt@dataly.pl</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <span>+48 123 456 789</span> <!-- Tutaj zmień telefon -->
+                        <span>+48 123 456 789</span>
                     </div>
                 </div>
                 
-                <!-- Formularz Kontaktowy -->
                 <form class="contact-form">
                     <div class="form-group">
                         <label for="name">Imię i Nazwisko / Firma</label>
@@ -681,15 +823,15 @@
                             <option value="kpir">Prowadzenie KPiR + ZUS</option>
                             <option value="pit">Rozliczenie PIT</option>
                             <option value="data">Narzędzia Budżetowe / Excel</option>
-                            <option value="inne">Inne zapytanie</option>
+                            <option value="all">Pełna księgowość + optymalizacja Excel</option>
                         </select>
                     </div>
                     <div class="form-group form-group-full">
-                        <label for="message">Wiadomość (opcjonalnie)</label>
-                        <textarea id="message" name="message" placeholder="Opisz krótko swoją sytuację..."></textarea>
+                        <label for="message">Opisz swoje potrzeby</label>
+                        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..."></textarea>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary">Wyślij zapytanie</button>
+                    <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
                 </form>
             </div>
         </div>
@@ -698,29 +840,182 @@
     <!-- 7. FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2023 Dataly. Wszelkie prawa zastrzeżone.</p>
-            <p style="font-size: 0.8rem; margin-top: 5px;">Modern Solutions for Data & Finance.</p>
+            <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px; color: #94a3b8;">Modern Solutions for Data & Finance.</p>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: Logika Menu Mobilnego -->
+    <!-- JAVASCRIPT: Logika Menu oraz Pętli Karuzeli Bez Końca -->
     <script>
+        // --- 1. MENU MOBILNE ---
         const mobileMenu = document.querySelector('#mobile-menu');
         const navMenu = document.querySelector('#nav-menu');
         const navLinks = document.querySelectorAll('.nav-link');
 
-        // Otwieranie/Zamykanie menu po kliknięciu w hamburger
         mobileMenu.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             mobileMenu.classList.toggle('active');
         });
 
-        // Zamykanie menu po kliknięciu w link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 mobileMenu.classList.remove('active');
             });
+        });
+
+        // --- 2. NIESKOŃCZONA KARUZELA (INFINITE LOOP CAROUSEL) ---
+        const track = document.getElementById('carouselTrack');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const dotsContainer = document.getElementById('carouselDots');
+        
+        // Zbieramy oryginalne karty
+        let originalCards = Array.from(track.children);
+        const originalLength = originalCards.length;
+
+        // Klonujemy elementy na początku i na końcu dla płynnego przejścia "bez końca"
+        originalCards.forEach(card => {
+            const cloneLast = card.cloneNode(true);
+            track.appendChild(cloneLast); // klony na końcu
+        });
+        
+        // Klonujemy od końca na początek
+        for (let i = originalLength - 1; i >= 0; i--) {
+            const cloneFirst = originalCards[i].cloneNode(true);
+            track.insertBefore(cloneFirst, track.firstChild); // klony na początku
+        }
+
+        // Wszystkie karty (oryginalne + sklonowane)
+        let allCards = Array.from(track.children);
+        
+        // Indeks startowy ustawiamy na pierwszy oryginalny element (przeskakujemy klony początkowe)
+        let currentIndex = originalLength; 
+        let isTransitioning = false;
+
+        function getVisibleCardsCount() {
+            const width = window.innerWidth;
+            if (width > 1024) return 3;
+            if (width > 768) return 2;
+            return 1;
+        }
+
+        function getCardWidth() {
+            const cardWidth = originalCards[0].getBoundingClientRect().width;
+            const gap = 30; // pasuje do gap w CSS
+            return cardWidth + gap;
+        }
+
+        function initCarousel() {
+            const cardWidth = getCardWidth();
+            // Przesuwamy bez animacji na pozycję startową (pierwsza oryginalna karta)
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            createDots();
+        }
+
+        function moveCarousel(direction) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            const cardWidth = getCardWidth();
+            track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+
+            if (direction === 'next') {
+                currentIndex++;
+                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            } else if (direction === 'prev') {
+                currentIndex--;
+                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+
+            updateDots();
+        }
+
+        // Szybki powrót bez animacji po zakończeniu przejścia
+        track.addEventListener('transitionend', () => {
+            isTransitioning = false;
+            const cardWidth = getCardWidth();
+
+            // Jeśli doszliśmy do sklonowanych kart na końcu
+            if (currentIndex >= originalLength * 2) {
+                track.style.transition = 'none';
+                currentIndex = originalLength; // skok na oryginalny początek
+                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+            // Jeśli doszliśmy do sklonowanych kart na początku
+            if (currentIndex < originalLength) {
+                track.style.transition = 'none';
+                currentIndex = originalLength * 2 - 1; // skok na oryginalny koniec
+                track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+            updateDots();
+        });
+
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < originalLength; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === (currentIndex % originalLength)) dot.classList.add('active');
+                
+                dot.addEventListener('click', () => {
+                    if (isTransitioning) return;
+                    currentIndex = originalLength + i;
+                    const cardWidth = getCardWidth();
+                    track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                    updateDots();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateDots() {
+            const dots = Array.from(dotsContainer.children);
+            const activeIndex = currentIndex % originalLength;
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => moveCarousel('next'));
+        prevBtn.addEventListener('click', () => moveCarousel('prev'));
+
+        // Obsługa gestów przesunięcia (Swipe) na urządzeniach dotykowych
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimalny dystans w px
+            if (touchStartX - touchEndX > swipeThreshold) {
+                moveCarousel('next'); // Przesunięcie w lewo -> następny slajd
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                moveCarousel('prev'); // Przesunięcie w prawo -> poprzedni slajd
+            }
+        }
+
+        // Dostosowanie do zmiany rozmiaru ekranu
+        window.addEventListener('resize', () => {
+            initCarousel();
+        });
+
+        // Inicjalizacja przy załadowaniu strony
+        window.addEventListener('DOMContentLoaded', () => {
+            initCarousel();
         });
     </script>
 </body>
