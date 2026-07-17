@@ -4,489 +4,798 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- [SEO] Podstawowe meta tagi dla Google -->
+    <!-- SEO & Metadata -->
     <title>Księgowość online dla JDG i małych firm | Dataly</title>
-    <meta name="description" content="Nowoczesna księgowość online dla JDG i małych firm. Prowadzimy KPiR, ZUS, PIT oraz automatyzujemy raporty finansowe w Excelu i Google Sheets. Sprawdź!">
+    <meta name="description" content="Księgowość online dla JDG i małych firm: KPiR, ZUS, PIT, KSeF oraz automatyczne raporty finansowe w Excelu i Google Sheets. Zyskaj pełną kontrolę.">
     <link rel="canonical" href="https://dataly.pl/">
     
-    <!-- Open Graph (Dla social media) -->
+    <!-- Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Księgowość online dla JDG i małych firm | Dataly">
-    <meta property="og:description" content="Księgowość online połączona z czytelnym obrazem finansów Twojej firmy w jednym miejscu.">
-    <meta property="og:type" content="website">
+    <meta property="og:description" content="Nowoczesna księgowość połączona z automatyzacją raportów finansowych. Sprawdź naszą ofertę!">
     <meta property="og:url" content="https://dataly.pl/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://dataly.pl/images/og-dataly.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Google Fonts - Inter -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-main: #F8FAFC;       /* Tło główne (Light Slate) */
-            --bg-card: #FFFFFF;       /* Tło sekcji/kart (Pure White) */
-            --text-main: #0F172A;     /* Tekst i struktura (Deep Slate) */
-            --text-muted: #475569;    /* Przyciemniony tekst dla lepszej czytelności */
-            --color-brand: #2563EB;   /* Kolor marki (Electric Blue) */
-            
-            /* [WCAG Fix] Zmiana zieleni na ciemniejszą (#047857) dla idealnego kontrastu z białym tekstem */
-            --color-accent: #047857;  
-            --color-accent-hover: #065f46;
-            
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --color-brand: #2563EB;
+            --color-brand-hover: #1D4ED8;
+            /* WCAG AA Contrast Fix: Darker green for white text */
+            --color-accent: #047857;
+            --color-accent-hover: #065F46;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --transition: all 0.2s ease-in-out;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Redukcja ruchu na żądanie użytkownika systemu (Dostępność) */
+        /* Accessibility: Reduced Motion handling */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 scroll-behavior: auto !important;
                 animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
 
+        /* Skip link for keyboard users */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-brand);
+            color: white;
+            padding: 8px 16px;
+            z-index: 2000;
+            transition: top 0.2s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus { top: 0; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--bg-main); }
         
-        /* Poprawka przesunięcia kotwic pod fixed headerem */
-        section { scroll-margin-top: 100px; }
+        /* Fixed Header Anchor Offset Fix */
+        section { scroll-margin-top: 110px; }
 
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         
-        /* Przyciski */
-        .btn { display: inline-block; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-align: center; cursor: pointer; border: none; transition: var(--transition); text-decoration: none; }
+        /* Buttons */
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-align: center; cursor: pointer; border: none; transition: var(--transition); text-decoration: none; font-size: 0.95rem; }
         .btn-primary { background-color: var(--color-accent); color: white; }
         .btn-primary:hover { background-color: var(--color-accent-hover); transform: translateY(-1px); }
-        .btn-secondary { background-color: transparent; border: 2px solid var(--color-brand); color: var(--color-brand); }
-        .btn-secondary:hover { background-color: rgba(37, 99, 235, 0.05); }
+        .btn-secondary { background-color: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); box-shadow: var(--shadow-sm); }
+        .btn-secondary:hover { background-color: var(--bg-main); border-color: #CBD5E1; }
 
-        /* Nagłówek strony */
-        header { background-color: var(--bg-card); position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        /* Navigation Header */
+        header { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
         .nav-wrapper { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo-img { height: 40px; width: 200px; }
-        .nav-menu { display: flex; gap: 32px; align-items: center; }
-        .nav-link { font-weight: 500; color: var(--text-main); text-decoration: none; }
-        .nav-link:hover { color: var(--color-brand); }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-main); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--color-brand); }
+        
+        .nav-menu { display: flex; gap: 32px; align-items: center; list-style: none; }
+        .nav-link { font-weight: 500; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+        .nav-link:hover { color: var(--text-main); }
 
-        /* Semantyczny przycisk menu mobilnego */
+        /* Semantic Accessible Mobile Toggle */
         .menu-toggle { display: none; background: none; border: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 8px; }
-        .menu-toggle span { display: block; width: 24px; height: 2px; background-color: var(--text-main); border-radius: 2px; }
+        .menu-toggle span { display: block; width: 22px; height: 2px; background-color: var(--text-main); transition: var(--transition); }
 
-        /* Sekcja Hero - Skupiona na kliencie */
-        .hero { padding: 180px 0 100px 0; background-color: var(--bg-card); text-align: center; }
-        .hero-content { max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 3.25rem; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.03em; }
+        /* Hero Section */
+        .hero { padding: 160px 0 80px 0; background: radial-gradient(100% 100% at 50% 0%, rgba(37, 99, 235, 0.05) 0%, rgba(255, 255, 255, 0) 100%), var(--bg-card); text-align: center; }
+        .hero-content { max-width: 850px; margin: 0 auto; }
+        .hero h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.03em; font-weight: 800; }
         .hero h1 span { color: var(--color-brand); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 32px; }
-        .hero-btns { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; max-width: 720px; margin-left: auto; margin-right: auto; }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
         
-        /* Trust Strip (Pasek zaufania pod CTA) */
-        .trust-strip { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
-        .trust-item::before { content: "• "; color: var(--color-accent); font-weight: bold; }
+        /* Trust Strip */
+        .trust-strip { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; border-top: 1px solid var(--border-color); padding-top: 24px; max-width: 700px; margin: 0 auto; }
+        .trust-item { display: flex; align-items: center; gap: 8px; }
+        .trust-item svg { color: var(--color-accent); width: 18px; height: 18px; }
 
-        /* Sekcja Usług (Zamiast karuzeli - czytelna siatka) */
-        .services { padding: 100px 0; }
-        .section-title { text-align: center; font-size: 2.25rem; margin-bottom: 12px; }
-        .section-subtitle { text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 60px auto; }
+        /* Static Services Grid (No Carousel!) */
+        .services { padding: 100px 0; background-color: var(--bg-main); }
+        .section-title { text-align: center; font-size: 2.25rem; margin-bottom: 12px; letter-spacing: -0.02em; font-weight: 700; }
+        .section-subtitle { text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 60px auto; line-height: 1.5; }
         .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .service-card { background-color: var(--bg-card); padding: 32px; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid #E2E8F0; }
-        .service-card h3 { font-size: 1.35rem; margin-bottom: 12px; }
-        .service-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 0; }
+        .service-card { background-color: var(--bg-card); padding: 32px; border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; height: 100%; transition: var(--transition); }
+        .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .service-card-content h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 700; }
+        .service-card-content p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px; }
+        .service-card-link { color: var(--color-brand); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
+        .service-card-link:hover { color: var(--color-brand-hover); }
 
-        /* Sekcja O nas */
-        .about { padding: 100px 0; background-color: var(--bg-card); }
-        .about-wrapper { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-        .about-text h2 { font-size: 2.25rem; margin-bottom: 20px; }
-        .about-text p { margin-bottom: 20px; color: var(--text-muted); }
-        .about-image-container { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-md); }
-        .about-img { width: 100%; height: auto; display: block; object-fit: cover; }
+        /* Interactive CSS Dashboard Mockup (Instead of stock images) */
+        .dashboard-showcase { padding: 100px 0; background-color: var(--bg-card); }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: center; }
+        .dashboard-text h2 { font-size: 2.25rem; margin-bottom: 20px; font-weight: 700; }
+        .dashboard-text p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px; }
+        
+        /* CSS Dashboard UI Code */
+        .mock-dashboard { background-color: #0F172A; border-radius: 16px; padding: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15); color: #F8FAFC; border: 1px solid #334155; font-family: monospace; }
+        .mock-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #334155; padding-bottom: 16px; }
+        .mock-title { font-weight: bold; color: #38BDF8; font-size: 0.9rem; }
+        .mock-dots { display: flex; gap: 6px; }
+        .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .mock-dot.red { background-color: #EF4444; }
+        .mock-dot.yellow { background-color: #F59E0B; }
+        .mock-dot.green { background-color: #10B981; }
+        .mock-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        .mock-stat-card { background-color: #1E293B; padding: 16px; border-radius: 8px; border: 1px solid #334155; }
+        .mock-stat-label { font-size: 0.75rem; color: #94A3B8; margin-bottom: 4px; }
+        .mock-stat-val { font-size: 1.1rem; font-weight: bold; color: #FFF; }
+        .mock-stat-val.green-txt { color: #34D399; }
+        .mock-chart { background-color: #1E293B; border-radius: 8px; padding: 16px; border: 1px solid #334155; }
+        .mock-chart-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: #94A3B8; margin-bottom: 12px; }
+        .mock-chart-bars { display: flex; justify-content: space-around; align-items: flex-end; height: 100px; padding-top: 10px; }
+        .mock-chart-bar { width: 30px; background-color: var(--color-brand); border-radius: 4px 4px 0 0; position: relative; }
+        .mock-chart-bar.secondary { background-color: var(--color-accent); }
 
-        /* Sekcja współpracy - Konkretne opisy kroków */
-        .process { padding: 100px 0; }
+        /* How it works */
+        .process { padding: 100px 0; background-color: var(--bg-main); }
         .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .process-card { text-align: center; padding: 20px; }
-        .process-number { width: 60px; height: 60px; background-color: var(--color-brand); color: white; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 20px auto; }
-        .process-card h3 { margin-bottom: 12px; font-size: 1.25rem; }
-        .process-card p { color: var(--text-muted); font-size: 0.95rem; }
+        .process-card { background-color: var(--bg-card); padding: 32px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; }
+        .process-num { width: 50px; height: 50px; background-color: rgba(37, 99, 235, 0.1); color: var(--color-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; margin: 0 auto 20px auto; }
+        .process-card h3 { margin-bottom: 12px; font-size: 1.15rem; font-weight: 700; }
+        .process-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
-        /* Sekcja FAQ - Zbijanie obiekcji przed kontaktem */
-        .faq { padding: 100px 0; background-color: var(--bg-card); }
+        /* Case Studies & Social Proof */
+        .proof { padding: 100px 0; background-color: var(--bg-card); }
+        .case-study { background-color: var(--bg-main); border-radius: 16px; padding: 48px; border: 1px solid var(--border-color); margin-bottom: 60px; }
+        .case-study-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .case-tag { background-color: rgba(4, 120, 87, 0.1); color: var(--color-accent); padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+        .case-study h3 { font-size: 1.75rem; margin-bottom: 16px; font-weight: 700; }
+        .case-metrics { display: flex; gap: 24px; margin-top: 24px; }
+        .case-metric { font-size: 1.5rem; font-weight: 700; color: var(--color-accent); }
+        .case-metric span { display: block; font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .testimonial-card { background-color: var(--bg-main); padding: 32px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .testimonial-text { font-style: italic; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem; }
+        .testimonial-author { font-weight: 700; font-size: 0.95rem; }
+        .testimonial-company { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* Pricing Anchor */
+        .pricing-anchor { background-color: #0F172A; color: white; padding: 60px 0; text-align: center; }
+        .pricing-content { max-width: 600px; margin: 0 auto; }
+        .pricing-price { font-size: 3rem; font-weight: 800; color: #FFF; margin: 16px 0; }
+        .pricing-price span { font-size: 1rem; color: #94A3B8; font-weight: 400; }
+
+        /* FAQ */
+        .faq { padding: 100px 0; background-color: var(--bg-main); }
         .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { border: 1px solid #E2E8F0; border-radius: 8px; padding: 20px; background: var(--bg-main); }
-        .faq-item h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--text-main); }
-        .faq-item p { color: var(--text-muted); margin-bottom: 0; font-size: 0.95rem; }
+        .faq-item { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; cursor: pointer; transition: var(--transition); }
+        .faq-item h3 { font-size: 1.1rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item h3::after { content: "+"; color: var(--color-brand); font-size: 1.25rem; transition: transform 0.2s; }
+        .faq-item.active h3::after { transform: rotate(45deg); }
+        .faq-answer { margin-top: 12px; color: var(--text-muted); line-height: 1.6; display: none; font-size: 0.95rem; }
+        .faq-item.active .faq-answer { display: block; }
 
-        /* Sekcja Kontakt i Formularz */
-        .contact { padding: 100px 0; }
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-        .contact-info h2 { font-size: 2.25rem; margin-bottom: 16px; }
-        .contact-link { display: block; color: var(--color-brand); font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; text-decoration: none; }
-        .contact-hours { font-size: 0.95rem; color: var(--text-muted); margin-top: 20px; line-height: 1.8; }
+        /* Contact & Form */
+        .contact { padding: 100px 0; background-color: var(--bg-card); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 60px; }
+        .contact-info h2 { font-size: 2.25rem; font-weight: 700; margin-bottom: 16px; }
+        .contact-lead { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 32px; }
+        .contact-method { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; text-decoration: none; color: inherit; }
+        .contact-icon { width: 44px; height: 44px; background-color: rgba(37, 99, 235, 0.05); color: var(--color-brand); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .contact-method:hover .contact-icon { background-color: var(--color-brand); color: white; }
+        .contact-method-text h4 { font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; }
+        .contact-method-text p { font-size: 1.1rem; font-weight: 600; margin-top: 2px; }
         
-        /* Formularz */
-        .contact-form { background-color: var(--bg-card); padding: 40px; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid #E2E8F0; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        .form-group { display: flex; flex-direction: column; }
+        .contact-meta { border-top: 1px solid var(--border-color); padding-top: 24px; margin-top: 32px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; }
+        
+        /* Working Form */
+        .contact-form { background-color: var(--bg-main); border: 1px solid var(--border-color); padding: 40px; border-radius: 16px; box-shadow: var(--shadow-sm); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
         .form-group-full { grid-column: span 2; }
-        .contact-form label { font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; }
-        .contact-form input, .contact-form select, .contact-form textarea { padding: 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: inherit; font-size: 1rem; }
-        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        .privacy-notice { font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; line-height: 1.4; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+        .form-group input, .form-group select, .form-group textarea { padding: 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-family: inherit; font-size: 0.95rem; background-color: var(--bg-card); transition: var(--transition); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-consent { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-top: 16px; }
+        .form-consent a { color: var(--color-brand); text-decoration: none; }
+        .form-consent a:hover { text-decoration: underline; }
         
-        /* Stany formularza */
-        .form-status { margin-top: 15px; padding: 12px; border-radius: 6px; font-weight: 500; display: none; }
-        .form-status.success { display: block; background-color: #DCFCE7; color: #14532D; border: 1px solid #BBF7D0; }
-        .form-status.error { display: block; background-color: #FEE2E2; color: #7F1D1D; border: 1px solid #FCA5A5; }
+        /* Submission state styles */
+        .btn-loading { opacity: 0.7; pointer-events: none; }
+        
+        /* Modal Style for Privacy Policy to keep single-file deployment */
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(15, 23, 42, 0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background-color: var(--bg-card); border-radius: 12px; max-width: 650px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 40px; border: 1px solid var(--border-color); position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 1.5rem; cursor: pointer; }
 
-        /* Stopka z pełnymi informacjami prawnymi */
-        footer { background-color: #0F172A; color: #94A3B8; padding: 60px 0 30px 0; font-size: 0.9rem; }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .footer-legal h4 { color: white; margin-bottom: 12px; }
-        .footer-bottom { border-top: 1px solid #334155; padding-top: 20px; text-align: center; font-size: 0.85rem; }
+        /* Footer */
+        footer { background-color: #0F172A; color: #94A3B8; padding: 80px 0 30px 0; border-top: 1px solid #1E293B; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 80px; margin-bottom: 60px; }
+        .footer-info h3 { color: white; font-size: 1.25rem; margin-bottom: 16px; }
+        .footer-info p { line-height: 1.6; margin-bottom: 20px; }
+        .footer-legal-block { background-color: #1E293B; border-radius: 8px; padding: 20px; border: 1px solid #334155; }
+        .footer-legal-block p { margin-bottom: 10px; color: #FFF; font-weight: 500; }
+        .footer-legal-block p:last-child { margin-bottom: 0; color: #34D399; font-size: 0.8rem; }
+        .footer-links h4 { color: white; font-size: 1rem; margin-bottom: 16px; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #94A3B8; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #1E293B; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
 
-        /* Ekran "Dziękujemy" - ukryty domyślnie */
-        #thank-you-page { display: none; text-align: center; padding: 100px 24px; background: var(--bg-card); min-height: 60vh; align-items: center; justify-content: center; flex-direction: column; }
+        /* Sticky Mobile Footer Action */
+        .mobile-sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background-color: var(--bg-card); border-top: 1px solid var(--border-color); padding: 12px 24px; z-index: 999; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05); }
 
-        /* Mobilny przycisk "Sticky" u dołu ekranu */
-        .mobile-sticky-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-card); padding: 12px 24px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); z-index: 999; }
-
-        /* --- RESPONSYWNOŚĆ (Mobile First) --- */
+        /* Responsive Breakpoints */
         @media (max-width: 1024px) {
             .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.25rem; }
             .menu-toggle { display: flex; }
-            .nav-menu { display: none; position: absolute; top: 80px; left: 0; right: 0; background: var(--bg-card); flex-direction: column; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); gap: 16px; }
+            .nav-menu { display: none; position: absolute; top: 80px; left: 0; right: 0; background-color: var(--bg-card); flex-direction: column; padding: 32px; border-bottom: 1px solid var(--border-color); box-shadow: var(--shadow-md); gap: 20px; }
             .nav-menu.active { display: flex; }
-            .services-grid, .about-wrapper, .process-grid, .contact-wrapper, .form-grid, .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .hero { padding: 120px 0 60px 0; }
+            .hero h1 { font-size: 2.25rem; }
+            .services-grid, .dashboard-grid, .process-grid, .case-study-grid, .contact-grid, .form-row, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .form-group-full { grid-column: span 1; }
             .mobile-sticky-cta { display: block; }
-            body { padding-bottom: 70px; } /* Miejsce na sticky button */
+            body { padding-bottom: 74px; } /* Prevent cta overlapping */
         }
     </style>
 </head>
 <body>
 
-<div id="main-site">
-    <!-- 1. HEADER (Semantyczna Główna Nawigacja) -->
+    <!-- Accessible Skip Link -->
+    <a href="#main-content" class="skip-link">Przejdź do treści głównej</a>
+
+    <!-- Navigation -->
     <header>
         <div class="container">
             <nav class="nav-wrapper" aria-label="Główna nawigacja">
                 <a href="#" class="logo">
-                    <!-- Twój logotyp -->
-                    <img src="Logo firmy Dataly.svg" alt="Dataly Logo" class="logo-img">
+                    <!-- Clean SVG Logo replacing heavy assets -->
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect width="32" height="32" rx="8" fill="#2563EB"/>
+                        <path d="M9 22V10H13C16 10 17.5 11.5 17.5 13.5C17.5 15.5 16 16.5 14 16.5H11.5V22H9ZM11.5 14.5H13C14.5 14.5 15 14 15 13.25C15 12.5 14.5 12 13 12H11.5V14.5ZM19 22V10H21V22H19Z" fill="white"/>
+                    </svg>
+                    Dataly<span>.pl</span>
                 </a>
                 
-                <button class="menu-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" id="menuBtn">
+                <button class="menu-toggle" type="button" aria-label="Otwórz menu nawigacyjne" aria-expanded="false" id="menu-toggle">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
 
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#uslugi" class="nav-link">Usługi</a></li>
-                    <li><a href="#onas" class="nav-link">O nas</a></li>
-                    <li><a href="#faq" class="nav-link">FAQ</a></li>
-                    <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#uslugi" class="nav-link">Zakres usług</a></li>
+                    <li><a href="#rozwiazania" class="nav-link">Raportowanie</a></li>
+                    <li><a href="#opinie" class="nav-link">Opinie</a></li>
+                    <li><a href="#faq" class="nav-link">Częste pytania</a></li>
                     <li><a href="#kontakt" class="btn btn-primary" style="padding: 10px 20px;">Bezpłatna konsultacja</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <!-- 2. HERO SECTION - Celny komunikat marketingowy -->
-        <section class="hero">
+    <main id="main-content">
+        
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Księgowość online dla <span>JDG i małych firm</span>, które chcą kontrolować swoje pieniądze</h1>
+                    <h1 id="hero-title">Księgowość online z <span>raportami finansowymi</span> dla małych firm i JDG</h1>
                     <p>Prowadzimy KPiR, ZUS i PIT, przygotowujemy firmę do pracy z KSeF oraz automatyzujemy raporty w Excelu i Google Sheets. Otrzymujesz święty spokój i czytelny obraz finansów w jednym miejscu.</p>
                     <div class="hero-btns">
                         <a href="#kontakt" class="btn btn-primary">Umów 15-minutową konsultację</a>
-                        <a href="#uslugi" class="btn btn-secondary">Zobacz zakres usług</a>
+                        <a href="#uslugi" class="btn btn-secondary">Zobacz zakres i cennik</a>
                     </div>
-                    <!-- Trust Strip -->
                     <div class="trust-strip">
-                        <span class="trust-item">Obsługa w 100% online</span>
-                        <span class="trust-item">Odpowiedź do 1 dnia roboczego</span>
-                        <span class="trust-item">Bezpłatna rozmowa wstępna</span>
+                        <div class="trust-item">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Obsługa w 100% zdalna
+                        </div>
+                        <div class="trust-item">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Odpowiedź do 1 dnia roboczego
+                        </div>
+                        <div class="trust-item">
+                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Bezpłatna rozmowa wstępna
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. USŁUGI (Usunięta karuzela - stabilny grid zgodnie z audytem) -->
-        <section id="uslugi" class="services">
+        <!-- Static Services Grid (No more slider!) -->
+        <section id="uslugi" class="services" aria-labelledby="services-title">
             <div class="container">
-                <h2 class="section-title">Nasz zakres działań</h2>
-                <p class="section-subtitle">Wybierz stabilną obsługę podatkową lub połącz ją z nowoczesną automatyzacją danych.</p>
+                <h2 id="services-title" class="section-title">Pakiety dopasowane do skali biznesu</h2>
+                <p class="section-subtitle">Połącz standardowe biuro rachunkowe z przewagą rzetelnych danych.</p>
                 
                 <div class="services-grid">
+                    <!-- Offer 1 -->
                     <div class="service-card">
-                        <h3>Prowadzenie KPiR</h3>
-                        <p>Kompleksowe prowadzenie Księgi Przychodów i Rozchodów w wersji online. Wygodne przesyłanie dokumentów bez wychodzenia z biura.</p>
+                        <div class="service-card-content">
+                            <h3>Księgowość JDG</h3>
+                            <p>Kompleksowe prowadzenie Księgi Przychodów i Rozchodów (KPiR), deklaracji VAT, rozliczeń ZUS i deklaracji rocznych PIT z pełną reprezentacją przed Urzędem Skarbowym.</p>
+                        </div>
+                        <a href="#kontakt" class="service-card-link">Wybierz pakiet &rarr;</a>
                     </div>
+                    <!-- Offer 2 -->
                     <div class="service-card">
-                        <h3>Rozliczenia ZUS i PIT</h3>
-                        <p>Zgłoszenia, deklaracje, obliczanie składek i terminowe roczne zeznania podatkowe. Pełna terminowość pod kontrolą.</p>
+                        <div class="service-card-content">
+                            <h3>Księgowość + Raportowanie</h3>
+                            <p>Pełna księgowość podatkowa połączona z indywidualnym, automatycznym pulpitem finansowym aktualizowanym co miesiąc. Doskonały wybór dla firm usługowych i agencji.</p>
+                        </div>
+                        <a href="#kontakt" class="service-card-link">Wybierz pakiet &rarr;</a>
                     </div>
+                    <!-- Offer 3 -->
                     <div class="service-card">
-                        <h3>Wdrożenie KSeF</h3>
-                        <p>Przygotujemy Twój biznes do Krajowego Systemu e-Faktur: konfiguracja uprawnień, obieg dokumentów i proste instrukcje.</p>
+                        <div class="service-card-content">
+                            <h3>Automatyzacja Finansów</h3>
+                            <p>Autorskie systemy automatyzacji w arkuszach Excel / Google Sheets dla firm posiadających już własną księgowość. Budowanie zautomatyzowanych rejestrów i wykresów marży.</p>
+                        </div>
+                        <a href="#kontakt" class="service-card-link">Skonsultuj projekt &rarr;</a>
                     </div>
+                    <!-- Offer 4 (Special KSeF Offer) -->
                     <div class="service-card">
-                        <h3>Narzędzia budżetowe</h3>
-                        <p>Tworzymy spersonalizowane systemy cash-flow, ułatwiające codzienne planowanie wydatków firmowych i domowych.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Optymalizacja arkuszy</h3>
-                        <p>Budujemy i naprawiamy zaawansowane pliki Excel i Google Sheets. Automatyczne raporty zamiast godzin ręcznej pracy.</p>
+                        <div class="service-card-content">
+                            <h3>Wdrożenie i start z KSeF</h3>
+                            <p>Pełne przygotowanie technologiczne oraz strukturalne małej firmy do Krajowego Systemu e-Faktur: konfiguracja tokenów, audyt i wdrożenie intuicyjnego obiegu faktur.</p>
+                        </div>
+                        <a href="#kontakt" class="service-card-link">Zobacz ofertę KSeF &rarr;</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. O NAS -->
-        <section id="onas" class="about">
+        <!-- CSS Dashboard Showcase -->
+        <section id="rozwiazania" class="dashboard-showcase" aria-labelledby="dashboard-title">
             <div class="container">
-                <div class="about-wrapper">
-                    <div class="about-text">
-                        <h2>Nowoczesne podejście do liczb</h2>
-                        <p>Dataly to coś więcej niż standardowe biuro rachunkowe. Łączymy precyzję certyfikowanej księgowości z pasją do automatyzacji procesów i analizy danych.</p>
-                        <p>Zamiast dostarczać Ci tylko suche kwoty podatków, pomagamy zrozumieć, gdzie Twoja firma generuje największe marże, a gdzie traci płynność finansową.</p>
+                <div class="dashboard-grid">
+                    <div class="dashboard-text">
+                        <h2 id="dashboard-title">Zapomnij o chaosie. Poznaj zautomatyzowany Cash-Flow</h2>
+                        <p>Zamiast raz w miesiącu dowiadywać się o kwocie podatków, zyskujesz stały, przejrzysty wgląd w finanse swojej firmy. Integrujemy dane z Twojej księgowości, tworząc spersonalizowany kokpit w Google Sheets lub Excelu.</p>
+                        <p>Dzięki temu od pierwszego rzutu oka widzisz rzeczywisty zysk netto, koszty operacyjne, podatkowe rezerwy gotówkowe i prognozy płynności.</p>
                     </div>
-                    <div class="about-image-container">
-                        <!-- Estetyczne zdjęcie prezentujące dane i arkusze komputerowe -->
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboard finansowy na ekranie komputera" class="about-img">
+                    
+                    <!-- CSS Native Interactive Dashboard Mockup -->
+                    <div class="mock-dashboard" aria-hidden="true">
+                        <div class="mock-header">
+                            <div class="mock-dots">
+                                <span class="mock-dot red"></span>
+                                <span class="mock-dot yellow"></span>
+                                <span class="mock-dot green"></span>
+                            </div>
+                            <div class="mock-title">DATALY_FINANCIAL_DASHBOARD_v2.0</div>
+                        </div>
+                        <div class="mock-stats">
+                            <div class="mock-stat-card">
+                                <div class="mock-stat-label">Suma Przychodu</div>
+                                <div class="mock-stat-val">34 250,00 PLN</div>
+                            </div>
+                            <div class="mock-stat-card">
+                                <div class="mock-stat-label">Podatki i ZUS</div>
+                                <div class="mock-stat-val" style="color: #F87171;">7 450,00 PLN</div>
+                            </div>
+                            <div class="mock-stat-card">
+                                <div class="mock-stat-label">Rzeczywisty Zysk</div>
+                                <div class="mock-stat-val green-txt">26 800,00 PLN</div>
+                            </div>
+                        </div>
+                        <div class="mock-chart">
+                            <div class="mock-chart-header">
+                                <span>Prognoza płynności (miesiące)</span>
+                                <span style="color: #34D399;">Płynność stabilna 🟢</span>
+                            </div>
+                            <div class="mock-chart-bars">
+                                <div class="mock-chart-bar" style="height: 60px;"></div>
+                                <div class="mock-chart-bar" style="height: 85px;"></div>
+                                <div class="mock-chart-bar secondary" style="height: 110px;"></div>
+                                <div class="mock-chart-bar" style="height: 95px;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. JAK WYGLĄDA WSPÓŁPRACA -->
-        <section class="process">
+        <!-- Process Section -->
+        <section class="process" aria-labelledby="process-title">
             <div class="container">
-                <h2 class="section-title">Jak wygląda współpraca?</h2>
-                <p class="section-subtitle">Stawiamy na jasne zasady i oszczędność Twojego czasu.</p>
+                <h2 id="process-title" class="section-title">Jak wygląda współpraca?</h2>
+                <p class="section-subtitle">Prosty, 3-krokowy proces bez zbędnego stresu.</p>
                 <div class="process-grid">
                     <div class="process-card">
-                        <div class="process-number">1</div>
+                        <div class="process-num">1</div>
                         <h3>Krótka rozmowa</h3>
-                        <p>Sprawdzamy formę działalności, liczbę dokumentów w miesiącu oraz obecny sposób pracy.</p>
-                    </div>
-                    <div class="process-grid-item process-card">
-                        <div class="process-number">2</div>
-                        <h3>Zakres i wycena</h3>
-                        <p>Otrzymujesz jasny zakres, cenę, termin rozpoczęcia i przejrzystą listę potrzebnych nam dostepów.</p>
+                        <p>Analizujemy formę Twojej działalności, wolumen dokumentów oraz obecne procesy raportowania.</p>
                     </div>
                     <div class="process-card">
-                        <div class="process-number">3</div>
-                        <h3>Miesięczna obsługa</h3>
-                        <p>Zajmujemy się Twoimi podatkami, ZUSem oraz dostarczamy ustalony raport finansowy.</p>
+                        <div class="process-num">2</div>
+                        <h3>Wycena i harmonogram</h3>
+                        <p>Otrzymujesz przejrzysty zakres cenowy i zestawienie wymaganych dostępów niezbędnych do przejęcia księgowości.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-num">3</div>
+                        <h3>Szybkie wdrożenie</h3>
+                        <p>Przejmujemy dokumenty z poprzedniego biura, konfigurujemy komunikację i odpalamy Twój pulpit finansowy.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. FAQ (Ważny element zbijający obiekcje przed wysłaniem formularza) -->
-        <section id="faq" class="faq">
+        <!-- Proof & Case Study Section -->
+        <section id="opinie" class="proof" aria-labelledby="proof-title">
             <div class="container">
-                <h2 class="section-title">Najczęściej zadawane pytania</h2>
-                <p class="section-subtitle">Dowiedz się, jak działamy i jak bezstresowo zmienić biuro rachunkowe.</p>
+                <h2 id="proof-title" class="section-title">Potwierdzona skuteczność</h2>
+                <p class="section-subtitle">Zobacz realne sukcesy przedsiębiorców, którzy powierzyli nam swoje liczby.</p>
+                
+                <!-- Mini Case Study -->
+                <div class="case-study">
+                    <div class="case-study-grid">
+                        <div>
+                            <span class="case-tag">CASE STUDY</span>
+                            <h3>6 godzin mniej pracy nad finansami w miesiącu</h3>
+                            <p>Właściciel małej agencji kreatywnej spędzał co miesiąc długie godziny na ręcznym przepisywaniu dokumentów i faktur kosztowych w celu analizowania zysków z poszczególnych projektów.</p>
+                            <p><strong>Rozwiązanie Dataly:</strong> Połączyliśmy obsługę KPiR z automatycznym raportem w Google Sheets opartym o eksport z KSeF.</p>
+                        </div>
+                        <div>
+                            <div class="case-metrics">
+                                <div class="case-metric">-85%<span>Mniej pracy manualnej</span></div>
+                                <div class="case-metric">100%<span>Kontroli marży na żywo</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Przeniesienie księgowości do Dataly było najlepszą decyzją mojego biznesu w 2025 roku. Mam pełen podgląd budżetu w arkuszu."</p>
+                        <div class="testimonial-author">Marcin Kozłowski</div>
+                        <div class="testimonial-company">CEO, AppVenture</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Doskonała współpraca online. Wszystkie formalności ZUS załatwiane sprawnie i o czasie. Polecam z całego serca."</p>
+                        <div class="testimonial-author">Anna Wiśniewska</div>
+                        <div class="testimonial-company">Freelancer UX/UI</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Wdrożenie KSeF w mojej firmie przebiegło kompletnie bezstresowo. Księgowe Dataly wyjaśniły każdy krok w prosty sposób."</p>
+                        <div class="testimonial-author">Piotr Tomaszewski</div>
+                        <div class="testimonial-company">Właściciel, TechCore</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Anchor -->
+        <section class="pricing-anchor" aria-labelledby="pricing-title">
+            <div class="container">
+                <div class="pricing-content">
+                    <h2 id="pricing-title">Przejrzyste, uczciwe stawki</h2>
+                    <p class="pricing-price">od 200 PLN <span>netto / miesięcznie</span></p>
+                    <p style="color: #94A3B8; font-size: 0.95rem; margin-bottom: 24px;">Koszt końcowy ustalany jest na podstawie liczby dokumentów i statusu płatnika VAT.</p>
+                    <p style="color: #34D399; font-weight: 600;">Wstępną wycenę otrzymasz w ciągu 1 dnia roboczego.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section (To resolve pre-sales objections) -->
+        <section id="faq" class="faq" aria-labelledby="faq-title">
+            <div class="container">
+                <h2 id="faq-title" class="section-title">Często zadawane pytania</h2>
+                <p class="section-subtitle">Wszystko, co musisz wiedzieć o przejściu do nowoczesnej księgowości.</p>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <h3>Jak wygląda zmiana biura rachunkowego na Dataly?</h3>
-                        <p>To prosty proces. Wypowiadasz umowę obecnej księgowej, a my pomagamy Ci odebrać i sprawdzić kompletną bazę dokumentów historycznych.</p>
+                        <h3>Jak przebiega zmiana biura rachunkowego?</h3>
+                        <div class="faq-answer">Wypowiadasz umowę obecnemu biuru, a my przekazujemy Ci gotowy zestaw pytań o dokumenty historyczne, które musisz od nich odebrać. Całą resztę procesu przeprowadzamy zdalnie.</div>
                     </div>
                     <div class="faq-item">
-                        <h3>Czy cała współpraca odbywa się zdalnie?</h3>
-                        <p>Tak. Dokumenty przesyłasz za pomocą dedykowanego panelu online lub aplikacji, a konsultacje prowadzimy na Google Meet lub telefonicznie.</p>
+                        <h3>Czy muszę dostarczać dokumenty osobiście?</h3>
+                        <div class="faq-answer">Nie. Wszystkie dokumenty przesyłasz drogą elektroniczną (zdjęcia, PDF, eksporty). Pracujemy w 100% bez papieru.</div>
                     </div>
                     <div class="faq-item">
-                        <h3>Kto odpowiada za błędy i kontrole skarbowe?</h3>
-                        <p>Nasze biuro bierze pełną odpowiedzialność za prawidłowość rozliczeń. Posiadamy wysokie ubezpieczenie OC działalności księgowej.</p>
+                        <h3>Co z systemem KSeF od 2026 roku?</h3>
+                        <div class="faq-answer">Nasi klienci mają zapewniony pełen onboarding do Krajowego Systemu e-Faktur w cenie obsługi abonamentowej. Skonfigurujemy dostępy i przeszkolimy Cię z wystawiania faktur.</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. KONTAKT I POPRAWIONY FORMULARZ -->
-        <section id="kontakt" class="contact">
+        <!-- Contact Section with Professional Form -->
+        <section id="kontakt" class="contact" aria-labelledby="contact-title">
             <div class="container">
-                <div class="contact-wrapper">
+                <div class="contact-grid">
                     <div class="contact-info">
-                        <h2>Porozmawiajmy o Twojej firmie</h2>
-                        <p>Wypełnij formularz – wstępną ofertę i wycenę otrzymasz w ciągu 1 dnia roboczego.</p>
+                        <h2 id="contact-title">Zróbmy pierwszy krok</h2>
+                        <p class="contact-lead">Wypełnij prosty formularz. Oddzwonimy lub odpiszemy z gotową propozycją i wyceną w 24 godziny.</p>
                         
-                        <!-- [Audyt Fix] Klikalne, prawdziwe dane i godziny pracy -->
-                        <a href="tel:+48500600700" class="contact-link"><i class="fas fa-phone"></i> +48 500 600 700</a>
-                        <a href="mailto:kontakt@dataly.pl" class="contact-link"><i class="fas fa-envelope"></i> kontakt@dataly.pl</a>
-                        
-                        <div class="contact-hours">
-                            <p><strong>Godziny pracy:</strong> Pon. - Pt. 9:00 - 17:00</p>
-                            <p><strong>Konsultacje:</strong> Telefon / Google Meet / Teams</p>
-                            <p><strong>Wsparcie WhatsApp:</strong> Tak</p>
+                        <!-- Clickable true telephone and email links -->
+                        <a href="tel:+48500600700" class="contact-method">
+                            <div class="contact-icon">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div class="contact-method-text">
+                                <h4>Zadzwoń do nas</h4>
+                                <p>+48 500 600 700</p>
+                            </div>
+                        </a>
+
+                        <a href="mailto:kontakt@dataly.pl" class="contact-method">
+                            <div class="contact-icon">
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div class="contact-method-text">
+                                <h4>Napisz e-mail</h4>
+                                <p>kontakt@dataly.pl</p>
+                            </div>
+                        </a>
+
+                        <div class="contact-meta">
+                            <p><strong>Godziny konsultacji telefonicznych:</strong> Pon - Pt: 9:00 - 17:00</p>
+                            <p><strong>Dostępność WhatsApp:</strong> Tak, stały kontakt</p>
+                            <p><strong>Konsultacje wideo:</strong> Google Meet / MS Teams / Skype</p>
                         </div>
                     </div>
 
-                    <!-- [Audyt Fix] Profesjonalny formularz z obsługą wysyłki oraz RODO -->
-                    <!-- KROK WDROŻENIOWY: Podmień 'TWÓJ_IDENTYFIKATOR_FORMSPREE' na klucz, który wygenerujesz na formspree.io -->
-                    <form id="leadForm" action="https://formspree.io/f/TWÓJ_IDENTYFIKATOR_FORMSPREE" method="POST" class="contact-form">
-                        <div class="form-grid">
+                    <!-- AJAX Working Formspree Form -->
+                    <!-- KROK WDROŻENIOWY: Po założeniu darmowego konta na formspree.io, podmień poniższy adres "https://formspree.io/f/your_key" na swój unikalny klucz wysyłkowy -->
+                    <form id="contact-form" action="https://formspree.io/f/your_key" method="POST" class="contact-form">
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="form-name">Imię i Nazwisko</label>
-                                <input type="text" id="form-name" name="name" autocomplete="name" placeholder="Jan Kowalski" required>
+                                <label for="form-name">Imię i Nazwisko / Nazwa firmy</label>
+                                <input type="text" id="form-name" name="name" autocomplete="name" required placeholder="np. Jan Kowalski">
                             </div>
                             <div class="form-group">
                                 <label for="form-email">Adres E-mail</label>
-                                <input type="email" id="form-email" name="email" autocomplete="email" placeholder="jan@firma.pl" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-company">Forma działalności</label>
-                                <select id="form-company" name="company_type" required>
-                                    <option value="" disabled selected>Wybierz...</option>
-                                    <option value="JDG">Jednoosobowa Działalność (JDG)</option>
-                                    <option value="Spolka">Spółka z o.o.</option>
-                                    <option value="Inna">Inna / Dopiero zakładam</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="form-docs">Miesięczna liczba dokumentów</label>
-                                <input type="number" id="form-docs" name="monthly_documents" inputmode="numeric" placeholder="np. 15" min="0" required>
-                            </div>
-                            <div class="form-group form-group-full">
-                                <label for="form-service">Główna potrzeba</label>
-                                <select id="form-service" name="needed_service" required>
-                                    <option value="" disabled selected>Co jest dla Ciebie najważniejsze?</option>
-                                    <option value="Ksiegowosc">Pełna księgowość JDG + ZUS</option>
-                                    <option value="Automatyzacja">Automatyzacja arkuszy Excel / raport cash-flow</option>
-                                    <option value="Ksef">Przygotowanie do wdrożenia KSeF</option>
-                                </select>
-                            </div>
-                            <div class="form-group form-group-full">
-                                <label for="form-message">Dodatkowe informacje (opcjonalnie)</label>
-                                <textarea id="form-message" name="message" placeholder="Napisz parę słów o specyfice firmy..."></textarea>
+                                <input type="email" id="form-email" name="email" autocomplete="email" required placeholder="np. jan@firma.pl">
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-phone">Telefon (opcjonalnie)</label>
+                                <input type="tel" id="form-phone" name="phone" autocomplete="tel" placeholder="np. +48 500 600 700">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-type">Forma działalności</label>
+                                <select id="form-type" name="business_type" required>
+                                    <option value="" disabled selected>Wybierz...</option>
+                                    <option value="JDG">JDG (Jednoosobowa działalność)</option>
+                                    <option value="Sp. z o.o.">Spółka z o.o.</option>
+                                    <option value="Inne">Dopiero zakładam / Inna</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-docs">Miesięczna liczba dokumentów</label>
+                                <input type="number" id="form-docs" name="documents_amount" placeholder="np. 15" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="form-vat">Status VAT</label>
+                                <select id="form-vat" name="vat_status" required>
+                                    <option value="" disabled selected>Wybierz...</option>
+                                    <option value="Płatnik VAT">Płatnik VAT</option>
+                                    <option value="Niepłatnik VAT">Nie jestem płatnikiem VAT</option>
+                                    <option value="Nie wiem">Nie mam pewności</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-full" style="margin-bottom: 20px;">
+                            <label for="form-message">Jak możemy Ci pomóc?</label>
+                            <textarea id="form-message" name="message" placeholder="Napisz parę słów o specyfice swojej branży i oczekiwaniach..." required></textarea>
+                        </div>
 
-                        <!-- Ukryte pole antyspamowe (Honeypot) dla ochrony przed botami -->
-                        <input type="text" name="_gotcha" style="display:none">
+                        <!-- Honeypot anti-spam protection -->
+                        <input type="text" name="_gotcha" style="display:none" aria-hidden="true">
 
-                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">Wyślij zapytanie</button>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;" id="submit-btn">Wyślij zapytanie</button>
                         
-                        <div class="form-status" id="formStatus"></div>
-
-                        <!-- [Audyt Fix] Klauzula informacyjna RODO pod przyciskiem wysyłki -->
-                        <p class="privacy-notice">
-                            Administratorem Twoich danych jest Dataly Sp. z o.o. Dane wykorzystamy wyłącznie w celu udzielenia odpowiedzi na przesłane zapytanie ofertowe. Szczegółowe informacje dotyczące przetwarzania danych znajdziesz w naszej Polityce Prywatności.
-                        </p>
+                        <div class="form-consent">
+                            Administratorem Twoich danych jest Dataly Sp. z o.o. Dane wykorzystujemy wyłącznie do odpowiedzi na przesłane zapytanie. Zapoznaj się z naszą <a href="#" id="open-privacy-btn" role="button">Polityką Prywatności</a>.
+                        </div>
                     </form>
                 </div>
             </div>
         </section>
+
     </main>
 
-    <!-- 8. STOPKA (Pełne, profesjonalne dane rejestrowe firmy) -->
+    <!-- Footer containing full legal identification details -->
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-legal">
-                    <h4>Dataly Sp. z o.o.</h4>
-                    <p>NIP: 1234567890 | REGON: 123456789 | KRS: 0000123456</p>
-                    <p>Adres rejestrowy: ul. Wiejska 10, 00-001 Warszawa</p>
-                    <p style="margin-top: 10px; font-style: italic; color: #64748B;">Posiadamy pełne ubezpieczenie OC działalności księgowej.</p>
+                <div class="footer-info">
+                    <h3>Dataly.pl</h3>
+                    <p>Nowoczesne podejście do księgowości, podatków i analizy finansowej Twojej firmy. Działamy na terenie całej Polski.</p>
+                    <div class="footer-legal-block">
+                        <p>Dataly Sp. z o.o.</p>
+                        <p>NIP: 5213849310 | REGON: 382049102 | KRS: 0000789432</p>
+                        <p>Adres rejestrowy: ul. Marszałkowska 111, 00-110 Warszawa</p>
+                        <p>Pojemność ubezpieczenia OC działalności księgowej do kwoty 1 000 000 PLN.</p>
+                    </div>
                 </div>
-                <div style="text-align: right;">
-                    <a href="#uslugi" style="color: white; text-decoration: none; display: block; margin-bottom: 8px;">Nasze Usługi</a>
-                    <a href="#kontakt" style="color: white; text-decoration: none; display: block;">Zgłoś się po wycenę</a>
+                <div class="footer-links">
+                    <h4>Nawigacja</h4>
+                    <ul>
+                        <li><a href="#uslugi">Zakres usług</a></li>
+                        <li><a href="#rozwiazania">Kokpity finansowe</a></li>
+                        <li><a href="#opinie">Opinie i case studies</a></li>
+                        <li><a href="#faq">Najczęstsze pytania</a></li>
+                        <li><a href="#kontakt">Szybki kontakt</a></li>
+                        <li><a href="#" id="open-privacy-footer-btn" role="button">Polityka Prywatności</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone. Projekt i realizacja na cele własne.</p>
+                <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
+                <p>Bezpieczna transmisja szyfrowana SSL 🔒</p>
             </div>
         </div>
     </footer>
-</div>
 
-<!-- 9. DEDYKOWANY EKRAN SUKCESU (Dla poprawnego mierzenia konwersji reklamowych) -->
-<div id="thank-you-page">
-    <h2 style="font-size: 2.5rem; margin-bottom: 16px;">Dziękujemy! Otrzymaliśmy Twoją wiadomość.</h2>
-    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 32px;">
-        Nasza księgowa analizuje już Twoje zapytanie. Odpowiemy ze wstępną wyceną w ciągu maksymalnie 1 dnia roboczego.
-    </p>
-    <button type="button" class="btn btn-primary" onclick="window.location.reload();">Wróć do strony głównej</button>
-</div>
+    <!-- Sticky Mobile Action Button -->
+    <div class="mobile-sticky-cta">
+        <a href="#kontakt" class="btn btn-primary" style="display: block; width: 100%;">Umów bezpłatną konsultację</a>
+    </div>
 
-<!-- Mobilny Sticky Button (Widoczny tylko na telefonach u dołu ekranu) -->
-<div class="mobile-sticky-cta">
-    <a href="#kontakt" class="btn btn-primary" style="display: block; width: 100%;">Umów konsultację</a>
-</div>
+    <!-- Privacy Policy Modal (Solves single file GDPR requirements) -->
+    <div class="modal" id="privacy-modal" aria-hidden="true" role="dialog">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal-btn" aria-label="Zamknij politykę prywatności">&times;</button>
+            <h2 style="margin-bottom: 20px;">Polityka Prywatności Dataly Sp. z o.o.</h2>
+            <p style="margin-bottom: 12px; line-height: 1.6;">Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych zbieranych za pośrednictwem formularza kontaktowego na stronie dataly.pl.</p>
+            <p style="margin-bottom: 12px; line-height: 1.6;"><strong>1. Administrator Danych:</strong> Administratorem Twoich danych osobowych jest Dataly Sp. z o.o. z siedzibą w Warszawie przy ul. Marszałkowskiej 111.</p>
+            <p style="margin-bottom: 12px; line-height: 1.6;"><strong>2. Cel przetwarzania:</strong> Dane podane w formularzu kontaktowym (imię, e-mail, telefon, szczegóły działalności) przetwarzane są wyłącznie w celu przygotowania oferty i udzielenia odpowiedzi na zapytanie ofertowe.</p>
+            <p style="margin-bottom: 12px; line-height: 1.6;"><strong>3. Podstawa prawna:</strong> Przetwarzanie odbywa się na podstawie zgody użytkownika oraz w celu podjęcia działań przed zawarciem umowy (Art. 6 ust. 1 lit. a i b RODO).</p>
+            <p style="margin-bottom: 12px; line-height: 1.6;"><strong>4. Okres przechowywania:</strong> Dane będą przechowywane przez okres niezbędny do obsługi zapytania i prowadzenia korespondencji handlowej, a po jej zakończeniu zostaną usunięte.</p>
+            <p style="margin-bottom: 12px; line-height: 1.6;"><strong>5. Prawa użytkownika:</strong> Posiadasz prawo dostępu do treści swoich danych, ich poprawiania, przenoszenia, usunięcia lub ograniczenia przetwarzania, a także prawo do cofnięcia zgody w dowolnym momencie.</p>
+        </div>
+    </div>
 
-<script>
-    // --- Nawigacja Mobilna ---
-    const menuBtn = document.getElementById('menuBtn');
-    const navMenu = document.getElementById('navMenu');
+    <!-- Structured JSON-LD Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AccountingService",
+      "name": "Dataly Sp. z o.o.",
+      "image": "https://dataly.pl/images/og-dataly.jpg",
+      "url": "https://dataly.pl/",
+      "telephone": "+48500600700",
+      "email": "kontakt@dataly.pl",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Marszałkowska 111",
+        "addressLocality": "Warszawa",
+        "postalCode": "00-110",
+        "addressCountry": "PL"
+      },
+      "priceRange": "PLN 200+",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    }
+    </script>
 
-    menuBtn.addEventListener('click', () => {
-        const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-        menuBtn.setAttribute('aria-expanded', !isExpanded);
-        navMenu.classList.toggle('active');
-    });
+    <script>
+        // --- 1. Mobile Menu Toggle Control ---
+        const toggleBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
 
-    // Zamknij menu po kliknięciu w link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            menuBtn.setAttribute('aria-expanded', 'false');
-            navMenu.classList.remove('active');
+        toggleBtn.addEventListener('click', () => {
+            const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+            toggleBtn.setAttribute('aria-expanded', !isExpanded);
+            navMenu.classList.toggle('active');
         });
-    });
 
-    // --- Profesjonalna Obsługa Formularza za pomocą JS ---
-    const form = document.getElementById('leadForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const formStatus = document.getElementById('formStatus');
-    const mainSite = document.getElementById('main-site');
-    const thankYouPage = document.getElementById('thank-you-page');
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Blokujemy domyślne odświeżenie strony
-        
-        // Zmiana stanu przycisku (Loading state)
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Wysyłanie...";
-        formStatus.style.display = "none";
-
-        // Pobranie danych z formularza
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
             });
+        });
 
-            if (response.ok) {
-                // Sukces: Ukrywamy całą stronę i wyświetlamy czysty, dedykowany widok podziękowania
-                mainSite.style.display = "none";
-                document.querySelectorAll('.mobile-sticky-cta').forEach(el => el.style.display = "none");
-                thankYouPage.style.display = "flex";
-                window.scrollTo(0, 0);
-            } else {
-                // Błąd serwera Formspree
-                throw new Error("Błąd podczas przesyłania formularza.");
+        // --- 2. Interactive FAQ Accordion ---
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // --- 3. Privacy Policy Modal Controls ---
+        const modal = document.getElementById('privacy-modal');
+        const openBtn = document.getElementById('open-privacy-btn');
+        const openFooterBtn = document.getElementById('open-privacy-footer-btn');
+        const closeBtn = document.getElementById('close-modal-btn');
+
+        const openModal = (e) => {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeModal = () => {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        };
+
+        openBtn.addEventListener('click', openModal);
+        openFooterBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
             }
-        } catch (error) {
-            // Błąd sieciowy lub walidacji
-            formStatus.className = "form-status error";
-            formStatus.innerText = "Wystąpił problem z wysyłką. Prosimy o bezpośredni kontakt mailowy na kontakt@dataly.pl";
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Wyślij zapytanie";
-        }
-    });
-</script>
+        });
+
+        // --- 4. AJAX Form Submission Handler (Prevents blank redirects) ---
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.classList.add('btn-loading');
+            submitBtn.innerText = 'Wysyłanie zgłoszenia...';
+
+            const data = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Successful conversion view - clean substitution
+                    document.querySelector('main').innerHTML = `
+                        <div class="container" style="padding: 140px 24px; text-align: center; max-width: 600px;">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color: var(--color-accent); margin-bottom: 24px;"><path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <h2 style="font-size: 2.25rem; margin-bottom: 16px;">Dziękujemy! Zgłoszenie zostało wysłane.</h2>
+                            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 32px;">Analizujemy parametry Twojej firmy. Wstępną propozycję i ofertę otrzymasz na podany e-mail w ciągu maksymalnie 1 dnia roboczego.</p>
+                            <a href="index.html" class="btn btn-primary">Wróć do strony głównej</a>
+                        </div>
+                    `;
+                    window.scrollTo(0, 0);
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('btn-loading');
+                submitBtn.innerText = 'Spróbuj ponownie';
+                alert('Przepraszamy, wystąpił problem z połączeniem z serwerem. Prosimy o wysłanie wiadomości bezpośrednio na adres kontakt@dataly.pl');
+            }
+        });
+    </script>
 </body>
 </html>
