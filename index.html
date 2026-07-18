@@ -3,295 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataly - Księgowość & Automatyzacja Online</title>
     
-    <!-- Semantyczne SEO i Meta Tagi -->
-    <title>Księgowość online i automatyzacja finansów dla małych firm | Dataly</title>
-    <meta name="description" content="Nowoczesna księgowość online dla JDG i małych firm. Prowadzimy KPiR, ZUS, PIT, wdrażamy KSeF oraz automatyzujemy raporty w Excelu i Google Sheets.">
-    <link rel="canonical" href="https://dataly.pl/">
-    
-    <!-- Open Graph (Dla lepszego wyglądu linków w Social Media) -->
-    <meta property="og:title" content="Księgowość online dla JDG i małych firm | Dataly">
-    <meta property="og:description" content="Połączenie profesjonalnej księgowości z automatyzacją finansów w jednym miejscu.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dataly.pl/">
-
-    <!-- Google Fonts - Inter -->
+    <!-- Nowoczesny Font z Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Podłączenie zewnętrznego pliku stylów CSS -->
+    <!-- Link do zewnętrznego pliku ze stylami CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Główna nawigacja strony (Landmark: header) -->
+    <!-- 1. HEADER & NAWIGACJA -->
     <header>
         <div class="container">
-            <nav class="nav-wrapper" aria-label="Główna nawigacja">
+            <div class="nav-wrapper">
                 <a href="#" class="logo">
-                    <!-- PODMIEŃ NAZWĘ PLIKU JEŚLI MASZ INNĄ: Upewnij się, że logo jest w tym samym folderze -->
+                    <!-- Jeśli posiadasz plik logo, upewnij się, że nazwa się zgadza -->
                     <img src="Gemini_Generated_Image_pypsmbpypsmbpyps (1).png" alt="Dataly Logo" class="logo-img">
                 </a>
                 
-                <!-- Semantyczny przycisk menu mobilnego -->
-                <button class="menu-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false" id="menuBtn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
-                <ul class="nav-menu" id="navMenu">
+                <ul class="nav-menu" id="nav-menu">
                     <li><a href="#uslugi" class="nav-link">Usługi</a></li>
                     <li><a href="#onas" class="nav-link">O nas</a></li>
                     <li><a href="#faq" class="nav-link">FAQ</a></li>
                     <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
-                    <li><a href="#kontakt" class="btn btn-primary" style="padding: 10px 20px;">Konsultacja</a></li>
+                    <li><a href="#kontakt" class="btn btn-primary">Darmowa Konsultacja</a></li>
                 </ul>
-            </nav>
+
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Główna treść strony (Landmark: main) -->
-    <main id="main-content">
-        
-        <!-- Sekcja Hero (Jasna, o wysokim kontraście, bez zbędnych obciążeń) -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Księgowość online dla <span>JDG i małych firm</span>, które chcą kontrolować swoje pieniądze</h1>
-                    <p>Prowadzimy KPiR, ZUS i PIT, przygotowujemy firmę do wdrożenia KSeF oraz automatyzujemy raporty w Excelu i Google Sheets. Otrzymujesz święty spokój i czytelny obraz finansów w jednym miejscu.</p>
-                    <div class="hero-btns">
-                        <a href="#kontakt" class="btn btn-primary">Umów bezpłatną konsultację</a>
-                        <a href="#uslugi" class="btn btn-secondary">Zobacz zakres usług</a>
+    <!-- 2. HERO SECTION (Zoptymalizowane tło WebP) -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Twoje dane pod kontrolą.<br>Twoja <span>księgowość</span> online.</h1>
+                <p>Połączenie nowoczesnej księgowości z automatyzacją arkuszy i analizą danych finansowych. Planujemy, optymalizujemy i wdrażamy narzędzia idealnie skrojone pod Twój budżet.</p>
+                <div class="hero-btns">
+                    <a href="#kontakt" class="btn btn-primary">Darmowa wycena</a>
+                    <a href="#uslugi" class="btn btn-secondary">Zobacz zakres usług</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. USŁUGI (Nowa stała siatka 5 kart) -->
+    <section id="uslugi" class="services">
+        <div class="container">
+            <h2 class="section-title">Nasz zakres działań</h2>
+            <p class="section-subtitle">Wspieramy dynamiczne firmy i przedsiębiorców. Wybierz usługę lub połącz księgowość z inteligentną analizą danych.</p>
+            
+            <div class="services-grid">
+                <!-- Usługa 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                     </div>
-                    <!-- Trust Strip (Pasek budujący zaufanie bezpośrednio pod CTA) -->
-                    <div class="trust-strip">
-                        <span class="trust-item">Obsługa w 100% online</span>
-                        <span class="trust-item">Odpowiedź do 1 dnia roboczego</span>
-                        <span class="trust-item">Bezpłatna rozmowa wstępna</span>
+                    <h3>Prowadzenie KPiR</h3>
+                    <p>Pełna i bezbłędna obsługa Księgi Przychodów i Rozchodów. Przesyłaj dokumenty online, bez wychodzenia z domu.</p>
+                </div>
+                
+                <!-- Usługa 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 15c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H9V7h6v3z"/></svg>
+                    </div>
+                    <h3>Rozliczenia ZUS</h3>
+                    <p>Kompleksowe generowanie i wysyłanie deklaracji rozliczeniowych. Dbamy o Twoje składki i terminowość zgłoszeń.</p>
+                </div>
+
+                <!-- Usługa 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/></svg>
+                    </div>
+                    <h3>Rozliczanie PIT</h3>
+                    <p>Sprawne przygotowanie rocznych zeznań podatkowych (PIT-36, PIT-36L, PIT-37, PIT-28). Maksymalizujemy przysługujące ulgi.</p>
+                </div>
+
+                <!-- Usługa 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg>
+                    </div>
+                    <h3>Narzędzia Budżetowe</h3>
+                    <p>Projektujemy spersonalizowane kalkulatory i plany budżetowe, które pomagają w pełni kontrolować koszty firmy.</p>
+                </div>
+
+                <!-- Usługa 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    </div>
+                    <h3>Arkusz Google & Excel</h3>
+                    <p>Budujemy od zera i optymalizujemy rozbudowane arkusze analityczne. Automatyzacja raportów bez drogiego oprogramowania.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. O NAS -->
+    <section id="onas" class="about">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-text">
+                    <h2 class="section-title" style="text-align: left; margin-left: 0;">Kim jesteśmy?</h2>
+                    <p>Dataly to połączenie tradycyjnego, skrupulatnego biura rachunkowego z technologicznym podejściem do analizy danych.</p>
+                    <p>Zamiast jedynie wpisywać dane, przekształcamy je w czytelne wykresy i automatyczne narzędzia. Pomagamy Ci zoptymalizować podatki oraz codzienne procesy w firmie.</p>
+                    
+                    <ul class="about-list">
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Rachunkowość 100% Online
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Automatyzacja procesów
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Analizy i budżety
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                            Pełne bezpieczeństwo
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Zoptymalizowane zdjęcie o rozszerzeniu WebP -->
+                <div class="about-image-container">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80&format=webp" alt="Panele analityczne i automatyzacja danych" class="about-img" loading="lazy">
+                    <div class="about-badge">
+                        <h4>Automatyzacja</h4>
+                        <p>Przyszłość finansów w Twoich rękach.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Sekcja Usług (Zamiast karuzeli - stabilna, przejrzysta siatka 5 kart) -->
-        <section id="uslugi" class="services">
-            <div class="container">
-                <h2 class="section-title">Nasz zakres działań</h2>
-                <p class="section-subtitle">Wybierz standardową obsługę rachunkową lub rozwiń skrzydła dzięki automatyzacji danych.</p>
+    <!-- 5. JAK WYGLĄDA WSPÓŁPRACA -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Jak wygląda współpraca?</h2>
+            <p class="section-subtitle">Cenimy Twój czas i prostotę. Nasz proces jest jasny i przejrzysty na każdym kroku.</p>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Kontakt i Wywiad</h3>
+                    <p>Wypełniasz krótki formularz. Rozmawiamy o potrzebach Twojej działalności.</p>
+                </div>
                 
-                <div class="services-grid">
-                    <!-- Karta 1 -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Dedykowane Rozwiązanie</h3>
+                    <p>Ustalamy zakres opieki KPiR i planujemy automatyzacje narzędzi budżetowych.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Stałe Wsparcie</h3>
+                    <p>Wdrażamy system, przejmujemy dokumentację, a Ty zyskujesz spokój i pełny wgląc w dane.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nowa Sekcja: 6. FAQ (Akordeon z obiekcjami zakupowymi) -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Często zadawane pytania</h2>
+            <p class="section-subtitle">Odpowiadamy na najważniejsze pytania dotyczące współpracy i formalności.</p>
+            
+            <div class="faq-wrapper">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Jak wygląda proces zmiany biura rachunkowego?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>To bardzo proste i nie wymaga od Ciebie wysiłku. Wszystkie formalności możemy załatwić w Twoim imieniu. Wypowiadasz umowę dotychczasowemu biuru, a my odbieramy dokumentację historyczną i wprowadzamy dane bilansu otwarcia do naszego systemu chmurowego.</p>
                         </div>
-                        <h3>Prowadzenie KPiR</h3>
-                        <p>Pełna, bezbłędna i terminowa obsługa Twojej Podatkowej Księgi Przychodów i Rozchodów w wygodnej formie online.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Kto odpowiada za dotrzymanie terminów i błędy?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Jako licencjonowane biuro przejmujemy pełną odpowiedzialność za terminowość i poprawność Twoich rozliczeń przed US oraz ZUS. Posiadamy również wysokie ubezpieczenie OC, które w 100% chroni Twój biznes przed ewentualnymi konsekwencjami finansowymi pomyłek urzędowych.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Czy muszę dowozić dokumenty osobiście w formie papierowej?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Nie, działamy w 100% online. Wszystkie faktury, rachunki i potwierdzenia przesyłasz za pomocą dedykowanego panelu klienta, e-maila lub aplikacji na telefon (wystarczy zrobić zdjęcie dokumentu). Oszczędzasz czas i paliwo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Czy pomagacie w optymalizacji podatkowej, czy tylko wpisujecie faktury?</span>
+                        <svg class="faq-icon" viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Nie jesteśmy zwykłą "klepalnią" faktur. Analizujemy Twoje przychody i koszty cyklicznie. Jeśli widzimy przestrzeń do przejścia na korzystniejszą formę opodatkowania (np. ryczałt zamiast liniowego) lub wdrożenia ulg, natychmiast Cię o tym informujemy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. KONTAKT -->
+    <section id="kontakt" class="contact">
+        <div class="container">
+            <h2 class="section-title">Zacznijmy współpracę</h2>
+            <p class="section-subtitle">Napisz do nas. Pomożemy Ci uporządkować podatki i zautomatyzować Twoje codzienne arkusze.</p>
+            
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Biuro Online</h3>
+                    <p>Pracujemy całkowicie w chmurze, obsługując partnerów z całej Polski.</p>
+                    
+                    <div class="info-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>kontakt@dataly.pl</span>
+                    </div>
+                    <div class="info-item">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span>+48 123 456 789</span>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Imię i Nazwisko / Firma</label>
+                        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adres E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="service">Interesuje mnie...</label>
+                        <select id="service" name="service">
+                            <option value="kpir">Prowadzenie KPiR + ZUS</option>
+                            <option value="pit">Rozliczenie PIT</option>
+                            <option value="data">Narzędzia Budżetowe / Excel</option>
+                            <option value="all">Pełna księgowość + optymalizacja Excel</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-full">
+                        <label for="message">Opisz swoje potrzeby</label>
+                        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..."></textarea>
                     </div>
                     
-                    <!-- Karta 2 -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="12" y1="4" x2="12" y2="20"></line></svg>
-                        </div>
-                        <h3>Rozliczenia ZUS</h3>
-                        <p>Kompleksowe generowanie i wysyłanie deklaracji rozliczeniowych do ZUS. Pilnujemy Twoich składek i terminów.</p>
-                    </div>
-
-                    <!-- Karta 3 -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-                        </div>
-                        <h3>Rozliczanie PIT</h3>
-                        <p>Sprawne przygotowanie rocznych zeznań podatkowych dla Ciebie i Twojej firmy z maksymalnym wykorzystaniem ulg.</p>
-                    </div>
-
-                    <!-- Karta 4 -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
-                        </div>
-                        <h3>Narzędzia budżetowe</h3>
-                        <p>Projektujemy indywidualne systemy i kalkulatory budżetowe, które pozwalają Ci w pełni kontrolować koszty i marżę.</p>
-                    </div>
-
-                    <!-- Karta 5 -->
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
-                        </div>
-                        <h3>Arkusz Google & Excel</h3>
-                        <p>Tworzymy od zera oraz naprawiamy i optymalizujemy rozbudowane arkusze danych. Automatyzujemy powtarzalną pracę.</p>
-                    </div>
-                </div>
+                    <button type="submit" class="btn btn-primary">Wyślij zgłoszenie</button>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Sekcja O nas (Nowoczesne zdjęcie analityczne zoptymalizowane do formatu WebP z Unsplash) -->
-        <section id="onas" class="about">
-            <div class="container">
-                <div class="about-wrapper">
-                    <div class="about-text">
-                        <h2>Kim jesteśmy?</h2>
-                        <p>Dataly to nowoczesne biuro rachunkowo-analityczne stworzone z myślą o przedsiębiorcach, którzy oczekują czegoś więcej niż tylko wklepywania faktur do systemu.</p>
-                        <p>Wierzymy, że w XXI wieku księgowość powinna dostarczać firmie realną wartość. Dlatego łączymy klasyczne, bezbłędne rozliczenia podatkowe z automatyzacją procesów raportowania w Excelu i Google Sheets.</p>
-                    </div>
-                    <div class="about-image-container">
-                        <!-- Zoptymalizowany technicznie obrazek WebP bezpośrednio z Unsplash (lekki, ostry, responsywny) -->
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80&fm=webp" alt="Wykresy finansowe i analizy procesów automatyzacji danych" class="about-img" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sekcja współpracy -->
-        <section class="process">
-            <div class="container">
-                <h2 class="section-title">Jak wygląda współpraca?</h2>
-                <p class="section-subtitle">Prosto, przejrzyście i bez zbędnych formalności.</p>
-                <div class="process-grid">
-                    <div class="process-card">
-                        <div class="process-number">1</div>
-                        <h3>Krótka rozmowa wstępna</h3>
-                        <p>Poznajemy specyfikę Twojej działalności, szacunkową liczbę dokumentów oraz Twoje potrzeby budżetowe.</p>
-                    </div>
-                    <div class="process-card">
-                        <div class="process-number">2</div>
-                        <h3>Dedykowane wdrożenie</h3>
-                        <p>Ustalamy stały harmonogram działania, konfigurujemy obieg dokumentów online i przygotowujemy Twoje arkusze.</p>
-                    </div>
-                    <div class="process-card">
-                        <div class="process-number">3</div>
-                        <h3>Stała, spokojna opieka</h3>
-                        <p>Ty skupiasz się na rozwijaniu swojego biznesu, a my dbamy o podatki, ZUS i dostarczanie czytelnych analiz finansowych.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- NOWA SEKCJA: FAQ (Zbijanie obiekcji zakupowych przed formularzem) -->
-        <section id="faq" class="faq">
-            <div class="container">
-                <h2 class="section-title">Najczęściej zadawane pytania</h2>
-                <p class="section-subtitle">Wszystko, co musisz wiedzieć przed podjęciem decyzji o współpracy.</p>
-                
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <h3>Jak wygląda proces zmiany biura rachunkowego na Dataly?</h3>
-                        <p>To prostsze niż myślisz. Pomagamy Ci przejść przez cały proces bezstresowo: przygotowujemy gotowy wzór wypowiedzenia dla obecnego biura oraz krok po kroku instruujemy, jakie dokumenty historyczne należy od nich odebrać. Całość możemy zamknąć w kilka dni.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>Kto odpowiada za ewentualne błędy i terminy urzędowe?</h3>
-                        <p>Jako licencjonowane biuro przejmujemy pełną odpowiedzialność za prawidłowość Twoich rozliczeń oraz bezwzględne dotrzymywanie terminów ZUS i US. Nasza działalność jest zabezpieczona wysoką polisą ubezpieczenia OC dla biur rachunkowych.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>W jaki sposób przekazuje się dokumenty do rozliczenia?</h3>
-                        <p>Działamy w 100% online. Zapomnij o dowożeniu teczek z fakturami. Wszystkie dokumenty przesyłasz za pomocą wygodnej, szyfrowanej chmury lub aplikacji w formie skanów bądź zdjęć z telefonu – w dowolnym, wybranym przez Ciebie momencie miesiąca.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3>Czy tworzone przez Was narzędzia Excel są trudne w obsłudze?</h3>
-                        <p>Absolutnie nie. Naszym celem jest upraszczanie Twojego życia, a nie komplikowanie go. Tworzymy narzędzia maksymalnie intuicyjne, automatycznie pobierające kluczowe dane, a po wdrożeniu otrzymujesz od nas krótkie wideo z instrukcją obsługi „krok po kroku”.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sekcja Kontakt -->
-        <section id="kontakt" class="contact">
-            <div class="container">
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <h2>Zacznijmy współpracę</h2>
-                        <p>Wypełnij formularz obok. Wstępną, niezobowiązującą ofertę i wycenę dostosowaną do Twojej skali otrzymasz w ciągu 1 dnia roboczego.</p>
-                        
-                        <!-- Prawdziwe, klikalne odnośniki dla uwiarygodnienia biznesu -->
-                        <a href="tel:+48500600700" class="contact-link">+48 500 600 700</a>
-                        <a href="mailto:kontakt@dataly.pl" class="contact-link">kontakt@dataly.pl</a>
-                        
-                        <div class="contact-meta">
-                            <p><strong>Godziny pracy biura:</strong> Pon. - Pt. 9:00 - 17:00</p>
-                            <p><strong>Forma konsultacji:</strong> Telefon / Google Meet / Teams</p>
-                            <p><strong>Obsługa WhatsApp:</strong> Tak</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Działający formularz z obsługą RODO i zbieraniem kluczowych danych biznesowych -->
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="name">Imię i Nazwisko</label>
-                                <input type="text" id="name" name="name" autocomplete="name" placeholder="np. Jan Kowalski" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Adres E-mail</label>
-                                <input type="email" id="email" name="email" autocomplete="email" placeholder="np. jan@firma.pl" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="business-type">Forma działalności</label>
-                                <select id="business-type" name="business-type" required>
-                                    <option value="" disabled selected>Wybierz...</option>
-                                    <option value="jdg">Jednoosobowa Działalność (JDG)</option>
-                                    <option value="spolka">Spółka z o.o.</option>
-                                    <option value="dopiero-zakladam">Dopiero zakładam firmę</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="docs-count">Liczba dokumentów / miesięcznie</label>
-                                <input type="number" id="docs-count" name="docs-count" inputmode="numeric" placeholder="np. 15" min="0" required>
-                            </div>
-                            <div class="form-group form-group-full">
-                                <label for="main-need">Główna potrzeba</label>
-                                <select id="main-need" name="main-need" required>
-                                    <option value="" disabled selected>W czym możemy Ci pomóc?</option>
-                                    <option value="full">Kompleksowa księgowość online + ZUS</option>
-                                    <option value="sheets">Optymalizacja Excela / raport budżetowy</option>
-                                    <option value="ksef">Przygotowanie firmy do KSeF</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Wyślij zapytanie ofertowe</button>
-                        
-                        <!-- Komunikat po wysyłce -->
-                        <div id="formAlert" class="form-alert"></div>
-                        
-                        <!-- Informacja RODO (Legalność przetwarzania danych) -->
-                        <p class="rodo-notice">
-                            Administratorem Twoich danych jest Dataly Sp. z o.o. Dane przetwarzamy wyłącznie w celu udzielenia odpowiedzi na zapytanie ofertowe. Więcej informacji znajdziesz w Polityce Prywatności.
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Stopka strony zawierająca pełne dane rejestrowe firmy (Klucz do budowania zaufania) -->
+    <!-- 8. FOOTER -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-legal">
-                    <h3>Dataly Sp. z o.o.</h3>
-                    <p>NIP: 1234567890 | REGON: 123456789 | KRS: 0000123456</p>
-                    <p>Adres rejestrowy: ul. Marszałkowska 10/12, 00-001 Warszawa</p>
-                    <p class="oc-line">Posiadamy pełne ubezpieczenie OC działalności księgowej.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#uslugi">Zakres usług</a>
-                    <a href="#onas">O biurze</a>
-                    <a href="#kontakt">Kontakt i wycena</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
-            </div>
+            <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px; color: #94a3b8;">Modern Solutions for Data & Finance.</p>
         </div>
     </footer>
 
-    <!-- Skrypt zewnętrzny JavaScript -->
+    <!-- Link do zewnętrznego pliku JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
