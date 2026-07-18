@@ -504,6 +504,32 @@ header {
     gap: 20px;
 }
 
+/* Styl dla wiersza łączącego e-mail i telefon */
+.form-row {
+    display: flex;
+    gap: 20px; /* Odstęp między polem e-mail a telefonem */
+    width: 100%;
+}
+
+/* Na dużych ekranach oba pola wewnątrz wiersza zajmują równo po połowie szerokości */
+.form-row .form-group {
+    flex: 1;
+    min-width: 0; /* Zabezpieczenie przed wychodzeniem elementów poza kontener */
+}
+
+/* Klasa wymuszająca pełną szerokość dla wybranych pól */
+.form-group-full {
+    width: 100%;
+}
+
+/* RESPONSYWNOŚĆ (RWD) - na smartfonach i tabletach pola e-mail i telefon układają się jedno pod drugim */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0; /* Resetujemy odstęp boczny na rzecz standardowych marginesów pionowych */
+    }
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
