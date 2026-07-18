@@ -266,40 +266,44 @@
     <!-- Zabezpieczenie Honeypot przed spamem (niewidoczne dla człowieka) -->
     <input type="text" name="_gotcha" style="display:none">
 
-    <div class="form-group">
-        <label for="name">Imię i Nazwisko / Firma</label>
-        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
-        <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
-    </div>
+    <!-- Pole Imię i Nazwisko / Firma - teraz na pełną szerokość -->
+<div class="form-group form-group-full">
+    <label for="name">Imię i Nazwisko / Firma</label>
+    <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
+    <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
+</div>
 
-   <div class="form-group">
-        <label for="phone">Numer telefonu</label>
-        <!-- Atrybut inputmode="numeric" wymusza klawiaturę numeryczną na smartfonach -->
-        <input type="tel" id="phone" name="phone" placeholder="123 456 789" required>
-        <span class="error-msg" id="phoneError">Wprowadź poprawny 9-cyfrowy numer telefonu (np. 123456789).</span>
-    </div>
-    
+<!-- Nowy kontener wiersza dla e-maila i telefonu -->
+<div class="form-row">
     <div class="form-group">
         <label for="email">Adres E-mail</label>
         <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
         <span class="error-msg" id="emailError">Wprowadź poprawny adres e-mail.</span>
     </div>
     
-    <div class="form-group form-group-full">
-        <label for="service">Interesuje mnie...</label>
-        <select id="service" name="service">
-            <option value="kpir">Prowadzenie KPiR + ZUS</option>
-            <option value="pit">Rozliczenie PIT</option>
-            <option value="data">Narzędzia budżetowe</option>
-            <option value="all">Optymalizacja arkuszy</option>
-        </select>
+    <div class="form-group">
+        <label for="phone">Numer telefonu</label>
+        <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
+        <span class="error-msg" id="phoneError">Wprowadź poprawny 9-cyfrowy numer telefonu.</span>
     </div>
-    
-    <div class="form-group form-group-full">
-        <label for="message">Opisz swoje potrzeby</label>
-        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
-        <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
-    </div>
+</div>
+
+<!-- Reszta formularza (usługa, wiadomość, statusy i przycisk) pozostaje bez zmian -->
+<div class="form-group form-group-full">
+    <label for="service">Interesuje mnie...</label>
+    <select id="service" name="service">
+        <option value="kpir">Prowadzenie KPiR + ZUS</option>
+        <option value="pit">Rozliczenie PIT</option>
+        <option value="data">Narzędzia budżetowe</option>
+        <option value="all">Optymalizacja arkuszy</option>
+    </select>
+</div>
+
+<div class="form-group form-group-full">
+    <label for="message">Opisz swoje potrzeby</label>
+    <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
+    <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
+</div>
     
     <!-- Dynamiczne komunikaty o stanie operacji -->
     <div class="form-status-container form-group-full">
