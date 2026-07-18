@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const generalErrorMsg = document.getElementById("generalErrorMessage");
 
     // Funkcja walidacji pojedynczego pola
-    const validateField = (field, errorId, condition) => {
+    const validateField = (field, condition) => {
         const parent = field.parentElement;
         if (condition) {
             parent.classList.remove("invalid");
@@ -70,10 +70,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return re.test(String(email).toLowerCase());
     };
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Blokada domyślnego przeładowania strony
+    // Walidacja formatu telefonu (akceptuje 9 cyfr, opcjonalnie z kierunkowym np. +48)
+    const isValidPhone = (phone) => {
+        const re = /^(?:\+\d{1,3}[\s-]?)?(\d{3}[\s-]?\d{3}[\s-]?\d{3})$/;
+        return re.test(String(phone).trim());
+    };
 
-        // Ukryj poprzednie komunikaty
+    // Dodatkowe UX: Blokowanie wpisywania liter w polu telefonu w czasie rzeczywistym
+    const phoneInput = document.getElementById("phone");
+    phoneInput.addEventListener("input", (e) => {
+        // Zastępuje każdy znak niebędący cyfrą, plusem, spacją lub myślnikiem pustym ciągiem
+        e.target.value = e.target.value.replace(/[^0-9+\s-]/g, "");
+    });
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
         successMsg.style.display = "none";
         generalErrorMsg.style.display = "none";
 
@@ -82,16 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailInput = document.getElementById("email");
         const messageInput = document.getElementById("message");
 
-        // Wykonanie pełnej walidacji przed wysyłką
-        const isNameValid = validateField(nameInput, "nameError", nameInput.value.trim().length >= 3);
-        const isEmailValid = validateField(emailInput, "emailError", isValidEmail(emailInput.value.trim()));
-        const isMessageValid = validateField(messageInput, "messageError", messageInput.value.trim().length >= 10);
+        // Wykonanie pełnej walidacji przed wysyłką (w tym nowe pole telefonu)
+        const isNameValid = validateField(nameInput, nameInput.value.trim().length >= 3);
+        const isEmailValid = validateField(emailInput, isValidEmail(emailInput.value.trim()));
+        const isPhoneValid = validateField(phoneInput, isValidPhone(phoneInput.value.trim()));
+        const isMessageValid = validateField(messageInput, messageInput.value.trim().length >= 10);
 
-        if (!isNameValid || !isEmailValid || !isMessageValid) {
-            return; // Jeśli walidacja nie przejdzie, przerywamy wysyłanie
+        if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) {
+            return; // Przerywamy, jeśli choć jedno pole jest błędne
         }
 
-        // --- STAN ŁADOWANIA (Loading State) & OCHRONA PRZED DUPLIKATAMI ---
+        // Stan ładowania i ochrona przed wielokrotnym kliknięciem
         submitBtn.disabled = true;
         btnText.style.display = "none";
         btnSpinner.style.display = "inline-block";
@@ -99,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
 
         try {
-            // Jawne przesyłanie żądaniem POST asynchronicznie
             const response = await fetch(form.action, {
                 method: form.method,
                 body: formData,
@@ -109,39 +121,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (response.ok) {
-                // --- POTWIERDZENIE SUKCESU ---
                 successMsg.style.display = "block";
-                form.reset(); // Czyszczenie pól formularza
+                form.reset();
 
-                // --- REJESTROWANIE ZDARZENIA ANALITYCZNEGO ---
-                // Sprawdzamy czy Google Analytics (dataLayer) istnieje na stronie
                 if (typeof dataLayer !== 'undefined') {
                     dataLayer.push({
                         'event': 'form_submission_success',
                         'form_id': 'contact_form_dataly'
                     });
-                    console.log("Analytics Event: Formularz wysłany pomyślnie.");
-                } else {
-                    console.log("Zdarzenie analityczne zasymulowane (brak GTM na stronie).");
                 }
-
             } else {
-                // Obsługa błędu serwera (np. limit żądań)
-                throw new Error("Błąd serwera podczas przetwarzania żądania.");
+                throw new Error("Błąd serwera.");
             }
         } catch (error) {
-            // --- CZYTELNY STAN BŁĘDU ---
             generalErrorMsg.style.display = "block";
-            console.error("Błąd wysyłania formularza:", error);
+            console.error(error);
         } finally {
-            // Przywrócenie pierwotnego stanu przycisku
             submitBtn.disabled = false;
             btnText.style.display = "inline-block";
             btnSpinner.style.display = "none";
         }
     });
 
-    // Usuwanie czerwonych ramek błędu w trakcie pisania (real-time UX)
+    // Usuwanie czerwonych ramek błędu w trakcie pisania
     form.querySelectorAll("input, textarea").forEach(input => {
         input.addEventListener("input", () => {
             input.parentElement.classList.remove("invalid");
