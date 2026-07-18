@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. OBSŁUGA MENU MOBILNEGO (Dostępność / ARIA) ---
+
+    // --- 1. OBSŁUGA MENU MOBILNEGO (Dostępność i Semantyka) ---
     const menuBtn = document.getElementById('menuBtn');
     const navMenu = document.getElementById('navMenu');
 
@@ -8,90 +8,64 @@ document.addEventListener('DOMContentLoaded', () => {
         menuBtn.addEventListener('click', () => {
             const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
             
-            // Przełącz stan przycisku i menu
+            // Przełączanie stanów dostępności dla czytników ekranu
             menuBtn.setAttribute('aria-expanded', !isExpanded);
             navMenu.classList.toggle('active');
-            
-            // Zmiana klasy pomocniczej przycisku (animacja linii)
-            menuBtn.classList.toggle('open');
         });
 
-        // Zamknij menu po kliknięciu w dowolny link
+        // Automatyczne zamykanie menu mobilnego po kliknięciu w dowolny odnośnik
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 menuBtn.setAttribute('aria-expanded', 'false');
                 navMenu.classList.remove('active');
-                menuBtn.classList.remove('open');
             });
         });
     }
 
-    // --- 2. PROFESJONALNA OBSŁUGA FORMULARZA ---
-    const form = document.getElementById('leadForm');
-    const formStatus = document.getElementById('formStatus');
+    // --- 2. OBSŁUGA FORMULARZA KONTAKTOWEGO (Lead Capture z komunikatami) ---
+    const form = document.getElementById('contactForm');
+    const formAlert = document.getElementById('formAlert');
 
     if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Zatrzymujemy odświeżanie strony
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Zatrzymujemy odświeżenie strony
 
-            // A. Honeypot check - Jeśli bot uzupełnił to pole, cicho przerywamy działanie
-            const honeypot = form.querySelector('input[name="_honey_validate"]').value;
-            if (honeypot) {
-                console.warn("Spam detected.");
-                return;
-            }
-
-            // B. Pobranie przycisku i ustawienie stanu ładowania (Loading State)
             const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerText;
+            
+            // Stan ładowania (Visual Loading State)
             submitBtn.disabled = true;
             submitBtn.innerText = "Wysyłanie zgłoszenia...";
-            
-            formStatus.style.display = "none";
+            formAlert.style.display = "none";
 
-            // C. Przygotowanie danych do wysyłki
-            const data = new FormData(form);
-            
-            // !!! KROK DLA CIEBIE: Gdy założysz darmowe konto na Formspree.io, wklej tutaj wygenerowany link URL !!!
-            const endpoint = "https://formspree.io/f/placeholder_id"; 
+            // Pobieramy dane z formularza
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
 
-            try {
-                // Jeśli nie podpięto prawdziwego Formspree, symulujemy działanie w celach testowych
-                if (endpoint.includes("placeholder_id")) {
-                    await new Promise(resolve => setTimeout(resolve, 1500)); // Udawanie zapytania sieciowego
-                    showStatus("success", "Dziękujemy! Otrzymaliśmy Twoją wiadomość. Odpowiemy ze wstępną wyceną w ciągu 1 dnia roboczego.");
-                    form.reset();
-                    return;
-                }
+            // [PRODUKCJA]: Tutaj w przyszłości podepniesz API lub platformę typu Formspree / Webhook CRM
+            // Symulacja wysyłania zapytania do bazy danych (np. 1.2 sekundy)
+            setTimeout(() => {
+                // Załóżmy, że wysyłka zakończyła się sukcesem
+                const success = true; 
 
-                // Prawdziwe zapytanie produkcyjne
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    showStatus("success", "Dziękujemy! Otrzymaliśmy Twoją wiadomość. Odpowiemy ze wstępną wyceną w ciągu 1 dnia roboczego.");
+                if (success) {
+                    formAlert.className = "form-alert success";
+                    formAlert.innerText = "Dziękujemy! Otrzymaliśmy Twoje zapytanie. Odpowiemy ze wstępną wyceną w ciągu 1 dnia roboczego.";
+                    formAlert.style.display = "block";
+                    
+                    // Resetowanie pól formularza po udanej wysyłce
                     form.reset();
                 } else {
-                    throw new Error("Server response error");
+                    // W razie błędu serwera
+                    formAlert.className = "form-alert error";
+                    formAlert.innerText = "Wystąpił problem z wysyłką formularza. Spróbuj ponownie lub napisz na kontakt@dataly.pl";
+                    formAlert.style.display = "block";
                 }
 
-            } catch (error) {
-                showStatus("error", "Wystąpił problem z wysłaniem formularza. Prosimy o kontakt bezpośredni na adres: kontakt@dataly.pl");
-            } finally {
-                // Przywrócenie stanu przycisku
+                // Przywrócenie pierwotnego stanu przycisku
                 submitBtn.disabled = false;
-                submitBtn.innerText = originalText;
-            }
-        });
-    }
+                submitBtn.innerText = "Wyślij zapytanie ofertowe";
 
-    // Funkcja pomocnicza do ładnego renderowania statusu
-    function showStatus(type, text) {
-        formStatus.style.display = "block";
-        formStatus.className = `form-status ${type}`;
-        formStatus.innerText = text;
+            }, 1200);
+        });
     }
 });
