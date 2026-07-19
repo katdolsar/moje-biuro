@@ -79,7 +79,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2h-4v2h4v2H9V7h6v2z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-4v2h4v2-4v2h4v2H9V7h6v2z"/></svg>
                     </div>
                     <h3>Rozliczanie PIT</h3>
                     <p>Sprawne przygotowanie rocznych zeznań podatkowych (PIT-36, PIT-36L, PIT-37, PIT-28). Maksymalizujemy przysługujące ulgi.</p>
@@ -251,70 +251,64 @@
                     </div>
                 </div>
                 
-               <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
-    <!-- Zabezpieczenie Honeypot przed spamem (niewidoczne dla człowieka) -->
-    <input type="text" name="_gotcha" style="display:none">
+                <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
+                    <input type="text" name="_gotcha" style="display:none">
 
-    <!-- Pole Imię i Nazwisko / Firma na pełną szerokość -->
-    <div class="form-group form-group-full">
-        <label for="name">Imię i Nazwisko / Firma</label>
-        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
-        <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
-    </div>
-    
-    <!-- Wiersz łączący E-mail i Telefon obok siebie -->
-    <div class="form-row">
-        <div class="form-group">
-            <label for="email">Adres E-mail</label>
-            <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
-            <span class="error-msg" id="emailError">Wprowadź poprawny adres e-mail.</span>
-        </div>
-        
-        <div class="form-group">
-            <label for="phone">Numer telefonu</label>
-            <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
-            <span class="error-msg" id="phoneError">Wprowadź poprawny 9-cyfrowy numer.</span>
-        </div>
-    </div>
-    
-    <!-- Wybór usługi na pełną szerokość -->
-    <div class="form-group form-group-full">
-        <label for="service">Interesuje mnie...</label>
-        <select id="service" name="service">
-            <option value="kpir">Prowadzenie KPiR + ZUS</option>
-            <option value="pit">Rozliczenie PIT</option>
-            <option value="data">Narzędzia budżetowe</option>
-            <option value="all">Optymalizacja arkuszy</option>
-        </select>
-    </div>
-    
-    <!-- Wiadomość na pełną szerokość -->
-    <div class="form-group form-group-full">
-        <label for="message">Opisz swoje potrzeby</label>
-        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
-        <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
-    </div>
-    
-    <!-- Powiadomienia o stanie operacji -->
-    <div class="form-status-container form-group-full">
-        <div class="status-msg success-msg" id="successMessage">
-            <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
-        </div>
-        <div class="status-msg error-container-msg" id="generalErrorMessage">
-            Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
-        </div>
-    </div>
+                    <div class="form-group form-group-full">
+                        <label for="name">Imię i Nazwisko / Firma</label>
+                        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
+                        <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Adres E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
+                            <span class="error-msg" id="emailError">Wprowadź poprawny adres e-mail.</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Numer telefonu</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
+                            <span class="error-msg" id="phoneError">Wprowadź poprawny 9-cyfrowy numer.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group form-group-full">
+                        <label for="service">Interesuje mnie...</label>
+                        <select id="service" name="service">
+                            <option value="kpir">Prowadzenie KPiR + ZUS</option>
+                            <option value="pit">Rozliczenie PIT</option>
+                            <option value="data">Narzędzia budżetowe</option>
+                            <option value="all">Optymalizacja arkuszy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group form-group-full">
+                        <label for="message">Opisz swoje potrzeby</label>
+                        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
+                        <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
+                    </div>
+                    
+                    <div class="form-status-container form-group-full">
+                        <div class="status-msg success-msg" id="successMessage">
+                            <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
+                        </div>
+                        <div class="status-msg error-container-msg" id="generalErrorMessage">
+                            Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
+                        </div>
+                    </div>
 
-    <!-- NOWOŚĆ: Komunikat prawny nad przyciskiem wysyłania (RODO) -->
-    <div class="form-group form-group-full form-privacy-notice" style="margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
-        Administratorem Twoich danych jest <strong>[Wpisz tutaj pełną nazwę swojej firmy, np. Dataly Jan Kowalski]</strong>. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie. Więcej szczegółów znajdziesz w naszej <a href="#" id="privacy-link-form" style="color: var(--color-brand); text-decoration: underline;">Polityce Prywatności</a>.
-    </div>
+                    <!-- ZMODYFIKOWANE: Krótki komunikat RODO umieszczony dokładnie nad przyciskiem wysyłania -->
+                    <p class="form-privacy-notice form-group-full">
+                        Administratorem Twoich danych jest [Wpisz pełną nazwę swojej firmy, np. Dataly Jan Kowalski]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
+                    </p>
 
-    <button type="submit" class="btn btn-primary" id="submitBtn">
-        <span class="btn-text">Wyślij zgłoszenie</span>
-        <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
-    </button>
-</form>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="btn-text">Wyślij zgłoszenie</span>
+                        <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
+                    </button>
+                </form>
             </div>
         </div>
     </section>
@@ -323,7 +317,6 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
-            <!-- TUTAJ dodaliśmy estetyczny link otwierający okienko modalne -->
             <p style="margin-top: 10px;">
                 <a href="#" id="privacy-trigger" style="font-size: 0.85rem; color: var(--color-brand); text-decoration: underline;">Polityka Prywatności</a>
             </p>
@@ -331,9 +324,7 @@
         </div>
     </footer>
 
-    <!-- ==========================================
-         NOWA SEKCJA: OKIENKO MODALNE POLITYKI PRYWATNOŚCI
-         ========================================== -->
+    <!-- MODAL POLITYKI PRYWATNOŚCI -->
     <div class="modal" id="privacy-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -341,7 +332,6 @@
                 <button class="modal-close" id="privacy-close" title="Zamknij">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Poniżej znajduje się treść polityki. PODMIEŃ DANE W NAWIASACH [...] NA SWOJE WŁASNE -->
                 <h3>1. Kto jest administratorem Twoich danych?</h3>
                 <p>Administratorem, czyli podmiotem decydującym o tym, jak będą wykorzystywane Twoje dane osobowe, jest: <strong>[Wpisz pełną nazwę firmy, np. Dataly Jan Kowalski]</strong> z siedzibą w [Wpisz adres firmy], NIP: [Wpisz NIP], REGON: [Wpisz REGON].</p>
                 <p>W sprawach związanych z ochroną danych możesz się ze mną skontaktować pod adresem e-mail: <strong>[Wpisz swój e-mail, np. kontakt@dataly.pl]</strong>[cite: 1].</p>
