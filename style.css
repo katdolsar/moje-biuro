@@ -819,12 +819,13 @@ body.modal-open {
 }
 
 /* ==========================================
-   14. DODATKOWE STYLIZOWANIE KLAUZULI W FORMULARZU
+   14. SUBTELNY KOMUNIKAT PRAWNY W FORMULARZU
    ========================================== */
 .form-privacy-notice {
-    font-size: 0.8rem; /* Mniejszy, dyskretny tekst */
-    color: var(--text-muted); /* Szary, nienachalny kolor tekstu */
-    margin-top: 12px; /* Odstęp od przycisku wysyłania */
+    font-size: 0.8rem;
+    color: var(--text-muted); /* Estetyczny szary odcień */
     line-height: 1.4;
-    max-width: 500px; /* Ograniczenie szerokości, by tekst ładnie łamał się na desktopie */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 400;
 }
