@@ -99,31 +99,25 @@ document.addEventListener("DOMContentLoaded", () => {
             return re.test(cleanPhone);
         };
 
-        // Maska UX telefonu
+        // Maska UX telefonu - automatyczne przerwy po 3 znakach
         if (phoneInput) {
             phoneInput.addEventListener("input", (e) => {
                 let value = e.target.value;
                 const hasPlus = value.startsWith('+');
-                let digits = value.replace(/[^0-9]/g, '');
-                let formatted = "";
                 
+                // Usuwamy wszystko, co nie jest cyfrą
+                let digits = value.replace(/[^0-9]/g, '');
+                
+                // Dzielimy ciąg cyfr na grupy po maksymalnie 3 znaki
+                let chunks = digits.match(/.{1,3}/g);
+                let formatted = chunks ? chunks.join(' ') : '';
+                
+                // Jeśli użytkownik wpisał plus na początku, zachowujemy go
                 if (hasPlus) {
-                    if (digits.length > 0) {
-                        formatted += "+" + digits.substring(0, 2);
-                        if (digits.length > 2) formatted += " " + digits.substring(2, 5);
-                        if (digits.length > 5) formatted += " " + digits.substring(5, 8);
-                        if (digits.length > 8) formatted += " " + digits.substring(8, 11);
-                    } else {
-                        formatted = "+";
-                    }
+                    e.target.value = '+' + formatted;
                 } else {
-                    if (digits.length > 0) {
-                        formatted += digits.substring(0, 3);
-                        if (digits.length > 3) formatted += " " + digits.substring(3, 6);
-                        if (digits.length > 6) formatted += " " + digits.substring(6, 9);
-                    }
+                    e.target.value = formatted;
                 }
-                e.target.value = formatted;
             });
         }
 
