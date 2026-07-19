@@ -596,6 +596,7 @@ textarea {
 }
 
 .form-status-container {
+    margin-top: 15px; /* Dodajemy odstęp od przycisku powyżej */
     margin-bottom: 0;
 }
 
