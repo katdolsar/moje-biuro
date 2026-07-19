@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ==========================================
     // 1. NAWIGACJA MOBILNA
-    // ==========================================
     const mobileMenu = document.getElementById("mobile-menu");
     const navMenu = document.getElementById("nav-menu");
 
@@ -20,38 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-   // ==========================================
-    // 2. AKORDEON FAQ (Zoptymalizowany i płynny)
-    // ==========================================
+    // 2. AKORDEON FAQ
     const faqQuestions = document.querySelectorAll(".faq-question");
-
     faqQuestions.forEach(question => {
         question.addEventListener("click", () => {
             const faqItem = question.parentElement;
             const faqAnswer = faqItem.querySelector(".faq-answer");
             const isActive = faqItem.classList.contains("active");
 
-            // 1. Zamknij wszystkie pozostałe otwarte elementy FAQ i zresetuj ich wysokość
             document.querySelectorAll(".faq-item").forEach(item => {
                 item.classList.remove("active");
                 const answer = item.querySelector(".faq-answer");
-                if (answer) {
-                    answer.style.maxHeight = null;
-                }
+                if (answer) answer.style.maxHeight = null;
             });
 
-            // 2. Jeśli kliknięty element nie był aktywny, otwórz go i oblicz jego wysokość
             if (!isActive) {
                 faqItem.classList.add("active");
-                // Dynamicznie ustawiamy wysokość na podstawie rzeczywistej zawartości tekstu
                 faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
             }
         });
     });
 
-    // ==========================================
     // 3. FORMULARZ KONTAKTOWY: WALIDACJA I ASYNCHRONICZNOŚĆ
-    // ==========================================
     const form = document.getElementById("dalyContactForm");
     const submitBtn = document.getElementById("submitBtn");
     
@@ -62,62 +50,52 @@ document.addEventListener("DOMContentLoaded", () => {
         const generalErrorMsg = document.getElementById("generalErrorMessage");
         const phoneInput = document.getElementById("phone");
 
-        // Dynamiczne zarządzanie błędami z poziomu JS
         const validateField = (field, condition, errorMessage) => {
             const parent = field.parentElement;
-            
-            // Usuń stary komunikat błędu, jeśli istnieje
             const existingError = parent.querySelector(".js-error-msg");
-            if (existingError) {
-                existingError.remove();
-            }
+            if (existingError) existingError.remove();
 
             if (condition) {
                 parent.classList.remove("invalid");
                 return true;
             } else {
                 parent.classList.add("invalid");
-                
-                // Tworzymy element błędu w locie przez JS
                 const errorSpan = document.createElement("span");
                 errorSpan.className = "js-error-msg";
                 errorSpan.innerText = errorMessage;
-                
                 parent.appendChild(errorSpan);
                 return false;
             }
         };
 
-        const isValidEmail = (email) => {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        };
-
+        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+        
+        // Elastyczna walidacja długości samych cyfr (od 9 do 12 znaków z kierunkowym)
         const isValidPhone = (phone) => {
-            const cleanPhone = phone.replace(/[\s-]/g, "");
-            const re = /^(?:\+\d{1,3})?(\d{9})$/;
-            return re.test(cleanPhone);
+            const cleanPhone = phone.replace(/[^0-9]/g, "");
+            return cleanPhone.length >= 9 && cleanPhone.length <= 12;
         };
 
-        // Maska UX telefonu - automatyczne przerwy po 3 znakach
+        // NOWA, STABILNA MASKA TELEFONU: Przerwy po 3 znakach
         if (phoneInput) {
             phoneInput.addEventListener("input", (e) => {
-                let value = e.target.value;
-                const hasPlus = value.startsWith('+');
+                let input = e.target.value;
+                const hasPlus = input.startsWith('+');
                 
-                // Usuwamy wszystko, co nie jest cyfrą
-                let digits = value.replace(/[^0-9]/g, '');
+                // Wyciągamy same cyfry
+                let digits = input.replace(/[^0-9]/g, '');
                 
-                // Dzielimy ciąg cyfr na grupy po maksymalnie 3 znaki
-                let chunks = digits.match(/.{1,3}/g);
-                let formatted = chunks ? chunks.join(' ') : '';
-                
-                // Jeśli użytkownik wpisał plus na początku, zachowujemy go
-                if (hasPlus) {
-                    e.target.value = '+' + formatted;
-                } else {
-                    e.target.value = formatted;
+                // Dzielimy na grupy po 3 cyfry
+                let formatted = '';
+                for (let i = 0; i < digits.length; i++) {
+                    if (i > 0 && i % 3 === 0) {
+                        formatted += ' ';
+                    }
+                    formatted += digits[i];
                 }
+                
+                // Zwracamy sformatowany tekst (z plusem lub bez)
+                e.target.value = hasPlus ? '+' + formatted : formatted;
             });
         }
 
@@ -132,15 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const emailInput = document.getElementById("email");
             const messageInput = document.getElementById("message");
 
-            // Tutaj definiujemy treści komunikatów błędów w JS
             const isNameValid = nameInput ? validateField(nameInput, nameInput.value.trim().length >= 3, "To pole jest wymagane (min. 3 znaki).") : true;
             const isEmailValid = emailInput ? validateField(emailInput, isValidEmail(emailInput.value.trim()), "Wprowadź poprawny adres e-mail.") : true;
-            const isPhoneValid = phoneInput ? validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny 9-cyfrowy numer.") : true;
-            const isMessageValid = messageInput ? validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz pokrótce swoje potrzeby (min. 10 znaków).") : true;
+            const isPhoneValid = phoneInput ? validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny numer telefonu.") : true;
+            const isMessageValid = messageInput ? validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz swoje potrzeby (min. 10 znaków).") : true;
 
-            if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) {
-                return; 
-            }
+            if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) return; 
 
             submitBtn.disabled = true;
             if (btnText) btnText.style.display = "none";
@@ -158,15 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (response.ok) {
                     if (successMsg) successMsg.style.display = "block";
                     form.reset();
-
-                    if (typeof dataLayer !== 'undefined') {
-                        dataLayer.push({
-                            'event': 'form_submission_success',
-                            'form_id': 'contact_form_dataly'
-                        });
-                    }
                 } else {
-                    throw new Error("Błąd serwera.");
+                    throw new Error("Błąd serwera Formspree.");
                 }
             } catch (error) {
                 if (generalErrorMsg) generalErrorMsg.style.display = "block";
@@ -187,19 +155,16 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-// ==========================================
+
     // 4. OBSŁUGA OKIENKA MODALNEGO (POLITYKA PRYWATNOŚCI)
-    // ==========================================
-    const privacyTrigger = document.getElementById("privacy-trigger"); // Link w stopce
-    const privacyLinkForm = document.getElementById("privacy-link-form"); // NOWOŚĆ: Link nad przyciskiem
+    const privacyTrigger = document.getElementById("privacy-trigger");
+    const privacyLinkForm = document.getElementById("privacy-link-form");
     const privacyModal = document.getElementById("privacy-modal");
     const privacyClose = document.getElementById("privacy-close");
 
     if (privacyModal && privacyClose) {
-        
-        // Funkcja otwierająca okienko
         const openModal = (e) => {
-            if (e) e.preventDefault(); // Blokujemy domyślne skakanie strony
+            if (e) e.preventDefault();
             privacyModal.style.display = "flex";
             setTimeout(() => {
                 privacyModal.classList.add("active");
@@ -207,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 10);
         };
 
-        // Funkcja zamykająca okienko
         const closeModal = () => {
             privacyModal.classList.remove("active");
             document.body.classList.remove("modal-open");
@@ -216,23 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 300);
         };
 
-        // Nasłuchiwanie zdarzeń - teraz oba linki otwierają okno!
         if (privacyTrigger) privacyTrigger.addEventListener("click", openModal);
         if (privacyLinkForm) privacyLinkForm.addEventListener("click", openModal);
-        
         privacyClose.addEventListener("click", closeModal);
 
-        // Zamknięcie po kliknięciu w tło poza okienkiem
         privacyModal.addEventListener("click", (e) => {
-            if (e.target === privacyModal) {
-                closeModal();
-            }
+            if (e.target === privacyModal) closeModal();
         });
 
-        // Zamknięcie za pomocą klawisza ESC
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && privacyModal.classList.contains("active")) {
-                closeModal();
-            }
+            if (e.key === "Escape" && privacyModal.classList.contains("active")) closeModal();
         });
     }
+});
