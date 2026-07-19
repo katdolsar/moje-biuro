@@ -177,3 +177,52 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// ==========================================
+    // 4. OBSŁUGA OKIENKA MODALNEGO (POLITYKA PRYWATNOŚCI)
+    // ==========================================
+    const privacyTrigger = document.getElementById("privacy-trigger");
+    const privacyModal = document.getElementById("privacy-modal");
+    const privacyClose = document.getElementById("privacy-close");
+
+    if (privacyTrigger && privacyModal && privacyClose) {
+        
+        // Funkcja otwierająca
+        const openModal = (e) => {
+            e.preventDefault(); // Blokujemy domyślne skakanie linku #
+            privacyModal.style.display = "flex";
+            // Krótkie opóźnienie, aby CSS zdążył wyrenderować przejście opacity
+            setTimeout(() => {
+                privacyModal.classList.add("active");
+                document.body.classList.add("modal-open");
+            }, 10);
+        };
+
+        // Funkcja zamykająca
+        const closeModal = () => {
+            privacyModal.classList.remove("active");
+            document.body.classList.remove("modal-open");
+            // Czekamy na koniec animacji CSS (300ms) przed pełnym ukryciem
+            setTimeout(() => {
+                privacyModal.style.display = "none";
+            }, 300);
+        };
+
+        // Nasłuchiwanie zdarzeń
+        privacyTrigger.addEventListener("click", openModal);
+        privacyClose.addEventListener("click", closeModal);
+
+        // Zamknięcie po kliknięciu w ciemne tło poza okienkiem
+        privacyModal.addEventListener("click", (e) => {
+            if (e.target === privacyModal) {
+                closeModal();
+            }
+        });
+
+        // Zamknięcie za pomocą klawisza ESC na klawiaturze
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && privacyModal.classList.contains("active")) {
+                closeModal();
+            }
+        });
+    }
