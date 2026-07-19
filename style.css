@@ -596,8 +596,9 @@ textarea {
 }
 
 .form-status-container {
-    margin-top: 15px; /* Dodajemy odstęp od przycisku powyżej */
+    margin-top: 20px; /* Przestrzeń między przyciskiem a komunikatem podziękowania */
     margin-bottom: 0;
+    width: 100%;
 }
 
 .status-msg {
