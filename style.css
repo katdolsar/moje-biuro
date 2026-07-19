@@ -455,10 +455,16 @@ header {
     color: var(--color-brand);
 }
 
+/* Ukryta odpowiedź */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* TO POWODUJE ROZWINIĘCIE: Rezerwujemy bezpieczną przestrzeń na tekst */
+.faq-item.active .faq-answer {
+    max-height: 500px; /* Wartość maksymalna, JavaScript dopasuje ją idealnie */
 }
 
 .faq-answer-content {
