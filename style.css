@@ -698,3 +698,122 @@ footer p {
     
     .contact-form .btn { width: 100%; }
 }
+/* ==========================================
+   13. STYLE DLA OKIENKA MODALNEGO POLITYKI
+   ========================================== */
+.modal {
+    display: none; /* Domyślnie ukryte */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.6); /* Ciemne tło */
+    backdrop-filter: blur(4px); /* Nowoczesne rozmycie tła */
+    z-index: 2000; /* Nad wszystkim (nawet nad menu mobilnym) */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Stan aktywny wywoływany przez JS */
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 700px;
+    max-height: 80vh; /* Zapobiega wychodzeniu poza ekran */
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    animation: modalSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    color: var(--text-main);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: #ef4444; /* Zmiana koloru na czerwony przy najechaniu */
+}
+
+.modal-body {
+    padding: 25px;
+    overflow-y: auto; /* Przewijanie wnętrza polityki */
+    font-size: 0.95rem;
+}
+
+.modal-body h3 {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.modal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-body p {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+.modal-body ul {
+    list-style: cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 1.5rem;
+    padding-left: 20px;
+}
+
+.modal-body li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    position: relative;
+}
+
+/* Kropki na liście wewnątrz polityki */
+.modal-body li::before {
+    content: "•";
+    color: var(--color-brand);
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Blokada przewijania tła strony, gdy modal jest otwarty */
+body.modal-open {
+    overflow: hidden;
+}
