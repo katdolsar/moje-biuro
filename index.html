@@ -231,87 +231,84 @@
     </section>
 
     <!-- 7. KONTAKT -->
-    <section id="kontakt" class="contact">
-        <div class="container">
-            <h2 class="section-title">Zacznijmy współpracę</h2>
-            <p class="section-subtitle">Napisz do nas. Pomożemy Ci uporządkować podatki i zautomatyzować Twoje codzienne arkusze.</p>
+<section id="kontakt" class="contact">
+    <div class="container">
+        <h2 class="section-title">Zacznijmy współpracę</h2>
+        <p class="section-subtitle">Napisz do nas. Pomożemy Ci uporządkować podatki i zautomatyzować Twoje codzienne arkusze.</p>
+        
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3>Biuro Online</h3>
+                <p>Pracujemy całkowicie online, obsługując partnerów z całej Polski.</p>
+                
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>kontakt@dataly.pl</span>
+                </div>
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span>+48 123 456 789</span>
+                </div>
+            </div>
             
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h3>Biuro Online</h3>
-                    <p>Pracujemy całkowicie online, obsługując partnerów z całej Polski.</p>
-                    
-                    <div class="info-item">
-                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        <span>kontakt@dataly.pl</span>
+            <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
+                <input type="text" name="_gotcha" style="display:none">
+
+                <div class="form-group form-group-full">
+                    <label for="name">Imię i Nazwisko / Firma</label>
+                    <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Adres E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
                     </div>
-                    <div class="info-item">
-                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                        <span>+48 123 456 789</span>
+                    
+                    <div class="form-group">
+                        <label for="phone">Numer telefonu</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
                     </div>
                 </div>
                 
-                <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
-                    <input type="text" name="_gotcha" style="display:none">
+                <div class="form-group form-group-full">
+                    <label for="service">Interesuje mnie...</label>
+                    <select id="service" name="service">
+                        <option value="kpir">Prowadzenie KPiR + ZUS</option>
+                        <option value="pit">Rozliczenie PIT</option>
+                        <option value="data">Narzędzia budżetowe</option>
+                        <option value="all">Optymalizacja arkuszy</option>
+                    </select>
+                </div>
+                
+                <!-- Zmniejszyliśmy margines dolny w tej grupie poprzez CSS -->
+                <div class="form-group form-group-full message-group">
+                    <label for="message">Opisz swoje potrzeby</label>
+                    <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
+                </div>
+                
+                <!-- Komunikat administratora (teraz tuż pod textarea) -->
+                <p class="form-privacy-notice form-group-full">
+                    Administratorem Twoich danych jest [pełna nazwa firmy]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
+                </p>
+                
+                <div class="form-status-container form-group-full">
+                    <div class="status-msg success-msg" id="successMessage">
+                        <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
+                    </div>
+                    <div class="status-msg error-container-msg" id="generalErrorMessage">
+                        Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
+                    </div>
+                </div>
 
-                    <div class="form-group form-group-full">
-                        <label for="name">Imię i Nazwisko / Firma</label>
-                        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
-                        <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Adres E-mail</label>
-                            <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
-                            <span class="error-msg" id="emailError">Wprowadź poprawny adres e-mail.</span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Numer telefonu</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
-                            <span class="error-msg" id="phoneError">Wprowadź poprawny 9-cyfrowy numer.</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group form-group-full">
-                        <label for="service">Interesuje mnie...</label>
-                        <select id="service" name="service">
-                            <option value="kpir">Prowadzenie KPiR + ZUS</option>
-                            <option value="pit">Rozliczenie PIT</option>
-                            <option value="data">Narzędzia budżetowe</option>
-                            <option value="all">Optymalizacja arkuszy</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group form-group-full">
-                        <label for="message">Opisz swoje potrzeby</label>
-                        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
-                        <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
-                    </div>
-                    
-                    <div class="form-status-container form-group-full">
-                        <div class="status-msg success-msg" id="successMessage">
-                            <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
-                        </div>
-                        <div class="status-msg error-container-msg" id="generalErrorMessage">
-                            Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
-                        </div>
-                    </div>
-
-                    <!-- ZMODYFIKOWANE: Krótki komunikat RODO umieszczony dokładnie nad przyciskiem wysyłania -->
-                    <p class="form-privacy-notice form-group-full">
-                        Administratorem Twoich danych jest [Wpisz pełną nazwę swojej firmy, np. Dataly Jan Kowalski]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
-                    </p>
-
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
-                        <span class="btn-text">Wyślij zgłoszenie</span>
-                        <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
-                    </button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span class="btn-text">Wyślij zgłoszenie</span>
+                    <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- 8. FOOTER -->
     <footer>
