@@ -20,22 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ==========================================
-    // 2. AKORDEON FAQ
+   // ==========================================
+    // 2. AKORDEON FAQ (Zoptymalizowany i płynny)
     // ==========================================
     const faqQuestions = document.querySelectorAll(".faq-question");
 
     faqQuestions.forEach(question => {
         question.addEventListener("click", () => {
             const faqItem = question.parentElement;
+            const faqAnswer = faqItem.querySelector(".faq-answer");
             const isActive = faqItem.classList.contains("active");
 
+            // 1. Zamknij wszystkie pozostałe otwarte elementy FAQ i zresetuj ich wysokość
             document.querySelectorAll(".faq-item").forEach(item => {
                 item.classList.remove("active");
+                const answer = item.querySelector(".faq-answer");
+                if (answer) {
+                    answer.style.maxHeight = null;
+                }
             });
 
+            // 2. Jeśli kliknięty element nie był aktywny, otwórz go i oblicz jego wysokość
             if (!isActive) {
                 faqItem.classList.add("active");
+                // Dynamicznie ustawiamy wysokość na podstawie rzeczywistej zawartości tekstu
+                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
             }
         });
     });
