@@ -181,45 +181,46 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
     // 4. OBSŁUGA OKIENKA MODALNEGO (POLITYKA PRYWATNOŚCI)
     // ==========================================
-    const privacyTrigger = document.getElementById("privacy-trigger");
+    const privacyTrigger = document.getElementById("privacy-trigger"); // Link w stopce
+    const privacyLinkForm = document.getElementById("privacy-link-form"); // NOWOŚĆ: Link nad przyciskiem
     const privacyModal = document.getElementById("privacy-modal");
     const privacyClose = document.getElementById("privacy-close");
 
-    if (privacyTrigger && privacyModal && privacyClose) {
+    if (privacyModal && privacyClose) {
         
-        // Funkcja otwierająca
+        // Funkcja otwierająca okienko
         const openModal = (e) => {
-            e.preventDefault(); // Blokujemy domyślne skakanie linku #
+            if (e) e.preventDefault(); // Blokujemy domyślne skakanie strony
             privacyModal.style.display = "flex";
-            // Krótkie opóźnienie, aby CSS zdążył wyrenderować przejście opacity
             setTimeout(() => {
                 privacyModal.classList.add("active");
                 document.body.classList.add("modal-open");
             }, 10);
         };
 
-        // Funkcja zamykająca
+        // Funkcja zamykająca okienko
         const closeModal = () => {
             privacyModal.classList.remove("active");
             document.body.classList.remove("modal-open");
-            // Czekamy na koniec animacji CSS (300ms) przed pełnym ukryciem
             setTimeout(() => {
                 privacyModal.style.display = "none";
             }, 300);
         };
 
-        // Nasłuchiwanie zdarzeń
-        privacyTrigger.addEventListener("click", openModal);
+        // Nasłuchiwanie zdarzeń - teraz oba linki otwierają okno!
+        if (privacyTrigger) privacyTrigger.addEventListener("click", openModal);
+        if (privacyLinkForm) privacyLinkForm.addEventListener("click", openModal);
+        
         privacyClose.addEventListener("click", closeModal);
 
-        // Zamknięcie po kliknięciu w ciemne tło poza okienkiem
+        // Zamknięcie po kliknięciu w tło poza okienkiem
         privacyModal.addEventListener("click", (e) => {
             if (e.target === privacyModal) {
                 closeModal();
             }
         });
 
-        // Zamknięcie za pomocą klawisza ESC na klawiaturze
+        // Zamknięcie za pomocą klawisza ESC
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && privacyModal.classList.contains("active")) {
                 closeModal();
