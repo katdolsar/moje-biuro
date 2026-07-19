@@ -287,11 +287,20 @@
                     <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
                 </div>
                 
-                <!-- Komunikat administratora (teraz tuż pod textarea) -->
+               <!-- ... wcześniejsze pola formularza (imię, email, telefon, wiadomość) ... -->
+                
+                <!-- Komunikat administratora -->
                 <p class="form-privacy-notice form-group-full">
                     Administratorem Twoich danych jest [pełna nazwa firmy]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
                 </p>
                 
+                <!-- Przycisk wysyłania zgłoszenia -->
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span class="btn-text">Wyślij zgłoszenie</span>
+                    <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
+                </button>
+
+                <!-- NOWE MIEJSCE: Kontener statusu przeniesiony bezpośrednio pod przycisk -->
                 <div class="form-status-container form-group-full">
                     <div class="status-msg success-msg" id="successMessage">
                         <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
@@ -300,11 +309,6 @@
                         Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span class="btn-text">Wyślij zgłoszenie</span>
-                    <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
-                </button>
             </form>
         </div>
     </div>
