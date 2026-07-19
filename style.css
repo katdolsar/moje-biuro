@@ -817,3 +817,14 @@ footer p {
 body.modal-open {
     overflow: hidden;
 }
+
+/* ==========================================
+   14. DODATKOWE STYLIZOWANIE KLAUZULI W FORMULARZU
+   ========================================== */
+.form-privacy-notice {
+    font-size: 0.8rem; /* Mniejszy, dyskretny tekst */
+    color: var(--text-muted); /* Szary, nienachalny kolor tekstu */
+    margin-top: 12px; /* Odstęp od przycisku wysyłania */
+    line-height: 1.4;
+    max-width: 500px; /* Ograniczenie szerokości, by tekst ładnie łamał się na desktopie */
+}
