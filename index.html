@@ -252,14 +252,17 @@
                 </div>
                 
                 <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
+                    <!-- Zabezpieczenie Honeypot przed spamem -->
                     <input type="text" name="_gotcha" style="display:none">
 
+                    <!-- Pole Imię i Nazwisko / Firma -->
                     <div class="form-group form-group-full">
                         <label for="name">Imię i Nazwisko / Firma</label>
                         <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
                         <span class="error-msg" id="nameError">To pole jest wymagane (min. 3 znaki).</span>
                     </div>
                     
+                    <!-- Wiersz łączący E-mail i Telefon -->
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Adres E-mail</label>
@@ -274,6 +277,7 @@
                         </div>
                     </div>
                     
+                    <!-- Wybór usługi -->
                     <div class="form-group form-group-full">
                         <label for="service">Interesuje mnie...</label>
                         <select id="service" name="service">
@@ -284,12 +288,14 @@
                         </select>
                     </div>
                     
+                    <!-- Wiadomość -->
                     <div class="form-group form-group-full">
                         <label for="message">Opisz swoje potrzeby</label>
                         <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
                         <span class="error-msg" id="messageError">Opisz pokrótce swoje potrzeby (min. 10 znaków).</span>
                     </div>
                     
+                    <!-- Powiadomienia o stanie operacji -->
                     <div class="form-status-container form-group-full">
                         <div class="status-msg success-msg" id="successMessage">
                             <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
@@ -299,10 +305,15 @@
                         </div>
                     </div>
 
+                    <!-- Przycisk wysyłania -->
                     <button type="submit" class="btn btn-primary" id="submitBtn">
                         <span class="btn-text">Wyślij zgłoszenie</span>
                         <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
                     </button>
+
+                    <!-- NOWOŚĆ: Obowiązkowy komunikat pod przyciskiem (Zmień nawias [...] na dane swojej firmy) -->
+                    <p class="form-legal-notice">
+                        Administratorem Twoich danych jest <strong>[wpisz pełną nazwę firmy]</strong>. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
                 </form>
             </div>
         </div>
@@ -312,13 +323,14 @@
     <footer>
         <div class="container">
             <p>&copy; 2026 Dataly. Wszelkie prawa zastrzeżone.</p>
-            <!-- TUTAJ dodaliśmy estetyczny link otwierający okienko modalne -->
             <p style="margin-top: 10px;">
-                <a href="#" id="privacy-trigger" style="font-size: 0.85rem; color: var(--color-brand); text-decoration: underline;">Polityka Prywatności</a>
+                <!-- Ten link również pozwoli otworzyć politykę ze stopki strony -->
+                <a href="#" class="privacy-link-trigger" style="font-size: 0.85rem; color: var(--color-brand); text-decoration: underline;">Polityka Prywatności</a>
             </p>
             <p style="font-size: 0.8rem; margin-top: 5px; color: #94a3b8;">Modern Solutions for Data & Finance.</p>
         </div>
     </footer>
+
 
     <!-- ==========================================
          NOWA SEKCJA: OKIENKO MODALNE POLITYKI PRYWATNOŚCI
