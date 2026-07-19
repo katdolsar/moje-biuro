@@ -477,7 +477,9 @@ header {
     line-height: 1.7;
 }
 
-/* 10. Sekcja Kontakt - Zaawansowany Formularz */
+/* ==========================================
+   10. Sekcja Kontakt - Zaawansowany Formularz
+   ========================================== */
 .contact {
     padding: 100px 0;
     background-color: var(--bg-card);
@@ -507,26 +509,27 @@ header {
     flex-shrink: 0;
 }
 
-/* Kontener Formularza oparty o CSS Grid */
 .contact-form {
     display: grid;
-    grid-template-columns: 1fr; /* Formularz domyślnie składa się z jednego głównego strumienia */
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
-/* Pola wejściowe i struktura pojedynczego form-group */
 .form-group {
     display: flex;
     flex-direction: column;
     position: relative;
-    margin-bottom: 5px;
 }
 
 .form-group-full {
     width: 100%;
 }
 
-/* Wiersz dla E-maila i Telefonu (Wyświetlanie obok siebie na Desktopach) */
+/* Usunięcie zbędnej luki między wiadomością a dopiskiem RODO */
+.message-group {
+    margin-bottom: -5px;
+}
+
 .form-row {
     display: flex;
     gap: 20px;
@@ -538,7 +541,6 @@ header {
     min-width: 0;
 }
 
-/* Elementy sterujące formularza */
 label {
     font-weight: 500;
     margin-bottom: 8px;
@@ -564,36 +566,37 @@ input:focus, textarea:focus, select:focus {
 
 textarea {
     resize: vertical;
-    min-height: 150px;
+    min-height: 140px;
 }
 
 .contact-form .btn {
     justify-self: start;
     padding: 12px 30px;
+    margin-top: 5px;
 }
 
-/* Stany walidacji UI i komunikaty o błędach */
-.error-msg {
+/* Styl błędu generowanego dynamicznie przez JS */
+.js-error-msg {
     color: #ef4444;
     font-size: 0.75rem;
     margin-top: 4px;
-    display: none;
+    display: block;
+    animation: fadeInError 0.2s ease-in-out;
+}
+
+@keyframes fadeInError {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .form-group.invalid input,
-.form-group.invalid textarea,
-.form-group.invalid select {
+.form-group.invalid textarea {
     border-color: #ef4444;
     background-color: #fef2f2;
 }
 
-.form-group.invalid .error-msg {
-    display: block;
-}
-
-/* Stany powiadomień API (Sukces / Błąd ogólny) */
 .form-status-container {
-    margin-bottom: 5px;
+    margin-bottom: 0;
 }
 
 .status-msg {
@@ -616,7 +619,6 @@ textarea {
     border: 1px solid #fecaca;
 }
 
-/* Stan zablokowania przycisku podczas ładowania (loading state) */
 .btn-primary:disabled {
     background-color: #94a3b8;
     cursor: not-allowed;
@@ -819,13 +821,13 @@ body.modal-open {
 }
 
 /* ==========================================
-   14. SUBTELNY KOMUNIKAT PRAWNY W FORMULARZU
+   14. Zoptymalizowany dopisek RODO (blisko pola)
    ========================================== */
 .form-privacy-notice {
     font-size: 0.8rem;
-    color: var(--text-muted); /* Estetyczny szary odcień */
+    color: var(--text-muted);
     line-height: 1.4;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: -5px; /* Przyciąga komunikat wyżej, do pola tekstowego */
+    margin-bottom: 0;
     font-weight: 400;
 }
