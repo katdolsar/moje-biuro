@@ -62,13 +62,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const generalErrorMsg = document.getElementById("generalErrorMessage");
         const phoneInput = document.getElementById("phone");
 
-        const validateField = (field, condition) => {
+        // Dynamiczne zarządzanie błędami z poziomu JS
+        const validateField = (field, condition, errorMessage) => {
             const parent = field.parentElement;
+            
+            // Usuń stary komunikat błędu, jeśli istnieje
+            const existingError = parent.querySelector(".js-error-msg");
+            if (existingError) {
+                existingError.remove();
+            }
+
             if (condition) {
                 parent.classList.remove("invalid");
                 return true;
             } else {
                 parent.classList.add("invalid");
+                
+                // Tworzymy element błędu w locie przez JS
+                const errorSpan = document.createElement("span");
+                errorSpan.className = "js-error-msg";
+                errorSpan.innerText = errorMessage;
+                
+                parent.appendChild(errorSpan);
                 return false;
             }
         };
@@ -84,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return re.test(cleanPhone);
         };
 
-        // --- DYNAMICZNE FORMATOWANIE TELEFONU (Maska UX) ---
+        // Maska UX telefonu
         if (phoneInput) {
             phoneInput.addEventListener("input", (e) => {
                 let value = e.target.value;
@@ -112,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // --- ZDARZENIE WYSYŁKI (POST AJAX) ---
+        // Obsługa wysyłki
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
@@ -123,16 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const emailInput = document.getElementById("email");
             const messageInput = document.getElementById("message");
 
-            const isNameValid = nameInput ? validateField(nameInput, nameInput.value.trim().length >= 3) : true;
-            const isEmailValid = emailInput ? validateField(emailInput, isValidEmail(emailInput.value.trim())) : true;
-            const isPhoneValid = phoneInput ? validateField(phoneInput, isValidPhone(phoneInput.value.trim())) : true;
-            const isMessageValid = messageInput ? validateField(messageInput, messageInput.value.trim().length >= 10) : true;
+            // Tutaj definiujemy treści komunikatów błędów w JS
+            const isNameValid = nameInput ? validateField(nameInput, nameInput.value.trim().length >= 3, "To pole jest wymagane (min. 3 znaki).") : true;
+            const isEmailValid = emailInput ? validateField(emailInput, isValidEmail(emailInput.value.trim()), "Wprowadź poprawny adres e-mail.") : true;
+            const isPhoneValid = phoneInput ? validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny 9-cyfrowy numer.") : true;
+            const isMessageValid = messageInput ? validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz pokrótce swoje potrzeby (min. 10 znaków).") : true;
 
             if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) {
                 return; 
             }
 
-            // Blokada ponownego wysłania (Duplicate submission prevention)
             submitBtn.disabled = true;
             if (btnText) btnText.style.display = "none";
             if (btnSpinner) btnSpinner.style.display = "inline-block";
@@ -150,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (successMsg) successMsg.style.display = "block";
                     form.reset();
 
-                    // Wywołanie zdarzenia analitycznego po faktycznym sukcesie
                     if (typeof dataLayer !== 'undefined') {
                         dataLayer.push({
                             'event': 'form_submission_success',
@@ -170,14 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // Czyszczenie błędów podczas pisania
         form.querySelectorAll("input, textarea").forEach(input => {
             input.addEventListener("input", () => {
                 input.parentElement.classList.remove("invalid");
+                const err = input.parentElement.querySelector(".js-error-msg");
+                if (err) err.remove();
             });
         });
     }
-});
-
 // ==========================================
     // 4. OBSŁUGA OKIENKA MODALNEGO (POLITYKA PRYWATNOŚCI)
     // ==========================================
