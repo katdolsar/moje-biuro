@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             phoneInput.addEventListener("input", (e) => {
                 let input = e.target.value;
                 const hasPlus = input.startsWith('+');
+                
                 let digits = input.replace(/[^0-9]/g, '');
                 
                 let formatted = '';
@@ -185,27 +186,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. INTELIGENTNE UKRYWANIE PRZYCISKU MOBILNEGO W POBLIŻU FORMULARZA
-    const mobileCtaBar = document.getElementById("mobileCtaBar");
+    // 5. OBSŁUGA UKRYWANIA STYKOWEGO PRZYCISKU MOBILNEGO PRZY FORMULARZU
+    const mobileStickyCta = document.getElementById("mobileStickyCta");
     const contactSection = document.getElementById("kontakt");
 
-    if (mobileCtaBar && contactSection && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
+    if (mobileStickyCta && contactSection) {
+        const observerOptions = {
+            root: null,
+            threshold: 0.1 // Przycisk zniknie, gdy co najmniej 10% sekcji kontaktowej pojawi się w oknie
+        };
+
+        const contactObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Gdy sekcja kontaktowa znajduje się w polu widzenia, ukryj dolną belkę CTA
                 if (entry.isIntersecting) {
-                    mobileCtaBar.classList.add("is-hidden");
+                    mobileStickyCta.classList.add("hidden");
                 } else {
-                    mobileCtaBar.classList.remove("is-hidden");
+                    mobileStickyCta.classList.remove("hidden");
                 }
             });
-        }, {
-            root: null,
-            // Rozpoczyna ukrywanie paska 100px przed dojechaniem do sekcji kontaktowej
-            rootMargin: "0px 0px -100px 0px",
-            threshold: 0.05
-        });
+        }, observerOptions);
 
-        observer.observe(contactSection);
+        contactObserver.observe(contactSection);
     }
 });
