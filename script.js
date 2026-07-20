@@ -70,22 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
         
-        // Elastyczna walidacja długości samych cyfr (od 9 do 12 znaków z kierunkowym)
         const isValidPhone = (phone) => {
             const cleanPhone = phone.replace(/[^0-9]/g, "");
             return cleanPhone.length >= 9 && cleanPhone.length <= 12;
         };
 
-        // NOWA, STABILNA MASKA TELEFONU: Przerwy po 3 znakach
         if (phoneInput) {
             phoneInput.addEventListener("input", (e) => {
                 let input = e.target.value;
                 const hasPlus = input.startsWith('+');
-                
-                // Wyciągamy same cyfry
                 let digits = input.replace(/[^0-9]/g, '');
                 
-                // Dzielimy na grupy po 3 cyfry
                 let formatted = '';
                 for (let i = 0; i < digits.length; i++) {
                     if (i > 0 && i % 3 === 0) {
@@ -94,12 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     formatted += digits[i];
                 }
                 
-                // Zwracamy sformatowany tekst (z plusem lub bez)
                 e.target.value = hasPlus ? '+' + formatted : formatted;
             });
         }
 
-        // Obsługa wysyłki
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
@@ -146,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Czyszczenie błędów podczas pisania
         form.querySelectorAll("input, textarea").forEach(input => {
             input.addEventListener("input", () => {
                 input.parentElement.classList.remove("invalid");
@@ -191,5 +183,29 @@ document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && privacyModal.classList.contains("active")) closeModal();
         });
+    }
+
+    // 5. INTELIGENTNE UKRYWANIE PRZYCISKU MOBILNEGO W POBLIŻU FORMULARZA
+    const mobileCtaBar = document.getElementById("mobileCtaBar");
+    const contactSection = document.getElementById("kontakt");
+
+    if (mobileCtaBar && contactSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Gdy sekcja kontaktowa znajduje się w polu widzenia, ukryj dolną belkę CTA
+                if (entry.isIntersecting) {
+                    mobileCtaBar.classList.add("is-hidden");
+                } else {
+                    mobileCtaBar.classList.remove("is-hidden");
+                }
+            });
+        }, {
+            root: null,
+            // Rozpoczyna ukrywanie paska 100px przed dojechaniem do sekcji kontaktowej
+            rootMargin: "0px 0px -100px 0px",
+            threshold: 0.05
+        });
+
+        observer.observe(contactSection);
     }
 });
