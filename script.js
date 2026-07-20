@@ -39,115 +39,162 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. FORMULARZ KONTAKTOWY: WALIDACJA I ASYNCHRONICZNOŚĆ
-    const form = document.getElementById("dalyContactForm");
-    const submitBtn = document.getElementById("submitBtn");
-    
-    if (form && submitBtn) {
-        const btnText = submitBtn.querySelector(".btn-text");
-        const btnSpinner = submitBtn.querySelector(".btn-spinner");
-        const successMsg = document.getElementById("successMessage");
-        const generalErrorMsg = document.getElementById("generalErrorMessage");
-        const phoneInput = document.getElementById("phone");
+   // 3. FORMULARZ KONTAKTOWY: WALIDACJA I ASYNCHRONICZNOŚĆ
+const form = document.getElementById("dalyContactForm");
+const submitBtn = document.getElementById("submitBtn");
 
-        const validateField = (field, condition, errorMessage) => {
-            const parent = field.parentElement;
-            const existingError = parent.querySelector(".js-error-msg");
-            if (existingError) existingError.remove();
+if (form && submitBtn) {
+    const btnText = submitBtn.querySelector(".btn-text");
+    const btnSpinner = submitBtn.querySelector(".btn-spinner");
+    const successMsg = document.getElementById("successMessage");
+    const generalErrorMsg = document.getElementById("generalErrorMessage");
+    const phoneInput = document.getElementById("phone");
+    const errorSummary = document.getElementById("errorSummary");
+    const errorSummaryList = document.getElementById("errorSummaryList");
 
-            if (condition) {
-                parent.classList.remove("invalid");
-                return true;
-            } else {
-                parent.classList.add("invalid");
-                const errorSpan = document.createElement("span");
-                errorSpan.className = "js-error-msg";
-                errorSpan.innerText = errorMessage;
-                parent.appendChild(errorSpan);
-                return false;
-            }
-        };
+    // Walidacja pojedynczego pola z komunikatem bezpośrednim
+    const validateField = (field, condition, errorMessage) => {
+        const parent = field.parentElement;
+        const existingError = parent.querySelector(".js-error-msg");
+        if (existingError) existingError.remove();
 
-        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
-        
-        const isValidPhone = (phone) => {
-            const cleanPhone = phone.replace(/[^0-9]/g, "");
-            return cleanPhone.length >= 9 && cleanPhone.length <= 12;
-        };
-
-        if (phoneInput) {
-            phoneInput.addEventListener("input", (e) => {
-                let input = e.target.value;
-                const hasPlus = input.startsWith('+');
-                
-                let digits = input.replace(/[^0-9]/g, '');
-                
-                let formatted = '';
-                for (let i = 0; i < digits.length; i++) {
-                    if (i > 0 && i % 3 === 0) {
-                        formatted += ' ';
-                    }
-                    formatted += digits[i];
-                }
-                
-                e.target.value = hasPlus ? '+' + formatted : formatted;
-            });
+        if (condition) {
+            parent.classList.remove("invalid");
+            return { valid: true };
+        } else {
+            parent.classList.add("invalid");
+            const errorSpan = document.createElement("span");
+            errorSpan.className = "js-error-msg";
+            errorSpan.innerText = errorMessage;
+            parent.appendChild(errorSpan);
+            return { valid: false, message: errorMessage, fieldId: field.id };
         }
+    };
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+    
+    const isValidPhone = (phone) => {
+        const cleanPhone = phone.replace(/[^0-9]/g, "");
+        return cleanPhone.length >= 9 && cleanPhone.length <= 12;
+    };
 
-            if (successMsg) successMsg.style.display = "none";
-            if (generalErrorMsg) generalErrorMsg.style.display = "none";
-
-            const nameInput = document.getElementById("name");
-            const emailInput = document.getElementById("email");
-            const messageInput = document.getElementById("message");
-
-            const isNameValid = nameInput ? validateField(nameInput, nameInput.value.trim().length >= 3, "To pole jest wymagane (min. 3 znaki).") : true;
-            const isEmailValid = emailInput ? validateField(emailInput, isValidEmail(emailInput.value.trim()), "Wprowadź poprawny adres e-mail.") : true;
-            const isPhoneValid = phoneInput ? validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny numer telefonu.") : true;
-            const isMessageValid = messageInput ? validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz swoje potrzeby (min. 10 znaków).") : true;
-
-            if (!isNameValid || !isEmailValid || !isPhoneValid || !isMessageValid) return; 
-
-            submitBtn.disabled = true;
-            if (btnText) btnText.style.display = "none";
-            if (btnSpinner) btnSpinner.style.display = "inline-block";
-
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    if (successMsg) successMsg.style.display = "block";
-                    form.reset();
-                } else {
-                    throw new Error("Błąd serwera Formspree.");
+    // Formatowanie numeru telefonu w trakcie wpisywania
+    if (phoneInput) {
+        phoneInput.addEventListener("input", (e) => {
+            let input = e.target.value;
+            const hasPlus = input.startsWith('+');
+            let digits = input.replace(/[^0-9]/g, '');
+            
+            let formatted = '';
+            for (let i = 0; i < digits.length; i++) {
+                if (i > 0 && i % 3 === 0) {
+                    formatted += ' ';
                 }
-            } catch (error) {
-                if (generalErrorMsg) generalErrorMsg.style.display = "block";
-                console.error(error);
-            } finally {
-                submitBtn.disabled = false;
-                if (btnText) btnText.style.display = "inline-block";
-                if (btnSpinner) btnSpinner.style.display = "none";
+                formatted += digits[i];
             }
-        });
-
-        form.querySelectorAll("input, textarea").forEach(input => {
-            input.addEventListener("input", () => {
-                input.parentElement.classList.remove("invalid");
-                const err = input.parentElement.querySelector(".js-error-msg");
-                if (err) err.remove();
-            });
+            
+            e.target.value = hasPlus ? '+' + formatted : formatted;
         });
     }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Czyszczenie poprzednich stanów komunikatów
+        if (successMsg) successMsg.style.display = "none";
+        if (generalErrorMsg) generalErrorMsg.style.display = "none";
+        if (errorSummary) errorSummary.style.display = "none";
+        if (errorSummaryList) errorSummaryList.innerHTML = "";
+
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const messageInput = document.getElementById("message");
+
+        const errors = [];
+
+        // Przeprowadzenie walidacji dla każdego pola
+        if (nameInput) {
+            const res = validateField(nameInput, nameInput.value.trim().length >= 3, "Pole 'Imię i Nazwisko / Firma' jest wymagane (min. 3 znaki).");
+            if (!res.valid) errors.push(res);
+        }
+        if (emailInput) {
+            const res = validateField(emailInput, isValidEmail(emailInput.value.trim()), "Wprowadź poprawny adres e-mail (np. jan@kowalski.pl).");
+            if (!res.valid) errors.push(res);
+        }
+        if (phoneInput) {
+            const res = validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny numer telefonu (min. 9 cyfr).");
+            if (!res.valid) errors.push(res);
+        }
+        if (messageInput) {
+            const res = validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz swoje potrzeby (min. 10 znaków).");
+            if (!res.valid) errors.push(res);
+        }
+
+        // Jeśli wystąpiły błędy, wygeneruj Podsumowanie Błędów
+        if (errors.length > 0) {
+            if (errorSummary && errorSummaryList) {
+                errors.forEach(err => {
+                    const li = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = `#${err.fieldId}`;
+                    link.innerText = err.message;
+                    
+                    // Po kliknięciu na błąd w podsumowaniu, przejdź do danego pola
+                    link.addEventListener("click", (evt) => {
+                        evt.preventDefault();
+                        const targetField = document.getElementById(err.fieldId);
+                        if (targetField) targetField.focus();
+                    });
+
+                    li.appendChild(link);
+                    errorSummaryList.appendChild(li);
+                });
+
+                errorSummary.style.display = "block";
+                errorSummary.focus(); // Przeniesienie widoku i ostrości na podsumowanie
+            }
+            return;
+        }
+
+        // Jeśli walidacja przeszła pomyślnie – wyślij formularz
+        submitBtn.disabled = true;
+        if (btnText) btnText.style.display = "none";
+        if (btnSpinner) btnSpinner.style.display = "inline-block";
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                if (successMsg) successMsg.style.display = "block";
+                form.reset();
+            } else {
+                throw new Error("Błąd serwera Formspree.");
+            }
+        } catch (error) {
+            if (generalErrorMsg) generalErrorMsg.style.display = "block";
+            console.error(error);
+        } finally {
+            submitBtn.disabled = false;
+            if (btnText) btnText.style.display = "inline-block";
+            if (btnSpinner) btnSpinner.style.display = "none";
+        }
+    });
+
+    // Czyszczenie błędów podczas wpisywania danych
+    form.querySelectorAll("input, textarea").forEach(input => {
+        input.addEventListener("input", () => {
+            input.parentElement.classList.remove("invalid");
+            const err = input.parentElement.querySelector(".js-error-msg");
+            if (err) err.remove();
+        });
+    });
+}
 
     // 4. OBSŁUGA OKIENKA MODALNEGO (POLITYKA PRYWATNOŚCI)
     const privacyTrigger = document.getElementById("privacy-trigger");
