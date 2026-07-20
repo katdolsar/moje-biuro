@@ -455,16 +455,14 @@ header {
     color: var(--color-brand);
 }
 
-/* Ukryta odpowiedź */
 .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TO POWODUJE ROZWINIĘCIE: Rezerwujemy bezpieczną przestrzeń na tekst */
 .faq-item.active .faq-answer {
-    max-height: 500px; /* Wartość maksymalna, JavaScript dopasuje ją idealnie */
+    max-height: 500px;
 }
 
 .faq-answer-content {
@@ -477,9 +475,7 @@ header {
     line-height: 1.7;
 }
 
-/* ==========================================
-   10. Sekcja Kontakt - Zaawansowany Formularz
-   ========================================== */
+/* 10. Sekcja Kontakt */
 .contact {
     padding: 100px 0;
     background-color: var(--bg-card);
@@ -525,7 +521,6 @@ header {
     width: 100%;
 }
 
-/* Usunięcie zbędnej luki między wiadomością a dopiskiem RODO */
 .message-group {
     margin-bottom: -5px;
 }
@@ -575,7 +570,6 @@ textarea {
     margin-top: 5px;
 }
 
-/* Styl błędu generowanego dynamicznie przez JS */
 .js-error-msg {
     color: #ef4444;
     font-size: 0.75rem;
@@ -596,7 +590,7 @@ textarea {
 }
 
 .form-status-container {
-    margin-top: 20px; /* Przestrzeń między przyciskiem a komunikatem podziękowania */
+    margin-top: 20px;
     margin-bottom: 0;
     width: 100%;
 }
@@ -642,7 +636,7 @@ footer p {
     font-size: 0.9rem;
 }
 
-/* 12. Media Queries (Responsywność i dostosowanie ekranów) */
+/* 12. Media Queries (Responsywność) */
 @media (max-width: 1024px) {
     .hero h1 { font-size: 3rem; }
     .about-wrapper, .contact-wrapper { gap: 40px; }
@@ -650,6 +644,12 @@ footer p {
 
 @media (max-width: 768px) {
     html { font-size: 15px; }
+    
+    /* Rezerwa miejsca na dole strony pod przypięty pasek CTA */
+    body {
+        padding-bottom: calc(75px + env(safe-area-inset-bottom));
+    }
+
     .section-title { font-size: 2rem; }
     .hero h1 { font-size: 2.3rem; }
 
@@ -694,7 +694,6 @@ footer p {
     .process-steps::before { display: none; }
     .hero-btns { flex-direction: column; gap: 10px; }
     
-    /* Zmiana układu wiersza z poziomego na pionowy dla urządzeń mobilnych */
     .form-row {
         flex-direction: column;
         gap: 20px; 
@@ -702,19 +701,18 @@ footer p {
     
     .contact-form .btn { width: 100%; }
 }
-/* ==========================================
-   13. STYLE DLA OKIENKA MODALNEGO POLITYKI
-   ========================================== */
+
+/* 13. Style okienka modalnego */
 .modal {
-    display: none; /* Domyślnie ukryte */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(15, 23, 42, 0.6); /* Ciemne tło */
-    backdrop-filter: blur(4px); /* Nowoczesne rozmycie tła */
-    z-index: 2000; /* Nad wszystkim (nawet nad menu mobilnym) */
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -722,7 +720,6 @@ footer p {
     transition: opacity 0.3s ease;
 }
 
-/* Stan aktywny wywoływany przez JS */
 .modal.active {
     display: flex;
     opacity: 1;
@@ -732,7 +729,7 @@ footer p {
     background-color: var(--bg-card);
     width: 100%;
     max-width: 700px;
-    max-height: 80vh; /* Zapobiega wychodzeniu poza ekran */
+    max-height: 80vh;
     border-radius: 12px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -770,12 +767,12 @@ footer p {
 }
 
 .modal-close:hover {
-    color: #ef4444; /* Zmiana koloru na czerwony przy najechaniu */
+    color: #ef4444;
 }
 
 .modal-body {
     padding: 25px;
-    overflow-y: auto; /* Przewijanie wnętrza polityki */
+    overflow-y: auto;
     font-size: 0.95rem;
 }
 
@@ -807,7 +804,6 @@ footer p {
     position: relative;
 }
 
-/* Kropki na liście wewnątrz polityki */
 .modal-body li::before {
     content: "•";
     color: var(--color-brand);
@@ -817,19 +813,62 @@ footer p {
     margin-left: -1em;
 }
 
-/* Blokada przewijania tła strony, gdy modal jest otwarty */
 body.modal-open {
     overflow: hidden;
 }
 
-/* ==========================================
-   14. Zoptymalizowany dopisek RODO (blisko pola)
-   ========================================== */
+/* 14. Dopisek RODO */
 .form-privacy-notice {
     font-size: 0.8rem;
     color: var(--text-muted);
     line-height: 1.4;
-    margin-top: -5px; /* Przyciąga komunikat wyżej, do pola tekstowego */
+    margin-top: -5px;
     margin-bottom: 0;
     font-weight: 400;
+}
+
+/* ==========================================
+   15. PRZYPIĘTY PRZYCISK CTA DLA SMARTFONÓW
+   ========================================== */
+.mobile-cta-bar {
+    display: none; /* Domyślnie ukryty na desktopie */
+}
+
+@media (max-width: 768px) {
+    .mobile-cta-bar {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 12px 16px;
+        /* Respektowanie bezpiecznych marginesów systemowych (iPhone X+ / Android gesture bar) */
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+        border-top: 1px solid rgba(226, 232, 240, 0.8);
+        z-index: 999;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Stan ukrycia gdy użytkownik jest przy właściwym formularzu */
+    .mobile-cta-bar.is-hidden {
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .mobile-cta-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 48px; /* Optymalny obszar dotyku */
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
 }
