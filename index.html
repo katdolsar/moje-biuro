@@ -250,60 +250,96 @@
                 </div>
                 
                 <form class="contact-form" id="dalyContactForm" action="https://formspree.io/f/mgogklpr" method="POST" novalidate>
-                    <input type="text" name="_gotcha" style="display:none">
+    <input type="text" name="_gotcha" style="display:none">
 
-                    <div class="form-group form-group-full">
-                        <label for="name">Imię i Nazwisko / Firma</label>
-                        <input type="text" id="name" name="name" placeholder="Jan Kowalski" required minlength="3">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Adres E-mail</label>
-                            <input type="email" id="email" name="email" placeholder="jan@kowalski.pl" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Numer telefonu</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+48 123 456 789" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group form-group-full">
-                        <label for="service">Interesuje mnie...</label>
-                        <select id="service" name="service">
-                            <option value="kpir">Prowadzenie KPiR + ZUS</option>
-                            <option value="pit">Rozliczenie PIT</option>
-                            <option value="data">Narzędzia budżetowe</option>
-                            <option value="all">Optymalizacja arkuszy</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group form-group-full message-group">
-                        <label for="message">Opisz swoje potrzeby</label>
-                        <textarea id="message" name="message" placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." required minlength="10"></textarea>
-                    </div>
-                    
-                    <p class="form-privacy-notice form-group-full">
-                        Administratorem Twoich danych jest [pełna nazwa firmy]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
-                    </p>
+    <!-- Kontener na podsumowanie błędów walidacji -->
+    <div id="errorSummary" class="error-summary form-group-full" style="display: none;" role="alert" tabindex="-1">
+        <h4>Popraw następujące błędy przed wysłaniem:</h4>
+        <ul id="errorSummaryList"></ul>
+    </div>
 
-                    <!-- Przycisk wysyłania zgłoszenia -->
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
-                        <span class="btn-text">Wyślij zgłoszenie</span>
-                        <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
-                    </button>
-                    
-                    <!-- KOMUNIKATY STATUSU -->
-                    <div class="form-status-container form-group-full">
-                        <div class="status-msg success-msg" id="successMessage">
-                            <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
-                        </div>
-                        <div class="status-msg error-container-msg" id="generalErrorMessage">
-                            Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
-                        </div>
-                    </div>
-                </form>
+    <div class="form-group form-group-full">
+        <label for="name">Imię i Nazwisko / Firma</label>
+        <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            placeholder="Jan Kowalski" 
+            autocomplete="name"
+            required 
+            minlength="3"
+        >
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group">
+            <label for="email">Adres E-mail</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="jan@kowalski.pl" 
+                autocomplete="email"
+                inputmode="email"
+                required
+            >
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Numer telefonu</label>
+            <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                placeholder="+48 123 456 789" 
+                autocomplete="tel"
+                inputmode="tel"
+                required
+            >
+        </div>
+    </div>
+    
+    <div class="form-group form-group-full">
+        <label for="service">Interesuje mnie...</label>
+        <select id="service" name="service">
+            <option value="kpir">Prowadzenie KPiR + ZUS</option>
+            <option value="pit">Rozliczenie PIT</option>
+            <option value="data">Narzędzia budżetowe</option>
+            <option value="all">Optymalizacja arkuszy</option>
+        </select>
+    </div>
+    
+    <div class="form-group form-group-full message-group">
+        <label for="message">Opisz swoje potrzeby</label>
+        <textarea 
+            id="message" 
+            name="message" 
+            placeholder="Napisz kilka słów o swojej firmie i oczekiwaniach..." 
+            required 
+            minlength="10"
+        ></textarea>
+    </div>
+    
+    <p class="form-privacy-notice form-group-full">
+        Administratorem Twoich danych jest [pełna nazwa firmy]. Dane wykorzystamy wyłącznie do odpowiedzi na zapytanie.
+    </p>
+
+    <!-- Przycisk wysyłania zgłoszenia -->
+    <button type="submit" class="btn btn-primary" id="submitBtn">
+        <span class="btn-text">Wyślij zgłoszenie</span>
+        <span class="btn-spinner" style="display: none;">Wysyłanie...</span>
+    </button>
+    
+    <!-- KOMUNIKATY STATUSU SERWERA -->
+    <div class="form-status-container form-group-full">
+        <div class="status-msg success-msg" id="successMessage">
+            <strong>Dziękujemy!</strong> Otrzymaliśmy Twoją wiadomość. Odpowiemy w ciągu 1 dnia roboczego.
+        </div>
+        <div class="status-msg error-container-msg" id="generalErrorMessage">
+            Coś poszło nie tak. Upewnij się, że masz połączenie z internetem i spróbuj ponownie.
+        </div>
+    </div>
+</form>
             </div>
         </div>
     </section>
