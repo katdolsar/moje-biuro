@@ -475,7 +475,7 @@ header {
     line-height: 1.7;
 }
 
-/* 10. Sekcja Kontakt */
+/* 10. Sekcja Kontakt - Zaawansowany Formularz */
 .contact {
     padding: 100px 0;
     background-color: var(--bg-card);
@@ -636,7 +636,12 @@ footer p {
     font-size: 0.9rem;
 }
 
-/* 12. Media Queries (Responsywność) */
+/* 12. Przyciski mobilne (Sticky CTA) */
+.mobile-sticky-cta {
+    display: none;
+}
+
+/* 13. Media Queries (Responsywność i dostosowanie ekranów) */
 @media (max-width: 1024px) {
     .hero h1 { font-size: 3rem; }
     .about-wrapper, .contact-wrapper { gap: 40px; }
@@ -645,13 +650,22 @@ footer p {
 @media (max-width: 768px) {
     html { font-size: 15px; }
     
-    /* Rezerwa miejsca na dole strony pod przypięty pasek CTA */
+    /* Rezerwacja miejsca pod dolny przycisk na telefonach */
     body {
-        padding-bottom: calc(75px + env(safe-area-inset-bottom));
+        padding-bottom: calc(75px + env(safe-area-inset-bottom, 0px));
     }
 
     .section-title { font-size: 2rem; }
     .hero h1 { font-size: 2.3rem; }
+
+    /* Usuwamy drugi równorzędny przycisk z sekcji Hero dla czytelności */
+    .hero-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .hero-btns .btn-secondary {
+        display: none;
+    }
 
     .menu-toggle { display: flex; z-index: 1100; }
     
@@ -692,7 +706,6 @@ footer p {
     }
 
     .process-steps::before { display: none; }
-    .hero-btns { flex-direction: column; gap: 10px; }
     
     .form-row {
         flex-direction: column;
@@ -700,9 +713,39 @@ footer p {
     }
     
     .contact-form .btn { width: 100%; }
+
+    /* Styl stałego przycisku mobilnego na dole ekranu */
+    .mobile-sticky-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        left: 16px;
+        right: 16px;
+        z-index: 999;
+        background-color: var(--color-accent);
+        color: white;
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 14px 20px;
+        min-height: 50px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px -3px rgba(16, 185, 129, 0.4);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        text-align: center;
+    }
+
+    /* Ukrywanie przycisku, gdy użytkownik przewinie do formularza */
+    .mobile-sticky-cta.hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        pointer-events: none;
+    }
 }
 
-/* 13. Style okienka modalnego */
+/* 14. Style okienka modalnego */
 .modal {
     display: none;
     position: fixed;
@@ -817,7 +860,7 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* 14. Dopisek RODO */
+/* 15. Dopisek RODO */
 .form-privacy-notice {
     font-size: 0.8rem;
     color: var(--text-muted);
@@ -825,50 +868,4 @@ body.modal-open {
     margin-top: -5px;
     margin-bottom: 0;
     font-weight: 400;
-}
-
-/* ==========================================
-   15. PRZYPIĘTY PRZYCISK CTA DLA SMARTFONÓW
-   ========================================== */
-.mobile-cta-bar {
-    display: none; /* Domyślnie ukryty na desktopie */
-}
-
-@media (max-width: 768px) {
-    .mobile-cta-bar {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 12px 16px;
-        /* Respektowanie bezpiecznych marginesów systemowych (iPhone X+ / Android gesture bar) */
-        padding-bottom: max(12px, env(safe-area-inset-bottom));
-        box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
-        border-top: 1px solid rgba(226, 232, 240, 0.8);
-        z-index: 999;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Stan ukrycia gdy użytkownik jest przy właściwym formularzu */
-    .mobile-cta-bar.is-hidden {
-        transform: translateY(100%);
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .mobile-cta-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        min-height: 48px; /* Optymalny obszar dotyku */
-        font-size: 1rem;
-        font-weight: 700;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
 }
