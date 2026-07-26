@@ -233,26 +233,32 @@ if (form && submitBtn) {
         });
     }
 
-    // 5. OBSŁUGA UKRYWANIA STYKOWEGO PRZYCISKU MOBILNEGO PRZY FORMULARZU
+   // 5. INTELIGENTNE WYŚWIETLANIE PRZYCISKU MOBILNEGO (STICKY CTA)
     const mobileStickyCta = document.getElementById("mobileStickyCta");
-    const contactSection = document.getElementById("kontakt");
+    const uslugiSection = document.getElementById("uslugi");
+    const faqSection = document.getElementById("faq");
 
-    if (mobileStickyCta && contactSection) {
-        const observerOptions = {
-            root: null,
-            threshold: 0.1 // Przycisk zniknie, gdy co najmniej 10% sekcji kontaktowej pojawi się w oknie
+    if (mobileStickyCta && uslugiSection && faqSection) {
+        const toggleStickyCta = () => {
+            // Obliczamy granice widoczności (kiedy pojawiają się na ekranie)
+            const startPoint = uslugiSection.offsetTop - window.innerHeight / 2;
+            const endPoint = faqSection.offsetTop + faqSection.offsetHeight - window.innerHeight / 2;
+            
+            // Sprawdzamy aktualną pozycję scrolla
+            const currentScroll = window.scrollY;
+
+            // Jeśli jesteśmy pomiędzy sekcją Usługi a końcem sekcji FAQ – pokaż przycisk
+            if (currentScroll >= startPoint && currentScroll <= endPoint) {
+                mobileStickyCta.classList.remove("hidden");
+            } else {
+                // W przeciwnym razie ukryj go
+                mobileStickyCta.classList.add("hidden");
+            }
         };
 
-        const contactObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    mobileStickyCta.classList.add("hidden");
-                } else {
-                    mobileStickyCta.classList.remove("hidden");
-                }
-            });
-        }, observerOptions);
+        // Uruchomienie funkcji przy załadowaniu strony
+        toggleStickyCta();
 
-        contactObserver.observe(contactSection);
+        // Nasłuchiwanie podczas przewijania (scrollowania)
+        window.addEventListener("scroll", toggleStickyCta);
     }
-});
