@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
     // 1. NAWIGACJA MOBILNA
-   // 1. NAWIGACJA MOBILNA
     const mobileMenu = document.getElementById("mobile-menu");
     const navMenu = document.getElementById("nav-menu");
 
@@ -267,6 +266,8 @@ if (mobileStickyCta && uslugiSection && faqSection) {
         } else {
             mobileStickyCta.classList.add("hidden");
         }
+
+        console.log(isBeforeFaq);
     };
 
     // Sprawdzamy pozycję od razu po załadowaniu strony
