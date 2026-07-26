@@ -233,32 +233,34 @@ if (form && submitBtn) {
         });
     }
 
-   // 5. INTELIGENTNE WYŚWIETLANIE PRZYCISKU MOBILNEGO (STICKY CTA)
+// 5. INTELIGENTNE WYŚWIETLANIE PRZYCISKU MOBILNEGO (STICKY CTA)
     const mobileStickyCta = document.getElementById("mobileStickyCta");
     const uslugiSection = document.getElementById("uslugi");
     const faqSection = document.getElementById("faq");
 
     if (mobileStickyCta && uslugiSection && faqSection) {
         const toggleStickyCta = () => {
-            // Obliczamy granice widoczności (kiedy pojawiają się na ekranie)
-            const startPoint = uslugiSection.offsetTop - window.innerHeight / 2;
-            const endPoint = faqSection.offsetTop + faqSection.offsetHeight - window.innerHeight / 2;
+            // Pobieramy dokładne pozycje sekcji względem widocznego okna przeglądarki
+            const uslugiRect = uslugiSection.getBoundingClientRect();
+            const faqRect = faqSection.getBoundingClientRect();
             
-            // Sprawdzamy aktualną pozycję scrolla
-            const currentScroll = window.scrollY;
+            // Przycisk ma się pojawić, gdy górna krawędź sekcji "Usługi" zacznie wjeżdżać na ekran
+            const isPastUslugi = uslugiRect.top <= window.innerHeight;
+            
+            // Przycisk ma zniknąć, gdy dolna krawędź sekcji "FAQ" wyjedzie do góry
+            const isBeforeFaqEnd = faqRect.bottom >= 0;
 
-            // Jeśli jesteśmy pomiędzy sekcją Usługi a końcem sekcji FAQ – pokaż przycisk
-            if (currentScroll >= startPoint && currentScroll <= endPoint) {
+            // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
+            if (isPastUslugi && isBeforeFaqEnd) {
                 mobileStickyCta.classList.remove("hidden");
             } else {
-                // W przeciwnym razie ukryj go
                 mobileStickyCta.classList.add("hidden");
             }
         };
 
-        // Uruchomienie funkcji przy załadowaniu strony
+        // Sprawdzamy pozycję od razu po załadowaniu strony
         toggleStickyCta();
 
-        // Nasłuchiwanie podczas przewijania (scrollowania)
+        // Sprawdzamy pozycję przy każdym przewinięciu strony (scrollu)
         window.addEventListener("scroll", toggleStickyCta);
     }
