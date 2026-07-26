@@ -249,15 +249,14 @@ const faqSection = document.getElementById("faq");
 
 if (mobileStickyCta && uslugiSection && faqSection) {
     const toggleStickyCta = () => {
-        // Pobieramy dokładne pozycje sekcji względem widocznego okna przeglądarki
         const uslugiRect = uslugiSection.getBoundingClientRect();
         const faqRect = faqSection.getBoundingClientRect();
         
-        // Przycisk ma się pojawić, gdy górna krawędź sekcji "Usługi" zacznie wjeżdżać na ekran
-        const isPastUslugi = uslugiRect.top <= window.innerHeight;
+        // Przycisk pojawia się dopiero, gdy górna krawędź sekcji "Usługi" 
+        // minie połowę wysokości ekranu (zapobiega pokazywaniu dwóch przycisków na małych ekranach)
+        const isPastUslugi = uslugiRect.top <= window.innerHeight * 0.8;
         
-        // NOWA REGUŁA: Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
-        // Sprawdzamy, czy góra sekcji FAQ jest poniżej dolnej krawędzi ekranu
+        // Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
         const isBeforeFaq = faqRect.top > window.innerHeight;
 
         // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
@@ -266,8 +265,6 @@ if (mobileStickyCta && uslugiSection && faqSection) {
         } else {
             mobileStickyCta.classList.add("hidden");
         }
-
-        console.log(isBeforeFaq);
     };
 
     // Sprawdzamy pozycję od razu po załadowaniu strony
