@@ -742,12 +742,13 @@ footer p {
         display: none;
     }
 
+    @media (max-width: 768px) {
     .menu-toggle { display: flex; z-index: 1100; }
     
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: -100%; /* Menu ukryte poza prawą krawędzią ekranu */
         width: 80%;
         height: 100vh;
         background-color: var(--bg-card);
@@ -760,10 +761,11 @@ footer p {
         z-index: 1050;
     }
 
+    /* Ta klasa aktywuje wysunięcie menu */
     .nav-menu.active {
-        right: 0;
+        right: 0; 
     }
-
+}
     .hero, .services, .about, .process, .faq, .contact { padding: 60px 0; }
     .hero { padding-top: 140px; }
 
