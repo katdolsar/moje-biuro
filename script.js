@@ -245,22 +245,22 @@ if (form && submitBtn) {
 // 5. INTELIGENTNE WYŚWIETLANIE PRZYCISKU MOBILNEGO (STICKY CTA)
 const mobileStickyCta = document.getElementById("mobileStickyCta");
 const uslugiSection = document.getElementById("uslugi");
-const faqSection = document.getElementById("faq");
+const kontaktSection = document.getElementById("kontakt");
 
 if (mobileStickyCta && uslugiSection && faqSection) {
     const toggleStickyCta = () => {
         const uslugiRect = uslugiSection.getBoundingClientRect();
-        const faqRect = faqSection.getBoundingClientRect();
+        const kontaktRect = kontaktSection.getBoundingClientRect();
         
         // Przycisk pojawia się dopiero, gdy górna krawędź sekcji "Usługi" 
         // minie połowę wysokości ekranu (zapobiega pokazywaniu dwóch przycisków na małych ekranach)
         const isPastUslugi = uslugiRect.top <= window.innerHeight * 0.1;
         
         // Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
-        const isBeforeFaq = faqRect.top > window.innerHeight;
+        const isBeforekontakt = kontaktRect.top > window.innerHeight;
 
         // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
-        if (isPastUslugi && isBeforeFaq) {
+        if (isPastUslugi && isBeforekontakt) {
             mobileStickyCta.classList.remove("hidden");
         } else {
             mobileStickyCta.classList.add("hidden");
