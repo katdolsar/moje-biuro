@@ -244,34 +244,35 @@ if (form && submitBtn) {
     }
 
 // 5. INTELIGENTNE WYŚWIETLANIE PRZYCISKU MOBILNEGO (STICKY CTA)
-    const mobileStickyCta = document.getElementById("mobileStickyCta");
-    const uslugiSection = document.getElementById("uslugi");
-    const faqSection = document.getElementById("faq");
+const mobileStickyCta = document.getElementById("mobileStickyCta");
+const uslugiSection = document.getElementById("uslugi");
+const faqSection = document.getElementById("faq");
 
-    if (mobileStickyCta && uslugiSection && faqSection) {
-        const toggleStickyCta = () => {
-            // Pobieramy dokładne pozycje sekcji względem widocznego okna przeglądarki
-            const uslugiRect = uslugiSection.getBoundingClientRect();
-            const faqRect = faqSection.getBoundingClientRect();
-            
-            // Przycisk ma się pojawić, gdy górna krawędź sekcji "Usługi" zacznie wjeżdżać na ekran
-            const isPastUslugi = uslugiRect.top <= window.innerHeight;
-            
-            // Przycisk ma zniknąć, gdy dolna krawędź sekcji "FAQ" wyjedzie do góry
-            const isBeforeFaqEnd = faqRect.bottom >= 0;
+if (mobileStickyCta && uslugiSection && faqSection) {
+    const toggleStickyCta = () => {
+        // Pobieramy dokładne pozycje sekcji względem widocznego okna przeglądarki
+        const uslugiRect = uslugiSection.getBoundingClientRect();
+        const faqRect = faqSection.getBoundingClientRect();
+        
+        // Przycisk ma się pojawić, gdy górna krawędź sekcji "Usługi" zacznie wjeżdżać na ekran
+        const isPastUslugi = uslugiRect.top <= window.innerHeight;
+        
+        // NOWA REGUŁA: Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
+        // Sprawdzamy, czy góra sekcji FAQ jest poniżej dolnej krawędzi ekranu
+        const isBeforeFaq = faqRect.top > window.innerHeight;
 
-            // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
-            if (isPastUslugi && isBeforeFaqEnd) {
-                mobileStickyCta.classList.remove("hidden");
-            } else {
-                mobileStickyCta.classList.add("hidden");
-            }
-        };
+        // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
+        if (isPastUslugi && isBeforeFaq) {
+            mobileStickyCta.classList.remove("hidden");
+        } else {
+            mobileStickyCta.classList.add("hidden");
+        }
+    };
 
-        // Sprawdzamy pozycję od razu po załadowaniu strony
-        toggleStickyCta();
+    // Sprawdzamy pozycję od razu po załadowaniu strony
+    toggleStickyCta();
 
-        // Sprawdzamy pozycję przy każdym przewinięciu strony (scrollu)
-        window.addEventListener("scroll", toggleStickyCta);
-    }
+    // Sprawdzamy pozycję przy każdym przewinięciu strony (scrollu)
+    window.addEventListener("scroll", toggleStickyCta);
+}
 });
