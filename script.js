@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navMenu.classList.remove("active");
             });
         });
-    }
+    
 
         // Zamknij menu po kliknięciu w tło poza menu
         document.addEventListener("click", (e) => {
@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 navMenu.classList.remove("active");
             }
         });
-    }
-
+}
     // 2. AKORDEON FAQ
     const faqQuestions = document.querySelectorAll(".faq-question");
     faqQuestions.forEach(question => {
