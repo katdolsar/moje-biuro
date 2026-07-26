@@ -1,20 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
     
+   document.addEventListener("DOMContentLoaded", () => {
+    
     // 1. NAWIGACJA MOBILNA
     const mobileMenu = document.getElementById("mobile-menu");
     const navMenu = document.getElementById("nav-menu");
 
     if (mobileMenu && navMenu) {
-        mobileMenu.addEventListener("click", () => {
+        mobileMenu.addEventListener("click", (e) => {
+            e.stopPropagation();
             mobileMenu.classList.toggle("active");
             navMenu.classList.toggle("active");
         });
 
-        document.querySelectorAll(".nav-link, .btn").forEach(link => {
+        // Zamknij menu po kliknięciu w dowolny link w środku
+        document.querySelectorAll(".nav-menu a").forEach(link => {
             link.addEventListener("click", () => {
                 mobileMenu.classList.remove("active");
                 navMenu.classList.remove("active");
             });
+        });
+
+        // Zamknij menu po kliknięciu w tło poza menu
+        document.addEventListener("click", (e) => {
+            if (!navMenu.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove("active");
+                navMenu.classList.remove("active");
+            }
         });
     }
 
