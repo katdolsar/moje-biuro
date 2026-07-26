@@ -254,7 +254,7 @@ if (mobileStickyCta && uslugiSection && faqSection) {
         
         // Przycisk pojawia się dopiero, gdy górna krawędź sekcji "Usługi" 
         // minie połowę wysokości ekranu (zapobiega pokazywaniu dwóch przycisków na małych ekranach)
-        const isPastUslugi = uslugiRect.top <= window.innerHeight * 0.8;
+        const isPastUslugi = uslugiRect.top <= window.innerHeight * 0.9;
         
         // Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
         const isBeforeFaq = faqRect.top > window.innerHeight;
