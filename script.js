@@ -247,7 +247,7 @@ const mobileStickyCta = document.getElementById("mobileStickyCta");
 const uslugiSection = document.getElementById("uslugi");
 const kontaktSection = document.getElementById("kontakt");
 
-if (mobileStickyCta && uslugiSection && faqSection) {
+if (mobileStickyCta && uslugiSection && kontaktSection) {
     const toggleStickyCta = () => {
         const uslugiRect = uslugiSection.getBoundingClientRect();
         const kontaktRect = kontaktSection.getBoundingClientRect();
@@ -256,7 +256,7 @@ if (mobileStickyCta && uslugiSection && faqSection) {
         // minie połowę wysokości ekranu (zapobiega pokazywaniu dwóch przycisków na małych ekranach)
         const isPastUslugi = uslugiRect.top <= window.innerHeight * 0.1;
         
-        // Przycisk znika, gdy górna krawędź sekcji "FAQ" wjedzie na ekran
+        // Przycisk znika, gdy górna krawędź sekcji "kontakt" wjedzie na ekran
         const isBeforekontakt = kontaktRect.top > window.innerHeight;
 
         // Jeśli jesteśmy w odpowiednim przedziale, zdejmujemy klasę "hidden"
