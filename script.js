@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-   document.addEventListener("DOMContentLoaded", () => {
-    
     // 1. NAWIGACJA MOBILNA
    // 1. NAWIGACJA MOBILNA
     const mobileMenu = document.getElementById("mobile-menu");
@@ -276,3 +274,4 @@ if (form && submitBtn) {
         // Sprawdzamy pozycję przy każdym przewinięciu strony (scrollu)
         window.addEventListener("scroll", toggleStickyCta);
     }
+});
