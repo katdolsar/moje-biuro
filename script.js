@@ -130,10 +130,17 @@ if (form && submitBtn) {
             const res = validateField(emailInput, isValidEmail(emailInput.value.trim()), "Wprowadź poprawny adres e-mail (np. jan@kowalski.pl).");
             if (!res.valid) errors.push(res);
         }
-        if (phoneInput) {
-            const res = validateField(phoneInput, isValidPhone(phoneInput.value.trim()), "Wprowadź poprawny numer telefonu (min. 9 cyfr).");
-            if (!res.valid) errors.push(res);
-        }
+       if (phoneInput) {
+    const phoneValue = phoneInput.value.trim();
+    // Sprawdzamy numer tylko wtedy, gdy użytkownik coś wpisał
+    if (phoneValue !== "") {
+        const res = validateField(phoneInput, isValidPhone(phoneValue), "Wprowadź poprawny numer telefonu (min. 9 cyfr).");
+        if (!res.valid) errors.push(res);
+    } else {
+        // Jeśli pole jest puste, upewniamy się, że nie ma na nim błędu
+        validateField(phoneInput, true, "");
+    }
+}
         if (messageInput) {
             const res = validateField(messageInput, messageInput.value.trim().length >= 10, "Opisz swoje potrzeby (min. 10 znaków).");
             if (!res.valid) errors.push(res);
